@@ -1,0 +1,2449 @@
+oot@pop-os:/home/davinunes# adb devices
+List of devices attached
+4493b2a6	device
+
+root@pop-os:/home/davinunes# adb shell
+root@pop-os:/home/davinunes# adb shell
+shell@msm8916_32_512:/ $ get prop
+/system/bin/sh: get: not found
+127|shell@msm8916_32_512:/ $ getprop
+[DEVICE_PROVISIONED]: [1]
+[audio.offload.buffer.size.kb]: [32]
+[audio.offload.gapless.enabled]: [false]
+[av.offload.enable]: [true]
+[config.disable_atlas]: [true]
+[dalvik.vm.heapgrowthlimit]: [48m]
+[dalvik.vm.heapmaxfree]: [2m]
+[dalvik.vm.heapminfree]: [512k]
+[dalvik.vm.heapsize]: [128m]
+[dalvik.vm.heapstartsize]: [5m]
+[dalvik.vm.heaptargetutilization]: [0.75]
+[dalvik.vm.lockprof.threshold]: [500]
+[dalvik.vm.stack-trace-file]: [/data/anr/traces.txt]
+[debug.composition.type]: [c2d]
+[debug.egl.hw]: [1]
+[debug.force_rtl]: [0]
+[debug.hwc.fakevsync]: [0]
+[debug.mdpcomp.logs]: [0]
+[debug.sf.hw]: [1]
+[dev.bootcomplete]: [1]
+[dev.pm.dyn_samplingrate]: [1]
+[dolby.audio.sink.info]: [speaker]
+[gsm.current.phone-type]: [1]
+[gsm.network.type]: [Unknown]
+[gsm.operator.alpha]: []
+[gsm.operator.iso-country]: []
+[gsm.operator.isroaming]: [false]
+[gsm.operator.numeric]: []
+[gsm.sim.operator.iso-country]: []
+[gsm.sim.state]: [ABSENT]
+[gsm.version.baseband]: [UFI003 v03 20221124]
+[gsm.version.ril-impl]: [Qualcomm RIL 1.0]
+[init.svc.adbd]: [running]
+[init.svc.atfwd]: [running]
+[init.svc.audiod]: [running]
+[init.svc.bootanim]: [stopped]
+[init.svc.carrier_switcher]: [stopped]
+[init.svc.cnd]: [stopped]
+[init.svc.config-video]: [stopped]
+[init.svc.config-zram]: [stopped]
+[init.svc.config_bluetooth]: [stopped]
+[init.svc.console]: [running]
+[init.svc.debuggerd]: [running]
+[init.svc.dpmd]: [running]
+[init.svc.drm]: [running]
+[init.svc.healthd]: [running]
+[init.svc.installd]: [running]
+[init.svc.irsc_util]: [stopped]
+[init.svc.keystore]: [running]
+[init.svc.media]: [running]
+[init.svc.mpdecision]: [running]
+[init.svc.netd]: [running]
+[init.svc.netmgrd]: [running]
+[init.svc.p2p_supplicant]: [stopped]
+[init.svc.ptt_socket_app]: [running]
+[init.svc.qcom-c_core-sh]: [stopped]
+[init.svc.qcom-c_main-sh]: [stopped]
+[init.svc.qcom-post-boot]: [stopped]
+[init.svc.qcom-sh]: [stopped]
+[init.svc.qcom-usb-sh]: [stopped]
+[init.svc.qcomsysd]: [running]
+[init.svc.qmuxd]: [running]
+[init.svc.qrngd]: [running]
+[init.svc.qrngp]: [stopped]
+[init.svc.qseecomd]: [running]
+[init.svc.rfs_access]: [running]
+[init.svc.ril-daemon]: [running]
+[init.svc.rmt_storage]: [running]
+[init.svc.sdcard]: [running]
+[init.svc.servicemanager]: [running]
+[init.svc.ssr_setup]: [stopped]
+[init.svc.surfaceflinger]: [running]
+[init.svc.thermal-engine]: [running]
+[init.svc.time_daemon]: [running]
+[init.svc.ueventd]: [running]
+[init.svc.usb_uicc_daemon]: [stopped]
+[init.svc.usb_uicc_enable]: [stopped]
+[init.svc.vm_bms]: [running]
+[init.svc.vold]: [running]
+[init.svc.wcnss-service]: [running]
+[init.svc.zygote]: [running]
+[keyguard.no_require_sim]: [true]
+[media.aac_51_output_enabled]: [false]
+[media.stagefright.enable-aac]: [false]
+[media.stagefright.enable-fma2dp]: [false]
+[media.stagefright.enable-http]: [false]
+[media.stagefright.enable-player]: [false]
+[media.stagefright.enable-qcp]: [false]
+[media.stagefright.enable-scan]: [false]
+[media.swhevccodectype]: [1]
+[mm.enable.qcom_parser]: [3407871]
+[mmp.enable.3g2]: [false]
+[net.bt.name]: [Android]
+[net.change]: [net.qtaguid_enabled]
+[net.hostname]: [android-a36cf0c5c1dfaa6d]
+[net.qtaguid_enabled]: [1]
+[net.tcp.buffersize.default]: [4096,87380,110208,4096,16384,110208]
+[net.tcp.buffersize.edge]: [4093,26280,35040,4096,16384,35040]
+[net.tcp.buffersize.evdo]: [4094,87380,262144,4096,16384,262144]
+[net.tcp.buffersize.gprs]: [4092,8760,11680,4096,8760,11680]
+[net.tcp.buffersize.hsdpa]: [4094,87380,1220608,4096,16384,1220608]
+[net.tcp.buffersize.hspa]: [4094,87380,1220608,4096,16384,1220608]
+[net.tcp.buffersize.hspap]: [4094,87380,1220608,4096,16384,1220608]
+[net.tcp.buffersize.hsupa]: [4094,87380,1220608,4096,16384,1220608]
+[net.tcp.buffersize.lte]: [524288,1048576,2097152,262144,524288,1048576]
+[net.tcp.buffersize.umts]: [4094,87380,110208,4096,16384,110208]
+[net.tcp.buffersize.wifi]: [524288,2097152,4194304,262144,524288,1048576]
+[net.tcp.default_init_rwnd]: [60]
+[net.tcp.delack.default]: [1]
+[net.tcp.delack.lte]: [8]
+[net.tcp.usercfg.default]: [0]
+[net.tcp.usercfg.lte]: [1]
+[net.tcp.usercfg.wifi]: [1]
+[persist.adb.tcp.port]: [10242]
+[persist.audio.fluence.speaker]: [false]
+[persist.audio.fluence.voicecall]: [false]
+[persist.audio.fluence.voicerec]: [false]
+[persist.auth.crash.limit]: []
+[persist.build.cust.led.group]: [LED_D_GROUP]
+[persist.camera.capture.animate]: [1]
+[persist.camera.preview.size]: [0]
+[persist.camera.qcom.misc]: [0]
+[persist.camera.tintless]: [enable]
+[persist.camera.tn.disable]: [0]
+[persist.cne.feature]: [4]
+[persist.cpe.gw.dhcp.end]: [192.168.100.254]
+[persist.cpe.gw.dhcp.leasetime]: [3h]
+[persist.cpe.gw.dhcp.start]: [192.168.100.2]
+[persist.cpe.gw.dhcp.type]: [dhcp]
+[persist.cpe.gw.eth.type]: [lan]
+[persist.cpe.gw.ip]: [192.168.100.1]
+[persist.cpe.gw.netmask]: [255.255.255.0]
+[persist.cpe.wifi.pword]: [1234567890]
+[persist.cpe.wifi.ssid]: [4G-UFI-]
+[persist.data.netmgrd.qos.enable]: [true]
+[persist.debug.wfd.enable]: [0]
+[persist.demo.hdmirotationlock]: [false]
+[persist.dpm.feature]: [3]
+[persist.elink.sim.count]: [1]
+[persist.env.c.phone.matchnum]: [11]
+[persist.fuse_sdcard]: [true]
+[persist.gps.qc_nlp_in_use]: [1]
+[persist.hwc.mdpcomp.enable]: [true]
+[persist.loc.nlp_name]: [com.qualcomm.services.location]
+[persist.radio.VT_ENABLE]: [1]
+[persist.radio.VT_HYBRID_ENABLE]: [1]
+[persist.radio.adb_log_on]: [0]
+[persist.radio.airplane_mode_on]: [0]
+[persist.radio.apm_sim_not_pwdn]: [1]
+[persist.radio.calls.on.ims]: [true]
+[persist.radio.csvt.enabled]: [false]
+[persist.radio.custom_ecc]: [1]
+[persist.radio.dsdx]: [true]
+[persist.radio.eons.enabled]: [false]
+[persist.radio.ignore_dom_time]: [5]
+[persist.radio.jbims]: [1]
+[persist.radio.lte_vrte_ltd]: [1]
+[persist.radio.mt_sms_ack]: [20]
+[persist.radio.multisim.config]: [ssss]
+[persist.radio.network_feature]: [6]
+[persist.radio.rat_on]: [combine]
+[persist.radio.restore_mode_pref]: [1]
+[persist.rild.nitz_long_ons_0]: []
+[persist.rild.nitz_long_ons_1]: []
+[persist.rild.nitz_long_ons_2]: []
+[persist.rild.nitz_long_ons_3]: []
+[persist.rild.nitz_plmn]: []
+[persist.rild.nitz_short_ons_0]: []
+[persist.rild.nitz_short_ons_1]: []
+[persist.rild.nitz_short_ons_2]: []
+[persist.rild.nitz_short_ons_3]: []
+[persist.sys.country]: [CN]
+[persist.sys.dalvik.vm.lib]: [libdvm.so]
+[persist.sys.language]: [zh]
+[persist.sys.localevar]: []
+[persist.sys.logkit.ctrlcode]: [1]
+[persist.sys.profiler_ms]: [0]
+[persist.sys.ssr.restart_level]: [modem]
+[persist.sys.strict_op_enable]: [false]
+[persist.sys.timezone]: [Asia/Shanghai]
+[persist.sys.usb.config.extra]: [serial_smd]
+[persist.sys.usb.config]: [diag,serial_smd,rmnet_bam,adb]
+[persist.sys.whitelist]: [/system/etc/whitelist_appops.xml]
+[persist.telephony.oosisdc]: [false]
+[persist.timed.enable]: [true]
+[persist.ufi.card.plug]: [yes]
+[persist.ufi.collect.sim]: []
+[persist.ufi.freq.band]: [eu_all]
+[persist.ufi.ft.haveeth]: [0]
+[persist.ufi.ft.only_sn]: [0]
+[persist.ufi.ft.server]: [NONE]
+[persist.ufi.ft.simsw]: [0]
+[persist.ufi.ft.simsw_pw]: [0]
+[persist.ufi.ft.simswitchpword]: [zx]
+[persist.ufi.ft.weblogo]: [NORMAL]
+[persist.ufi.ft.withmtp]: [0]
+[persist.ufi.ft.write_imei]: [1]
+[persist.ufi.name.imei.suffix]: [no]
+[persist.ufi.nosignal.reboot]: [no]
+[persist.ufi.oem.name]: [YL]
+[persist.ufi.ping.router]: []
+[persist.ufi.qhyl.light]: []
+[persist.ufi.qhyl.switchsim]: []
+[persist.ufi.signal.check]: [yes]
+[persist.ufi.sim.pooling]: [no]
+[persist.ufi.sim.prior]: [DD]
+[persist.ufi.sn.auth.service]: [1]
+[persist.ufi.test.light]: [no]
+[persist.ufi.wifi.light]: [yes]
+[persist.web.default.lang]: [en]
+[persist.web.login.password]: [admin]
+[persist.wlan.imei.fromnv]: [000000041775022]
+[persist.wlan.mac.fromnv]: [5c:a0:02:45:ac:5d]
+[persist.ykm.light.ctrl]: []
+[ril.ecclist]: [*911,#911,000,08,110,999,118,119,120,122,911,112]
+[ril.qcril_pre_init_lock_held]: [0]
+[ril.subscription.types]: [NV,RUIM]
+[rild.libargs]: [-d /dev/smd0]
+[rild.libpath]: [/system/vendor/lib/libril-qc-qmi-1.so]
+[ro.alarm_boot]: [false]
+[ro.allow.mock.location]: [0]
+[ro.baseband]: [msm]
+[ro.bluetooth.dun]: [true]
+[ro.bluetooth.hfp.ver]: [1.6]
+[ro.bluetooth.sap]: [true]
+[ro.board.platform]: [msm8916]
+[ro.boot.baseband]: [msm]
+[ro.boot.bootdevice]: [7824900.sdhci]
+[ro.boot.console]: [ttyHSL0]
+[ro.boot.emmc]: [true]
+[ro.boot.hardware]: [qcom]
+[ro.boot.selinux]: [permissive]
+[ro.boot.serialno]: [4493b2a6]
+[ro.bootloader]: [unknown]
+[ro.bootmode]: [unknown]
+[ro.build.characteristics]: [default]
+[ro.build.cust_proj]: [UFI003]
+[ro.build.date.utc]: [1740560026]
+[ro.build.date]: [2025年 02月 26日 星期三 16:53:46 CST]
+[ro.build.description]: [msm8916_32_512-userdebug 4.4.4 KTU84P eng.huanghonghuan.20250226 test-keys]
+[ro.build.display.id]: [msm8916_32_512-userdebug 4.4.4 KTU84P eng.huanghonghuan.20250226 test-keys]
+[ro.build.factory]: []
+[ro.build.host]: [elinksrv3]
+[ro.build.hw.version]: [HW1.3]
+[ro.build.id]: [KTU84P]
+[ro.build.lcd_direction]: [LCD_GH]
+[ro.build.lcd_type]: [128X128]
+[ro.build.model_type]: [UFI003]
+[ro.build.product]: [msm8916_32_512]
+[ro.build.sw.custom.version]: [UFI003S_V03_ZX_DD_250226]
+[ro.build.tags]: [test-keys]
+[ro.build.type]: [userdebug]
+[ro.build.user]: [huanghonghuan]
+[ro.build.version.codename]: [REL]
+[ro.build.version.incremental]: [eng.huanghonghuan.20250226]
+[ro.build.version.release]: [4.4.4]
+[ro.build.version.sdk]: [19]
+[ro.carrier]: [unknown]
+[ro.com.android.dataroaming]: [true]
+[ro.com.android.dateformat]: [MM-dd-yyyy]
+[ro.config.alarm_alert]: [Alarm_Classic.ogg]
+[ro.config.low_ram]: [true]
+[ro.config.notification_sound]: [pixiedust.ogg]
+[ro.config.pppoe_enable]: [1]
+[ro.config.ringtone]: [Ring_Synth_04.ogg]
+[ro.config.zram]: [true]
+[ro.crypto.state]: [unencrypted]
+[ro.debuggable]: [1]
+[ro.factorytest]: [0]
+[ro.fm.transmitter]: [false]
+[ro.gps.agps_provider]: [1]
+[ro.hardware]: [qcom]
+[ro.min_freq_0]: [800000]
+[ro.opengles.version]: [196608]
+[ro.pip.gated]: [0]
+[ro.product.board]: [msm8916]
+[ro.product.brand]: [qcom]
+[ro.product.cpu.abi2]: [armeabi]
+[ro.product.cpu.abi]: [armeabi-v7a]
+[ro.product.device]: [msm8916_32_512]
+[ro.product.locale.language]: [en]
+[ro.product.locale.region]: [US]
+[ro.product.manufacturer]: [unknown]
+[ro.product.model]: [msm8916_32_512]
+[ro.product.name]: [msm8916_32_512]
+[ro.qc.sdk.audio.fluencetype]: [none]
+[ro.qc.sdk.audio.ssr]: [false]
+[ro.qualcomm.bluetooth.ftp]: [true]
+[ro.qualcomm.bluetooth.hfp]: [true]
+[ro.qualcomm.bluetooth.hsp]: [true]
+[ro.qualcomm.bluetooth.map]: [true]
+[ro.qualcomm.bluetooth.nap]: [true]
+[ro.qualcomm.bluetooth.opp]: [true]
+[ro.qualcomm.bluetooth.pbap]: [true]
+[ro.qualcomm.bt.hci_transport]: [smd]
+[ro.qualcomm.cabl]: [0]
+[ro.revision]: [0]
+[ro.ril.svdo]: [false]
+[ro.ril.svlte1x]: [false]
+[ro.runtime.firstboot]: [86411498]
+[ro.secure]: [1]
+[ro.serialno]: [4493b2a6]
+[ro.sf.lcd_density]: [114]
+[ro.sys.fw.bg_apps_limit]: [16]
+[ro.sys.usb.default.config]: [diag,serial_smd,rmnet_bam,adb]
+[ro.telephony.call_ring.multiple]: [false]
+[ro.telephony.default_cdma_sub]: [0]
+[ro.telephony.default_network]: [12]
+[ro.use_data_netmgrd]: [true]
+[ro.vendor.extension_library]: [/vendor/lib/libqc-opt.so]
+[ro.wifi.channels]: []
+[service.adb.tcp.port]: [10242]
+[service.bootanim.exit]: [1]
+[swe.tile.height]: [128]
+[swe.tile.maxtile]: [128]
+[swe.tile.width]: [128]
+[sys.boot_completed]: [1]
+[sys.keymaster.loaded]: [true]
+[sys.listeners.registered]: [true]
+[sys.settings_global_version]: [2]
+[sys.sysctl.extra_free_kbytes]: [204]
+[sys.usb.config]: [rndis,serial_smd,adb]
+[sys.usb.rps_mask]: [0]
+[sys.usb.state]: [rndis,adb]
+[sys.usb.tethering]: [true]
+[telephony.lteOnCdmaDevice]: [1]
+[tunnel.audio.encode]: [false]
+[usb_uicc.enabled]: [0]
+[usb_uicc.loading]: [1]
+[use.voice.path.for.pcm.voip]: [false]
+[vidc.enc.narrow.searchrange]: [1]
+[vold.post_fs_data_done]: [1]
+[wifi.interface]: [wlan0]
+[wlan.driver.ath]: [0]
+[wlan.driver.config]: [/data/misc/wifi/WCNSS_qcom_cfg.ini]
+[wlan.driver.status]: [ok]
+shell@msm8916_32_512:/ $ 
+
+
+
+
+
+shell@msm8916_32_512:/ $ getprop | grep product                                
+[ro.build.product]: [msm8916_32_512]
+[ro.product.board]: [msm8916]
+[ro.product.brand]: [qcom]
+[ro.product.cpu.abi2]: [armeabi]
+[ro.product.cpu.abi]: [armeabi-v7a]
+[ro.product.device]: [msm8916_32_512]
+[ro.product.locale.language]: [en]
+[ro.product.locale.region]: [US]
+[ro.product.manufacturer]: [unknown]
+[ro.product.model]: [msm8916_32_512]
+[ro.product.name]: [msm8916_32_512]
+shell@msm8916_32_512:/ $ 
+
+
+
+
+
+
+
+
+
+
+
+
+root@pop-os:/home/davinunes# apt purge modemmanager
+Lendo listas de pacotes... Pronto
+Construindo árvore de dependências... Pronto
+Lendo informação de estado... Pronto        
+Os pacotes a seguir serão REMOVIDOS:
+  modemmanager*
+0 pacotes atualizados, 0 pacotes novos instalados, 1 a serem removidos e 221 não atualizados.
+Depois desta operação, 4.821 kB de espaço em disco serão liberados.
+Você quer continuar? [S/n] s
+(Lendo banco de dados ... 227189 ficheiros e directórios actualmente instalados.
+)
+A remover modemmanager (1.20.0-1~ubuntu22.04.4) ...
+Unknown option: runtime
+A processar 'triggers' para man-db (2.10.2-1) ...
+A processar 'triggers' para dbus (1.12.20-2ubuntu4.1) ...
+A processar 'triggers' para dbus-broker (29-4build1) ...
+A processar 'triggers' para hicolor-icon-theme (0.17-2) ...
+(Lendo banco de dados ... 227077 ficheiros e directórios actualmente instalados.
+)
+A purgar os ficheiros de configuração para modemmanager (1.20.0-1~ubuntu22.04.4)
+ ...
+A processar 'triggers' para dbus-broker (29-4build1) ...
+A processar 'triggers' para dbus (1.12.20-2ubuntu4.1) ...
+root@pop-os:/home/davinunes# systemctl stop ModemManager
+Failed to stop ModemManager.service: Unit ModemManager.service not loaded.
+root@pop-os:/home/davinunes# systemctl disable ModemManager
+Failed to disable unit: Unit file ModemManager.service does not exist.
+root@pop-os:/home/davinunes# git clone https://github.com/bkerler/edl.git
+Cloning into 'edl'...
+remote: Enumerating objects: 3157, done.
+remote: Counting objects: 100% (985/985), done.
+remote: Compressing objects: 100% (362/362), done.
+remote: Total 3157 (delta 708), reused 638 (delta 623), pack-reused 2172 (from 2)
+Receiving objects: 100% (3157/3157), 68.52 MiB | 6.28 MiB/s, done.
+Resolving deltas: 100% (2122/2122), done.
+root@pop-os:/home/davinunes# d edl
+git submodule update --init --recursive
+d: comando não encontrado
+fatal: not a git repository (or any of the parent directories): .git
+root@pop-os:/home/davinunes# cd edl
+git submodule update --init --recursive
+Submodule 'Loaders' (https://github.com/bkerler/Loaders) registered for path 'Loaders'
+Cloning into '/home/davinunes/edl/Loaders'...
+Submodule path 'Loaders': checked out 'bf0d8017eb97464530114a348c5157a6ea6a3372'
+root@pop-os:/home/davinunes/edl# ./autoinstall.sh
+Now rebuild your initramfs and reboot
+
+Usage:   
+  pip3 install [options] <requirement specifier> [package-index-options] ...
+  pip3 install [options] -r <requirements file> [package-index-options] ...
+  pip3 install [options] [-e] <vcs project url> ...
+  pip3 install [options] [-e] <local project path> ...
+  pip3 install [options] <archive url/path> ...
+
+no such option: --break-system-packages
+
+Failed to install the dependencies!
+root@pop-os:/home/davinunes/edl# ./autoinstall.sh
+Now rebuild your initramfs and reboot
+
+Usage:   
+  pip3 install [options] <requirement specifier> [package-index-options] ...
+  pip3 install [options] -r <requirements file> [package-index-options] ...
+  pip3 install [options] [-e] <vcs project url> ...
+  pip3 install [options] [-e] <local project path> ...
+  pip3 install [options] <archive url/path> ...
+
+no such option: --break-system-packages
+
+Failed to install the dependencies!
+root@pop-os:/home/davinunes/edl# update-in
+update-inetd      update-info-dir   update-initramfs  
+root@pop-os:/home/davinunes/edl# update-initramfs -u -k all
+update-initramfs: Generating /boot/initrd.img-6.16.3-76061603-generic
+xz: Reduced the number of threads from 16 to 11 to not exceed the memory usage limit of 1.974 MiB
+kernelstub.Config    : INFO     Looking for configuration...
+kernelstub           : INFO     System information: 
+
+    OS:..................Pop!_OS 22.04
+    Root partition:....../dev/nvme0n1p3
+    Root FS UUID:........f6791c9b-39ad-4d99-b465-43f33d091cfe
+    ESP Path:............/boot/efi
+    ESP Partition:......./dev/nvme0n1p1
+    ESP Partition #:.....1
+    NVRAM entry #:.......-1
+    Boot Variable #:.....0000
+    Kernel Boot Options:.quiet loglevel=0 systemd.show_status=false splash nvidia-drm.modeset=1
+    Kernel Image Path:.../boot/vmlinuz-6.16.3-76061603-generic
+    Initrd Image Path:.../boot/initrd.img-6.16.3-76061603-generic
+    Force-overwrite:.....False
+
+kernelstub.Installer : INFO     Copying Kernel into ESP
+kernelstub.Installer : INFO     Copying initrd.img into ESP
+kernelstub.Installer : INFO     Setting up loader.conf configuration
+kernelstub.Installer : INFO     Making entry file for Pop!_OS
+kernelstub.Installer : INFO     Backing up old kernel
+kernelstub.Installer : INFO     No old kernel found, skipping
+root@pop-os:/home/davinunes/edl# 
+
+
+
+#############
+apt install python3-pip python3-dev libusb-1.0-0-dev libudev-dev
+
+pip3 install pyusb pyserial
+
+sudo cp collections/*.rules /etc/udev/rules.d/
+sudo udevadm control --reload-rules
+sudo udevadm trigger
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+oot@pop-os:/home/davinunes/edl# 
+root@pop-os:/home/davinunes/edl# 
+root@pop-os:/home/davinunes/edl# 
+root@pop-os:/home/davinunes/edl# 
+root@pop-os:/home/davinunes/edl# apt install python3-pip python3-dev libusb-1.0-0-dev libudev-dev
+Lendo listas de pacotes... Pronto
+Construindo árvore de dependências... Pronto
+Lendo informação de estado... Pronto        
+python3-pip já é a versão mais recente (22.0.2+dfsg-1ubuntu0.7).
+python3-dev já é a versão mais recente (3.10.6-1~22.04.1).
+Os pacotes adicionais seguintes serão instalados:
+  libusb-1.0-doc
+Os NOVOS pacotes a seguir serão instalados:
+  libudev-dev libusb-1.0-0-dev libusb-1.0-doc
+0 pacotes atualizados, 3 pacotes novos instalados, 0 a serem removidos e 221 não atualizados.
+É preciso baixar 442 kB de arquivos.
+Depois desta operação, 2.214 kB adicionais de espaço em disco serão usados.
+Você quer continuar? [S/n] s
+Obter:1 http://apt.pop-os.org/release jammy/main amd64 libudev-dev amd64 249.11-0ubuntu3.17pop0~1760637232~22.04~155dd5b [183 kB]
+Obter:2 http://apt.pop-os.org/ubuntu jammy-updates/main amd64 libusb-1.0-0-dev amd64 2:1.0.25-1ubuntu2 [76,3 kB]
+Obter:3 http://apt.pop-os.org/ubuntu jammy-updates/main amd64 libusb-1.0-doc all 2:1.0.25-1ubuntu2 [183 kB]
+Baixados 442 kB em 1s (383 kB/s)        
+A seleccionar pacote anteriormente não seleccionado libudev-dev:amd64.
+(Lendo banco de dados ... 227077 ficheiros e directórios actualmente instalados.
+)
+A preparar para desempacotar .../libudev-dev_249.11-0ubuntu3.17pop0~1760637232~2
+2.04~155dd5b_amd64.deb ...
+A descompactar libudev-dev:amd64 (249.11-0ubuntu3.17pop0~1760637232~22.04~155dd5
+b) ...
+A seleccionar pacote anteriormente não seleccionado libusb-1.0-0-dev:amd64.
+A preparar para desempacotar .../libusb-1.0-0-dev_2%3a1.0.25-1ubuntu2_amd64.deb 
+...
+A descompactar libusb-1.0-0-dev:amd64 (2:1.0.25-1ubuntu2) ...
+A seleccionar pacote anteriormente não seleccionado libusb-1.0-doc.
+A preparar para desempacotar .../libusb-1.0-doc_2%3a1.0.25-1ubuntu2_all.deb ...
+A descompactar libusb-1.0-doc (2:1.0.25-1ubuntu2) ...
+Configurando libusb-1.0-doc (2:1.0.25-1ubuntu2) ...
+Configurando libusb-1.0-0-dev:amd64 (2:1.0.25-1ubuntu2) ...
+Configurando libudev-dev:amd64 (249.11-0ubuntu3.17pop0~1760637232~22.04~155dd5b)
+ ...
+A processar 'triggers' para man-db (2.10.2-1) ...
+root@pop-os:/home/davinunes/edl# pip3 install pyusb pyserial
+Collecting pyusb
+  Downloading pyusb-1.3.1-py3-none-any.whl (58 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 58.5/58.5 KB 1.6 MB/s eta 0:00:00
+Collecting pyserial
+  Downloading pyserial-3.5-py2.py3-none-any.whl (90 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 90.6/90.6 KB 4.3 MB/s eta 0:00:00
+Installing collected packages: pyserial, pyusb
+Successfully installed pyserial-3.5 pyusb-1.3.1
+WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv
+root@pop-os:/home/davinunes/edl# cp collections/*.rules /etc/udev/rules.d/
+cp: não foi possível obter estado de 'collections/*.rules': Arquivo ou diretório inexistente
+root@pop-os:/home/davinunes/edl# 
+root@pop-os:/home/davinunes/edl# 
+root@pop-os:/home/davinunes/edl# 
+root@pop-os:/home/davinunes/edl# 
+root@pop-os:/home/davinunes/edl# 
+root@pop-os:/home/davinunes/edl# 
+
+
+oot@pop-os:/home/davinunes/edl# 
+root@pop-os:/home/davinunes/edl# 
+root@pop-os:/home/davinunes/edl# 
+root@pop-os:/home/davinunes/edl# 
+root@pop-os:/home/davinunes/edl# ./autoinstall.sh
+Now rebuild your initramfs and reboot
+
+Usage:   
+  pip3 install [options] <requirement specifier> [package-index-options] ...
+  pip3 install [options] -r <requirements file> [package-index-options] ...
+  pip3 install [options] [-e] <vcs project url> ...
+  pip3 install [options] [-e] <local project path> ...
+  pip3 install [options] <archive url/path> ...
+
+no such option: --break-system-packages
+
+Failed to install the dependencies!
+root@pop-os:/home/davinunes/edl# 
+
+
+
+
+sudo cp Drivers/*.rules /etc/udev/rules.d/
+sudo udevadm control --reload-rules
+sudo udevadm trigger
+
+
+pip3 install pycryptodome docopt
+
+
+python3 edl.py --help
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+root@pop-os:/home/davinunes/edl# cp Drivers/*.rules /etc/udev/rules.d/
+root@pop-os:/home/davinunes/edl# udevadm control --reload-rules
+root@pop-os:/home/davinunes/edl# udevadm trigger
+root@pop-os:/home/davinunes/edl# pip3 install pycryptodome docopt
+Collecting pycryptodome
+  Downloading pycryptodome-3.23.0-cp37-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (2.3 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.3/2.3 MB 8.6 MB/s eta 0:00:00
+Collecting docopt
+  Downloading docopt-0.6.2.tar.gz (25 kB)
+  Preparing metadata (setup.py) ... done
+Building wheels for collected packages: docopt
+  Building wheel for docopt (setup.py) ... done
+  Created wheel for docopt: filename=docopt-0.6.2-py2.py3-none-any.whl size=13723 sha256=89cf50f71030d64730c16a03a7be4377c43d6def29726982e054c5fdf31f837b
+  Stored in directory: /root/.cache/pip/wheels/fc/ab/d4/5da2067ac95b36618c629a5f93f809425700506f72c9732fac
+Successfully built docopt
+Installing collected packages: docopt, pycryptodome
+Successfully installed docopt-0.6.2 pycryptodome-3.23.0
+WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv
+root@pop-os:/home/davinunes/edl# python3 edl.py --help
+Capstone library is missing (optional).
+Keystone library is missing (optional).
+No module named 'Cryptodome'
+No module named 'Cryptodome'
+No module named 'Cryptodome'
+Usage:
+    edl.py -h | --help
+    edl.py [--vid=vid] [--pid=pid] [--portname=portname] [--serial]
+    edl.py [--loader=filename] [--memory=memtype] [--portname=portname] [--serial]
+    edl.py [--debugmode] [--portname=portname] [--serial]
+    edl.py [--gpt-num-part-entries=number] [--gpt-part-entry-size=number] [--gpt-part-entry-start-lba=number] [--portname=portname] [--serial]
+    edl.py [--memory=memtype] [--skipstorageinit] [--maxpayload=bytes] [--sectorsize==bytes] [--pagesperblock=number] [--portname=portname] [--serial]
+    edl.py server [--tcpport=portnumber] [--loader=filename] [--debugmode] [--skipresponse] [--vid=vid] [--pid=pid] [--skipstorageinit] [--portname=portname] [--serial]  [--devicemodel=value]
+    edl.py memorydump [--partitions=partnames] [--debugmode] [--vid=vid] [--pid=pid] [--portname=portname] [--serial] [--serial_number=serial_number]
+    edl.py printgpt [--memory=memtype] [--lun=lun] [--sectorsize==bytes] [--pagesperblock=number] [--loader=filename] [--debugmode]  [--skipresponse] [--vid=vid] [--pid=pid] [--skipstorageinit] [--portname=portname] [--serial] [--devicemodel=value]
+    edl.py gpt <directory> [--memory=memtype] [--lun=lun] [--genxml] [--loader=filename]  [--skipresponse] [--debugmode] [--vid=vid] [--pid=pid] [--skipstorageinit] [--pagesperblock=number] [--portname=portname] [--serial] [--devicemodel=value]
+    edl.py r <partitionname> <filename> [--memory=memtype] [--sectorsize==bytes] [--pagesperblock=number] [--lun=lun] [--loader=filename]  [--skipresponse] [--debugmode] [--vid=vid] [--pid=pid] [--skipstorageinit] [--portname=portname] [--serial] [--devicemodel=value]
+    edl.py rl <directory> [--memory=memtype] [--lun=lun] [--sectorsize==bytes] [--pagesperblock=number] [--skip=partnames] [--genxml]  [--skipresponse] [--loader=filename] [--debugmode] [--vid=vid] [--pid=pid] [--skipstorageinit] [--portname=portname] [--serial] [--devicemodel=value]
+    edl.py rf <filename> [--memory=memtype] [--lun=lun] [--sectorsize==bytes] [--pagesperblock=number] [--loader=filename] [--debugmode]  [--skipresponse] [--vid=vid] [--pid=pid] [--skipstorageinit] [--portname=portname] [--serial] [--devicemodel=value]
+    edl.py rs <start_sector> <sectors> <filename> [--lun=lun] [--sectorsize==bytes] [--pagesperblock=number] [--memory=memtype] [--loader=filename] [--debugmode] [--skipresponse] [--vid=vid] [--pid=pid] [--skipstorageinit] [--portname=portname] [--serial] [--devicemodel=value]
+    edl.py w <partitionname> <filename> [--partitionfilename=filename] [--memory=memtype] [--lun=lun] [--sectorsize==bytes] [--pagesperblock=number] [--skipwrite] [--skipresponse] [--loader=filename] [--debugmode] [--vid=vid] [--pid=pid] [--devicemodel=value] [--skipstorageinit] [--portname=portname] [--serial]
+    edl.py wl <directory> [--memory=memtype] [--lun=lun] [--sectorsize==bytes] [--pagesperblock=number] [--skip=partnames] [--skipresponse] [--loader=filename] [--debugmode] [--vid=vid] [--pid=pid] [--devicemodel=value] [--skipstorageinit] [--portname=portname] [--serial]
+    edl.py wf <filename> [--memory=memtype] [--lun=lun] [--sectorsize==bytes] [--pagesperblock=number] [--loader=filename] [--skipresponse] [--debugmode] [--vid=vid] [--pid=pid] [--devicemodel=value] [--skipstorageinit] [--portname=portname] [--serial]
+    edl.py ws <start_sector> <filename> [--memory=memtype] [--lun=lun] [--sectorsize==bytes] [--pagesperblock=number] [--skipwrite] [--skipresponse] [--loader=filename] [--debugmode] [--vid=vid] [--pid=pid] [--devicemodel=value] [--skipstorageinit] [--portname=portname] [--serial]
+    edl.py e <partitionname> [--memory=memtype] [--skipwrite] [--lun=lun] [--sectorsize==bytes] [--pagesperblock=number] [--loader=filename] [--debugmode] [--skipresponse] [--vid=vid] [--pid=pid] [--devicemodel=value] [--skipstorageinit] [--portname=portname] [--serial]
+    edl.py es <start_sector> <sectors> [--memory=memtype] [--lun=lun] [--sectorsize==bytes] [--pagesperblock=number] [--skipwrite] [--loader=filename] [--skipresponse] [--debugmode] [--vid=vid] [--pid=pid] [--devicemodel=value] [--skipstorageinit] [--portname=portname] [--serial]
+    edl.py ep <partitionname> <sectors> [--memory=memtype] [--skipwrite] [--lun=lun] [--sectorsize==bytes] [--pagesperblock=number] [--loader=filename] [--debugmode] [--skipresponse] [--vid=vid] [--pid=pid] [--devicemodel=value] [--skipstorageinit] [--portname=portname] [--serial]
+    edl.py footer <filename> [--memory=memtype] [--lun=lun] [--loader=filename] [--debugmode] [--skipresponse] [--vid=vid] [--pid=pid] [--skipstorageinit] [--portname=portname] [--serial]  [--devicemodel=value]
+    edl.py peek <offset> <length> <filename> [--loader=filename] [--debugmode] [--skipresponse] [--vid=vid] [--pid=pid] [--portname=portname] [--serial]
+    edl.py peekhex <offset> <length> [--loader=filename] [--debugmode] [--vid=vid] [--pid=pid] [--portname=portname] [--serial]
+    edl.py peekdword <offset> [--loader=filename] [--debugmode] [--vid=vid] [--pid=pid] [--skipstorageinit] [--portname=portname] [--serial]
+    edl.py peekqword <offset> [--loader=filename] [--debugmode] [--vid=vid] [--pid=pid] [--skipstorageinit] [--portname=portname] [--serial]
+    edl.py memtbl <filename> [--loader=filename] [--debugmode] [--vid=vid] [--pid=pid] [--skipstorageinit] [--portname=portname] [--serial]
+    edl.py poke <offset> <filename> [--loader=filename] [--debugmode] [--vid=vid] [--pid=pid] [--skipstorageinit] [--portname=portname] [--serial]
+    edl.py pokehex <offset> <data> [--loader=filename] [--debugmode] [--vid=vid] [--pid=pid] [--skipstorageinit] [--portname=portname] [--serial]
+    edl.py pokedword <offset> <data> [--loader=filename] [--debugmode] [--vid=vid] [--pid=pid] [--skipstorageinit] [--portname=portname] [--serial]
+    edl.py pokeqword <offset> <data> [--loader=filename] [--debugmode] [--vid=vid] [--pid=pid] [--skipstorageinit] [--portname=portname] [--serial]
+    edl.py memcpy <offset> <size> [--loader=filename] [--debugmode] [--vid=vid] [--pid=pid] [--portname=portname] [--serial]
+    edl.py secureboot [--loader=filename] [--debugmode] [--vid=vid] [--pid=pid] [--skipstorageinit] [--portname=portname] [--serial]
+    edl.py pbl <filename> [--loader=filename] [--debugmode] [--vid=vid] [--pid=pid] [--skipstorageinit] [--portname=portname] [--serial]
+    edl.py qfp <filename> [--loader=filename] [--debugmode] [--vid=vid] [--pid=pid] [--skipstorageinit] [--portname=portname] [--serial]
+    edl.py getstorageinfo [--loader=filename] [--memory=memtype] [--pagesperblock=number] [--debugmode] [--skipresponse] [--vid=vid] [--pid=pid] [--skipstorageinit] [--portname=portname] [--serial]  [--devicemodel=value]
+    edl.py setbootablestoragedrive <lun> [--loader=filename] [--debugmode] [--skipresponse] [--vid=vid] [--pid=pid] [--portname=portname] [--serial]  [--devicemodel=value]
+    edl.py getactiveslot [--memory=memtype] [--loader=filename] [--debugmode] [--vid=vid] [--pid=pid] [--portname=portname] [--serial]  [--devicemodel=value]
+    edl.py setactiveslot <slot> [--loader=filename] [--debugmode] [--skipresponse] [--vid=vid] [--pid=pid] [--portname=portname] [--serial]  [--devicemodel=value]
+    edl.py send <command> [--loader=filename] [--debugmode] [--skipresponse] [--vid=vid] [--pid=pid] [--portname=portname] [--serial]  [--devicemodel=value]
+    edl.py xml <xmlfile> [--loader=filename] [--debugmode] [--skipresponse] [--vid=vid] [--pid=pid] [--skipstorageinit] [--portname=portname] [--serial]  [--devicemodel=value]
+    edl.py rawxml <xmlstring> [--loader=filename] [--debugmode] [--skipresponse] [--vid=vid] [--pid=pid] [--skipstorageinit] [--portname=portname] [--serial]  [--devicemodel=value]
+    edl.py reset [--resetmode=mode] [--loader=filename] [--debugmode] [--vid=vid] [--pid=pid] [--portname=portname] [--serial] [--devicemodel=value]
+    edl.py nop [--loader=filename] [--debugmode] [--vid=vid] [--pid=pid] [--skipstorageinit] [--portname=portname] [--serial] [--devicemodel=value]
+    edl.py modules <command> <options> [--memory=memtype] [--lun=lun] [--loader=filename] [--debugmode] [--skipresponse] [--vid=vid] [--pid=pid] [--devicemodel=value] [--portname=portname] [--serial]
+    edl.py provision <xmlfile> [--loader=filename] [--debugmode] [--skipresponse] [--vid=vid] [--pid=pid] [--portname=portname] [--serial]  [--devicemodel=value]
+    edl.py qfil <rawprogram> <patch> <imagedir> [--loader=filename] [--memory=memtype] [--pagesperblock=number] [--debugmode] [--skipresponse] [--vid=vid] [--pid=pid] [--portname=portname] [--serial]  [--devicemodel=value]
+
+Description:
+    server                      # Run tcp/ip server
+    printgpt                    # Print GPT Table information
+    gpt                         # Save gpt table to given directory
+    r                           # Read flash to filename
+    rl                          # Read all partitions from flash to a directory
+    rf                          # Read whole flash to file
+    rs                          # Read sectors starting at start_sector to filename
+    w                           # Write filename to partition to flash
+    wl                          # Write all files from directory to flash
+    wf                          # Write whole filename to flash
+    ws                          # Write filename to flash at start_sector
+    e                           # Erase partition from flash
+    es                          # Erase sectors at start_sector from flash
+    ep                          # Erase sector count from flash partition
+    footer                      # Read crypto footer from flash
+    peek                        # Dump memory at offset with given length to filename
+    peekhex                     # Dump memory at offset and given length
+    peekdword                   # Dump DWORD at memory offset
+    peekqword                   # Dump QWORD at memory offset
+    memtbl                      # Dump memory table to file
+    poke                        # Write filename to memory at offset to memory
+    pokehex                     # Write hex string data at offset to memory
+    pokedword                   # Write DWORD to memory at offset
+    pokeqword                   # Write QWORD to memory at offset
+    memcpy                      # Copy memory from srcoffset with given size to dstoffset
+    secureboot                  # Print secureboot fields from qfprom fuses
+    pbl                         # Dump primary bootloader to filename
+    qfp                         # Dump QFPROM fuses to filename
+    getstorageinfo              # Print storage info in firehose mode
+    setbootablestoragedrive     # Change bootable storage drive to lun number
+    send                        # Send firehose command
+    xml                         # Send firehose xml file
+    rawxml                      # Send firehose xml raw string
+    reset                       # Send firehose reset command, reset modes: reset, off, edl
+    nop                         # Send firehose nop command
+    modules                     # Enable submodules, for example: "oemunlock enable"
+    setactiveslot               # Set partition as active (Slot A/B)
+    provision                   # UFS provision
+    qfil                        # Write rawprogram xml files
+                                # <rawprogram> : program config xml, such as rawprogram_unsparse.xml or rawprogram*.xml
+                                # <patch> : patch config xml, such as patch0.xml or patch*.xml
+                                # <imagedir> : directory name of image files
+
+Options:
+    --loader=filename                  Use specific EDL loader, disable autodetection [default: None]
+    --vid=vid                          Set usb vendor id used for EDL [default: -1]
+    --pid=pid                          Set usb product id used for EDL [default: -1]
+    --lun=lun                          Set lun to read/write from (UFS memory only)
+    --maxpayload=bytes                 Set the maximum payload for EDL [default: 0x100000]
+    --sectorsize=bytes                 Set default sector size
+    --pagesperblock=number             Set NAND pages per block (firehose configure attribute)
+    --memory=memtype                   Set memory type ("NAND", "eMMC", "UFS", "spinor")
+    --partitionfilename=filename       Set partition table as filename for streaming mode
+    --partitions=partnames             Skip reading partition with names != "partname1,partname2,etc."
+    --skipwrite                        Do not allow any writes to flash (simulate only)
+    --skipresponse                     Do not expect a response from phone on read/write (some Qualcomms)
+    --skipstorageinit                  Skip storage initialisation
+    --debugmode                        Enable verbose mode
+    --gpt-num-part-entries=number      Set GPT entry count [default: 0]
+    --gpt-part-entry-size=number       Set GPT entry size [default: 0]
+    --gpt-part-entry-start-lba=number  Set GPT entry start lba sector [default: 0]
+    --tcpport=portnumber               Set port for tcp server [default: 1340]
+    --skip=partnames                   Skip reading partition with names "partname1,partname2,etc."
+    --genxml                           Generate rawprogram[lun].xml
+    --devicemodel=value                Set device model
+    --portname=portname                Set serial port name (/dev/ttyUSB0 for Linux/MAC; \\.\COM1 for Windows)
+    --serial                           Use serial port (port autodetection)
+    --slot                             Set active slot for setactiveslot [a or b]
+    --resetmode=mode                   Resetmode for reset (poweroff, reset, edl, etc.)
+root@pop-os:/home/davinunes/edl# 
+
+
+
+
+
+
+
+
+
+
+
+
+davinunes@pop-os:~$ edl --help
+Comando 'edl' não encontrado, você quis dizer:
+  comando 'edb' do deb edb-debugger (1.3.0-1)
+  comando 'ed' do deb ed (1.18-1)
+  comando 'tdl' do deb devtodo (0.1.20+git20200830.0ad52b0-1)
+  comando 'pdl' do deb pdl (1:2.074-1)
+  comando 'erl' do deb erlang-base (1:24.2.1+dfsg-1ubuntu0.6)
+  comando 'ecl' do deb ecl (21.2.1+ds-4)
+  comando 'el' do deb oneliner-el (0.3.6-9.1)
+  comando 'gdl' do deb gnudatalanguage (1.0.1-3build1)
+Experimente: sudo apt install <deb name>
+davinunes@pop-os:~$ sudo su
+[sudo] senha para davinunes: 
+root@pop-os:/home/davinunes# edl --help
+Comando 'edl' não encontrado, você quis dizer:
+  comando 'tdl' do deb devtodo (0.1.20+git20200830.0ad52b0-1)
+  comando 'ed' do deb ed (1.18-1)
+  comando 'edb' do deb edb-debugger (1.3.0-1)
+  comando 'el' do deb oneliner-el (0.3.6-9.1)
+  comando 'erl' do deb erlang-base (1:24.2.1+dfsg-1ubuntu0.6)
+  comando 'gdl' do deb gnudatalanguage (1.0.1-3build1)
+  comando 'pdl' do deb pdl (1:2.074-1)
+  comando 'ecl' do deb ecl (21.2.1+ds-4)
+Experimente: apt install <deb name>
+root@pop-os:/home/davinunes# 
+
+
+ln -s /home/davinunes/edl/edl.py /usr/bin/edl
+chmod +x /home/davinunes/edl/edl.py
+
+
+
+
+
+root@pop-os:~# adb devices
+* daemon not running; starting now at tcp:5037
+* daemon started successfully
+List of devices attached
+4493b2a6	device
+
+root@pop-os:~# adb reboot edl
+root@pop-os:~# lsusb
+Bus 002 Device 003: ID 05c6:9008 Qualcomm, Inc. Gobi Wireless Modem (QDL mode)
+Bus 002 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+Bus 001 Device 004: ID 0e0f:0008 VMware, Inc. Virtual Bluetooth Adapter
+Bus 001 Device 003: ID 0e0f:0002 VMware, Inc. Virtual USB Hub
+Bus 001 Device 002: ID 0e0f:0003 VMware, Inc. Virtual Mouse
+Bus 001 Device 001: ID 1d6b:0001 Linux Foundation 1.1 root hub
+root@pop-os:~# 
+
+
+
+
+root@pop-os:~# pwd
+/root
+root@pop-os:~# mkdir backup-modem
+root@pop-os:~# cd backup-modem/
+root@pop-os:~/backup-modem# ls
+root@pop-os:~/backup-modem# edl rl zhihe_backup
+Capstone library is missing (optional).
+Keystone library is missing (optional).
+No module named 'Cryptodome'
+No module named 'Cryptodome'
+No module named 'Cryptodome'
+Qualcomm Sahara / Firehose Client V3.62 (c) B.Kerler 2018-2025.
+main - Trying with no loader given ...
+main - Waiting for the device
+main - Device detected :)
+sahara - Protocol version: 2, Version supported: 1
+main - Mode detected: sahara
+sahara - 
+Version 0x2
+------------------------
+HWID:              0x007050e100000000 (MSM_ID:0x007050e1,OEM_ID:0x0000,MODEL_ID:0x0000)
+CPU detected:      "MSM8916"
+PK_HASH:           0xcc3153a80293939b90d02d3bf8b23e0292e452fef662c74998421adad42a380f
+Serial:            0x25b647a6
+
+sahara - Possibly unfused device detected, so any loader should be fine...
+sahara - Possible loader available: /home/davinunes/edl/edlclient/../Loaders/longcheer/007050e100000000_3022817d373fd7f9_fhprg_peek.bin
+sahara - Possible loader available: /home/davinunes/edl/edlclient/../Loaders/cyanogen/007050e100000000_4e3eefa63a67eb7a_fhprg_peek.bin
+sahara - Possible loader available: /home/davinunes/edl/edlclient/../Loaders/cyanogen/007050e100000000_d36c6073c9c2cb1c_fhprg_peek.bin
+sahara - Possible loader available: /home/davinunes/edl/edlclient/../Loaders/cyanogen/007050e100000000_4614048173062ae4_fhprg_peek.bin
+sahara - Possible loader available: /home/davinunes/edl/edlclient/../Loaders/lenovo_motorola/007050e100000000_99c8c13e374c34d8_fhprg_peek.bin
+sahara - Possible loader available: /home/davinunes/edl/edlclient/../Loaders/xiaomi/007050e100000000_50838757eab7c632_fhprg_peek_wt88047.bin
+sahara - Possible loader available: /home/davinunes/edl/edlclient/../Loaders/xiaomi/007050e100000000_278448179ac756a1_fhprg_peek.bin
+sahara - Possible loader available: /home/davinunes/edl/edlclient/../Loaders/qualcomm/factory/msm8916/007050e100000000_394a2e47cf830150_fhprg_peek.bin
+sahara - Possible loader available: /home/davinunes/edl/edlclient/../Loaders/qualcomm/factory/msm8916/007050e100000000_8ecf3eaa03f772e2_fhprg_peek.bin
+sahara - Trying loader: /home/davinunes/edl/edlclient/../Loaders/longcheer/007050e100000000_3022817d373fd7f9_fhprg_peek.bin
+sahara - Protocol version: 2, Version supported: 1
+sahara - Uploading loader /home/davinunes/edl/edlclient/../Loaders/longcheer/007050e100000000_3022817d373fd7f9_fhprg_peek.bin ...
+sahara - 32-Bit mode detected.
+sahara - Firehose mode detected, uploading...
+sahara - Loader successfully uploaded.
+main - Trying to connect to firehose loader ...
+firehose_client
+firehose_client - [LIB]: No --memory option set, we assume "eMMC" as default ..., if it fails, try using "--memory" with "UFS","NAND" or "spinor" instead !
+firehose
+firehose - [LIB]: Host's payload to target size is too large
+firehose
+firehose - [LIB]: logbuf@0x0801BDA8 fh@0x08018C10
+firehose - TargetName=MSM8916
+firehose - MemoryName=eMMC
+firehose - Version=1
+firehose - Trying to read first storage sector...
+firehose
+firehose - [LIB]: XML (0 bytes) not validated
+root@pop-os:~/backup-modem# 
+
+
+
+root@pop-os:~/backup-modem# pip3 install pycryptodome capstone keystone-engine
+Requirement already satisfied: pycryptodome in /usr/local/lib/python3.10/dist-packages (3.23.0)
+Collecting capstone
+  Downloading capstone-5.0.7-py3-none-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (1.5 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.5/1.5 MB 8.9 MB/s eta 0:00:00
+Collecting keystone-engine
+  Downloading keystone_engine-0.9.2-py2.py3-none-manylinux1_x86_64.whl (1.8 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.8/1.8 MB 21.1 MB/s eta 0:00:00
+Installing collected packages: keystone-engine, capstone
+Successfully installed capstone-5.0.7 keystone-engine-0.9.2
+WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv
+root@pop-os:~/backup-modem# edl rl zhihe_backup --memory=eMMC --sectorsize=512 --maxpayload=131072
+No module named 'Cryptodome'
+No module named 'Cryptodome'
+No module named 'Cryptodome'
+Usage:
+    edl.py -h | --help
+    edl.py [--vid=vid] [--pid=pid] [--portname=portname] [--serial]
+    edl.py [--loader=filename] [--memory=memtype] [--portname=portname] [--serial]
+    edl.py [--debugmode] [--portname=portname] [--serial]
+    edl.py [--gpt-num-part-entries=number] [--gpt-part-entry-size=number] [--gpt-part-entry-start-lba=number] [--portname=portname] [--serial]
+    edl.py [--memory=memtype] [--skipstorageinit] [--maxpayload=bytes] [--sectorsize==bytes] [--pagesperblock=number] [--portname=portname] [--serial]
+    edl.py server [--tcpport=portnumber] [--loader=filename] [--debugmode] [--skipresponse] [--vid=vid] [--pid=pid] [--skipstorageinit] [--portname=portname] [--serial]  [--devicemodel=value]
+    edl.py memorydump [--partitions=partnames] [--debugmode] [--vid=vid] [--pid=pid] [--portname=portname] [--serial] [--serial_number=serial_number]
+    edl.py printgpt [--memory=memtype] [--lun=lun] [--sectorsize==bytes] [--pagesperblock=number] [--loader=filename] [--debugmode]  [--skipresponse] [--vid=vid] [--pid=pid] [--skipstorageinit] [--portname=portname] [--serial] [--devicemodel=value]
+    edl.py gpt <directory> [--memory=memtype] [--lun=lun] [--genxml] [--loader=filename]  [--skipresponse] [--debugmode] [--vid=vid] [--pid=pid] [--skipstorageinit] [--pagesperblock=number] [--portname=portname] [--serial] [--devicemodel=value]
+    edl.py r <partitionname> <filename> [--memory=memtype] [--sectorsize==bytes] [--pagesperblock=number] [--lun=lun] [--loader=filename]  [--skipresponse] [--debugmode] [--vid=vid] [--pid=pid] [--skipstorageinit] [--portname=portname] [--serial] [--devicemodel=value]
+    edl.py rl <directory> [--memory=memtype] [--lun=lun] [--sectorsize==bytes] [--pagesperblock=number] [--skip=partnames] [--genxml]  [--skipresponse] [--loader=filename] [--debugmode] [--vid=vid] [--pid=pid] [--skipstorageinit] [--portname=portname] [--serial] [--devicemodel=value]
+    edl.py rf <filename> [--memory=memtype] [--lun=lun] [--sectorsize==bytes] [--pagesperblock=number] [--loader=filename] [--debugmode]  [--skipresponse] [--vid=vid] [--pid=pid] [--skipstorageinit] [--portname=portname] [--serial] [--devicemodel=value]
+    edl.py rs <start_sector> <sectors> <filename> [--lun=lun] [--sectorsize==bytes] [--pagesperblock=number] [--memory=memtype] [--loader=filename] [--debugmode] [--skipresponse] [--vid=vid] [--pid=pid] [--skipstorageinit] [--portname=portname] [--serial] [--devicemodel=value]
+    edl.py w <partitionname> <filename> [--partitionfilename=filename] [--memory=memtype] [--lun=lun] [--sectorsize==bytes] [--pagesperblock=number] [--skipwrite] [--skipresponse] [--loader=filename] [--debugmode] [--vid=vid] [--pid=pid] [--devicemodel=value] [--skipstorageinit] [--portname=portname] [--serial]
+    edl.py wl <directory> [--memory=memtype] [--lun=lun] [--sectorsize==bytes] [--pagesperblock=number] [--skip=partnames] [--skipresponse] [--loader=filename] [--debugmode] [--vid=vid] [--pid=pid] [--devicemodel=value] [--skipstorageinit] [--portname=portname] [--serial]
+    edl.py wf <filename> [--memory=memtype] [--lun=lun] [--sectorsize==bytes] [--pagesperblock=number] [--loader=filename] [--skipresponse] [--debugmode] [--vid=vid] [--pid=pid] [--devicemodel=value] [--skipstorageinit] [--portname=portname] [--serial]
+    edl.py ws <start_sector> <filename> [--memory=memtype] [--lun=lun] [--sectorsize==bytes] [--pagesperblock=number] [--skipwrite] [--skipresponse] [--loader=filename] [--debugmode] [--vid=vid] [--pid=pid] [--devicemodel=value] [--skipstorageinit] [--portname=portname] [--serial]
+    edl.py e <partitionname> [--memory=memtype] [--skipwrite] [--lun=lun] [--sectorsize==bytes] [--pagesperblock=number] [--loader=filename] [--debugmode] [--skipresponse] [--vid=vid] [--pid=pid] [--devicemodel=value] [--skipstorageinit] [--portname=portname] [--serial]
+    edl.py es <start_sector> <sectors> [--memory=memtype] [--lun=lun] [--sectorsize==bytes] [--pagesperblock=number] [--skipwrite] [--loader=filename] [--skipresponse] [--debugmode] [--vid=vid] [--pid=pid] [--devicemodel=value] [--skipstorageinit] [--portname=portname] [--serial]
+    edl.py ep <partitionname> <sectors> [--memory=memtype] [--skipwrite] [--lun=lun] [--sectorsize==bytes] [--pagesperblock=number] [--loader=filename] [--debugmode] [--skipresponse] [--vid=vid] [--pid=pid] [--devicemodel=value] [--skipstorageinit] [--portname=portname] [--serial]
+    edl.py footer <filename> [--memory=memtype] [--lun=lun] [--loader=filename] [--debugmode] [--skipresponse] [--vid=vid] [--pid=pid] [--skipstorageinit] [--portname=portname] [--serial]  [--devicemodel=value]
+    edl.py peek <offset> <length> <filename> [--loader=filename] [--debugmode] [--skipresponse] [--vid=vid] [--pid=pid] [--portname=portname] [--serial]
+    edl.py peekhex <offset> <length> [--loader=filename] [--debugmode] [--vid=vid] [--pid=pid] [--portname=portname] [--serial]
+    edl.py peekdword <offset> [--loader=filename] [--debugmode] [--vid=vid] [--pid=pid] [--skipstorageinit] [--portname=portname] [--serial]
+    edl.py peekqword <offset> [--loader=filename] [--debugmode] [--vid=vid] [--pid=pid] [--skipstorageinit] [--portname=portname] [--serial]
+    edl.py memtbl <filename> [--loader=filename] [--debugmode] [--vid=vid] [--pid=pid] [--skipstorageinit] [--portname=portname] [--serial]
+    edl.py poke <offset> <filename> [--loader=filename] [--debugmode] [--vid=vid] [--pid=pid] [--skipstorageinit] [--portname=portname] [--serial]
+    edl.py pokehex <offset> <data> [--loader=filename] [--debugmode] [--vid=vid] [--pid=pid] [--skipstorageinit] [--portname=portname] [--serial]
+    edl.py pokedword <offset> <data> [--loader=filename] [--debugmode] [--vid=vid] [--pid=pid] [--skipstorageinit] [--portname=portname] [--serial]
+    edl.py pokeqword <offset> <data> [--loader=filename] [--debugmode] [--vid=vid] [--pid=pid] [--skipstorageinit] [--portname=portname] [--serial]
+    edl.py memcpy <offset> <size> [--loader=filename] [--debugmode] [--vid=vid] [--pid=pid] [--portname=portname] [--serial]
+    edl.py secureboot [--loader=filename] [--debugmode] [--vid=vid] [--pid=pid] [--skipstorageinit] [--portname=portname] [--serial]
+    edl.py pbl <filename> [--loader=filename] [--debugmode] [--vid=vid] [--pid=pid] [--skipstorageinit] [--portname=portname] [--serial]
+    edl.py qfp <filename> [--loader=filename] [--debugmode] [--vid=vid] [--pid=pid] [--skipstorageinit] [--portname=portname] [--serial]
+    edl.py getstorageinfo [--loader=filename] [--memory=memtype] [--pagesperblock=number] [--debugmode] [--skipresponse] [--vid=vid] [--pid=pid] [--skipstorageinit] [--portname=portname] [--serial]  [--devicemodel=value]
+    edl.py setbootablestoragedrive <lun> [--loader=filename] [--debugmode] [--skipresponse] [--vid=vid] [--pid=pid] [--portname=portname] [--serial]  [--devicemodel=value]
+    edl.py getactiveslot [--memory=memtype] [--loader=filename] [--debugmode] [--vid=vid] [--pid=pid] [--portname=portname] [--serial]  [--devicemodel=value]
+    edl.py setactiveslot <slot> [--loader=filename] [--debugmode] [--skipresponse] [--vid=vid] [--pid=pid] [--portname=portname] [--serial]  [--devicemodel=value]
+    edl.py send <command> [--loader=filename] [--debugmode] [--skipresponse] [--vid=vid] [--pid=pid] [--portname=portname] [--serial]  [--devicemodel=value]
+    edl.py xml <xmlfile> [--loader=filename] [--debugmode] [--skipresponse] [--vid=vid] [--pid=pid] [--skipstorageinit] [--portname=portname] [--serial]  [--devicemodel=value]
+    edl.py rawxml <xmlstring> [--loader=filename] [--debugmode] [--skipresponse] [--vid=vid] [--pid=pid] [--skipstorageinit] [--portname=portname] [--serial]  [--devicemodel=value]
+    edl.py reset [--resetmode=mode] [--loader=filename] [--debugmode] [--vid=vid] [--pid=pid] [--portname=portname] [--serial] [--devicemodel=value]
+    edl.py nop [--loader=filename] [--debugmode] [--vid=vid] [--pid=pid] [--skipstorageinit] [--portname=portname] [--serial] [--devicemodel=value]
+    edl.py modules <command> <options> [--memory=memtype] [--lun=lun] [--loader=filename] [--debugmode] [--skipresponse] [--vid=vid] [--pid=pid] [--devicemodel=value] [--portname=portname] [--serial]
+    edl.py provision <xmlfile> [--loader=filename] [--debugmode] [--skipresponse] [--vid=vid] [--pid=pid] [--portname=portname] [--serial]  [--devicemodel=value]
+    edl.py qfil <rawprogram> <patch> <imagedir> [--loader=filename] [--memory=memtype] [--pagesperblock=number] [--debugmode] [--skipresponse] [--vid=vid] [--pid=pid] [--portname=portname] [--serial]  [--devicemodel=value]
+root@pop-os:~/backup-modem# 
+
+
+
+
+
+root@pop-os:~/backup-modem# 
+root@pop-os:~/backup-modem# apt install python3-pycryptodome python3-capstone -y
+Lendo listas de pacotes... Pronto
+Construindo árvore de dependências... Pronto
+Lendo informação de estado... Pronto        
+Os pacotes adicionais seguintes serão instalados:
+  libcapstone4
+Os NOVOS pacotes a seguir serão instalados:
+  libcapstone4 python3-capstone python3-pycryptodome
+0 pacotes atualizados, 3 pacotes novos instalados, 0 a serem removidos e 221 não atualizados.
+É preciso baixar 1.782 kB de arquivos.
+Depois desta operação, 10,8 MB adicionais de espaço em disco serão usados.
+Obter:1 http://apt.pop-os.org/ubuntu jammy/universe amd64 libcapstone4 amd64 4.0.2-5 [664 kB]
+Obter:2 http://apt.pop-os.org/ubuntu jammy/universe amd64 python3-capstone amd64 4.0.2-5 [89,1 kB]
+Obter:3 http://apt.pop-os.org/ubuntu jammy-security/main amd64 python3-pycryptodome amd64 3.11.0+dfsg1-3ubuntu0.1 [1.029 kB]
+Baixados 1.782 kB em 2s (1.142 kB/s)            
+A seleccionar pacote anteriormente não seleccionado libcapstone4:amd64.
+(Lendo banco de dados ... 227243 ficheiros e directórios actualmente instalados.)
+A preparar para desempacotar .../libcapstone4_4.0.2-5_amd64.deb ...
+A descompactar libcapstone4:amd64 (4.0.2-5) ...
+A seleccionar pacote anteriormente não seleccionado python3-capstone.
+A preparar para desempacotar .../python3-capstone_4.0.2-5_amd64.deb ...
+A descompactar python3-capstone (4.0.2-5) ...
+A seleccionar pacote anteriormente não seleccionado python3-pycryptodome.
+A preparar para desempacotar .../python3-pycryptodome_3.11.0+dfsg1-3ubuntu0.1_amd64.deb ...
+A descompactar python3-pycryptodome (3.11.0+dfsg1-3ubuntu0.1) ...
+Configurando python3-pycryptodome (3.11.0+dfsg1-3ubuntu0.1) ...
+Configurando libcapstone4:amd64 (4.0.2-5) ...
+Configurando python3-capstone (4.0.2-5) ...
+A processar 'triggers' para libc-bin (2.35-0ubuntu3.11) ...
+root@pop-os:~/backup-modem# 
+root@pop-os:~/backup-modem# 
+root@pop-os:~/backup-modem# 
+
+
+
+
+root@pop-os:~/backup-modem# edl rl zhihe_backup
+Qualcomm Sahara / Firehose Client V3.62 (c) B.Kerler 2018-2025.
+main - Trying with no loader given ...
+main - Waiting for the device
+main - Device detected :)
+main - Mode detected: firehose
+firehose
+firehose - [LIB]: Host's payload to target size is too large
+firehose
+firehose - [LIB]: logbuf@0x0801BDA8 fh@0x08018C10
+firehose
+firehose - [LIB]: Sector size in XML 4096 does not match disk sector size 512
+Progress: |██████████| 100.0% Read (Sector 0x1FFE0 of 0x20000, ) 0.59 MB/s                                                            
+Progress: |██████████| 100.0% Read (Sector 0x20000 of 0x20000, ) 9.43 MB/s                                                            
+Progress: |██████████| 100.0% Read (Sector 0x400 of 0x400, ) 6.74 MB/s                                                                
+Progress: |██████████| 100.0% Read (Sector 0x400 of 0x400, ) 5.83 MB/s                                                                
+Progress: |██████████| 100.0% Read (Sector 0x800 of 0x800, ) 10.31 MB/s                                                               
+Progress: |██████████| 100.0% Read (Sector 0x800 of 0x800, ) 9.62 MB/s                                                                
+Progress: |██████████| 100.0% Read (Sector 0x400 of 0x400, ) 5.64 MB/s                                                                
+Progress: |██████████| 100.0% Read (Sector 0x400 of 0x400, ) 5.75 MB/s                                                                
+Progress: |██████████| 100.0% Read (Sector 0x400 of 0x400, ) 5.73 MB/s                                                                
+Progress: |██████████| 100.0% Read (Sector 0x400 of 0x400, ) 7.44 MB/s                                                                
+Progress: |██████████| 100.0% Read (Sector 0x400 of 0x400, ) 6.50 MB/s                                                                
+Progress: |██████████| 100.0% Read (Sector 0x400 of 0x400, ) 6.28 MB/s                                                                
+Progress: |██████████| 100.0% Read (Sector 0x800 of 0x800, ) 8.47 MB/s                                                                
+Progress: |██████████| 100.0% Read (Sector 0xC00 of 0xC00, ) 6.35 MB/s                                                                
+Progress: |██████████| 100.0% Read (Sector 0xC00 of 0xC00, ) 10.84 MB/s                                                               
+Progress: |██████████| 100.0% Read (Sector 0x800 of 0x800, ) 5.84 MB/s                                                                
+Progress: |██████████| 100.0% Read (Sector 0x2 of 0x2, ) 0.43 MB/s                                                                    
+Progress: |██████████| 100.0% Read (Sector 0x10 of 0x10, ) 3.65 MB/s                                                                  
+Progress: |██████████| 100.0% Read (Sector 0x5000 of 0x5000, ) 9.74 MB/s                                                              
+Progress: |██████████| 100.0% Read (Sector 0x40 of 0x40, ) 10.00 MB/s                                                                 
+Progress: |██████████| 100.0% Read (Sector 0xC00 of 0xC00, ) 10.09 MB/s                                                               
+Progress: |██████████| 100.0% Read (Sector 0x20 of 0x20, ) 5.72 MB/s                                                                  
+Progress: |██████████| 100.0% Read (Sector 0x8000 of 0x8000, ) 9.59 MB/s                                                              
+Progress: |██████████| 100.0% Read (Sector 0x18FD80 of 0x190000, ) 4.80 MB/s                                                          
+Progress: |██████████| 100.0% Read (Sector 0x18FF60 of 0x190000, ) 5.01 MB/s                                                          
+Progress: |██████████| 100.0% Read (Sector 0x18FF80 of 0x190000, ) 0.29 MB/s                                                          
+Progress: |██████████| 100.0% Read (Sector 0x18FFA0 of 0x190000, ) 0.33 MB/s                                                          
+Progress: |██████████| 100.0% Read (Sector 0x18FFE0 of 0x190000, ) 7.01 MB/s                                                          
+Progress: |██████████| 100.0% Read (Sector 0x190000 of 0x190000, ) 10.04 MB/s                                                         
+Progress: |██████████| 100.0% Read (Sector 0xFFE0 of 0x10000, ) 6.38 MB/s                                                             
+Progress: |██████████| 100.0% Read (Sector 0x10000 of 0x10000, ) 7.03 MB/s                                                            
+Progress: |██████████| 100.0% Read (Sector 0x3FF80 of 0x40000, ) 0.29 MB/s                                                            
+Progress: |██████████| 100.0% Read (Sector 0x3FFA0 of 0x40000, ) 0.33 MB/s                                                            
+Progress: |██████████| 100.0% Read (Sector 0x3FFE0 of 0x40000, ) 7.16 MB/s                                                            
+Progress: |██████████| 100.0% Read (Sector 0x40000 of 0x40000, ) 10.84 MB/s                                                           
+Progress: |██████████| 100.0% Read (Sector 0x8000 of 0x8000, ) 11.16 MB/s                                                             
+Progress: |██████████| 100.0% Read (Sector 0x4F6980 of 0x4F737F, ) 4.85 MB/s                                                          
+Progress: |██████████| 100.0% Read (Sector 0x4F6B80 of 0x4F737F, ) 6.68 MB/s                                                          
+Progress: |██████████| 100.0% Read (Sector 0x4F6D80 of 0x4F737F, ) 4.08 MB/s                                                          
+Progress: |██████████| 100.0% Read (Sector 0x4F6F80 of 0x4F737F, ) 6.11 MB/s                                                          
+Progress: |██████████| 100.0% Read (Sector 0x4F737F of 0x4F737F, ) 19.31 MB/s                                                         
+root@pop-os:~/backup-modem# 
+
+
+root@pop-os:~/backup-modem# ls
+zhihe_backup
+root@pop-os:~/backup-modem# cd zhihe_backup/
+root@pop-os:~/backup-modem/zhihe_backup# 
+root@pop-os:~/backup-modem/zhihe_backup# 
+root@pop-os:~/backup-modem/zhihe_backup# 
+root@pop-os:~/backup-modem/zhihe_backup# 
+root@pop-os:~/backup-modem/zhihe_backup# 
+root@pop-os:~/backup-modem/zhihe_backup# 
+root@pop-os:~/backup-modem/zhihe_backup# tree
+.
+├── abootbak.bin
+├── aboot.bin
+├── boot.bin
+├── cache.bin
+├── DDR.bin
+├── fsc.bin
+├── fsg.bin
+├── gpt_backup0.bin
+├── gpt_main0.bin
+├── hypbak.bin
+├── hyp.bin
+├── misc.bin
+├── modem.bin
+├── modemst1.bin
+├── modemst2.bin
+├── pad.bin
+├── persist.bin
+├── recovery.bin
+├── rpmbak.bin
+├── rpm.bin
+├── sbl1bak.bin
+├── sbl1.bin
+├── sec.bin
+├── splash.bin
+├── ssd.bin
+├── system.bin
+├── tzbak.bin
+├── tz.bin
+└── userdata.bin
+
+0 directories, 29 files
+root@pop-os:~/backup-modem/zhihe_backup# 
+
+
+root@pop-os:~/backup-modem/zhihe_backup# ls -lah
+total 3,6G
+drwxr-xr-x 2 root root 4,0K fev 24 21:15 .
+drwxr-xr-x 3 root root 4,0K fev 24 21:12 ..
+-rw-r--r-- 1 root root 1,0M fev 24 21:12 abootbak.bin
+-rw-r--r-- 1 root root 1,0M fev 24 21:12 aboot.bin
+-rw-r--r-- 1 root root  16M fev 24 21:12 boot.bin
+-rw-r--r-- 1 root root 128M fev 24 21:15 cache.bin
+-rw-r--r-- 1 root root  32K fev 24 21:12 DDR.bin
+-rw-r--r-- 1 root root 1,0K fev 24 21:12 fsc.bin
+-rw-r--r-- 1 root root 1,5M fev 24 21:12 fsg.bin
+-rw-r--r-- 1 root root 3,5K fev 24 21:12 gpt_backup0.bin
+-rw-r--r-- 1 root root 4,5K fev 24 21:12 gpt_main0.bin
+-rw-r--r-- 1 root root 512K fev 24 21:12 hypbak.bin
+-rw-r--r-- 1 root root 512K fev 24 21:12 hyp.bin
+-rw-r--r-- 1 root root 1,0M fev 24 21:12 misc.bin
+-rw-r--r-- 1 root root  64M fev 24 21:12 modem.bin
+-rw-r--r-- 1 root root 1,5M fev 24 21:12 modemst1.bin
+-rw-r--r-- 1 root root 1,5M fev 24 21:12 modemst2.bin
+-rw-r--r-- 1 root root 1,0M fev 24 21:12 pad.bin
+-rw-r--r-- 1 root root  32M fev 24 21:15 persist.bin
+-rw-r--r-- 1 root root  16M fev 24 21:15 recovery.bin
+-rw-r--r-- 1 root root 512K fev 24 21:12 rpmbak.bin
+-rw-r--r-- 1 root root 512K fev 24 21:12 rpm.bin
+-rw-r--r-- 1 root root 512K fev 24 21:12 sbl1bak.bin
+-rw-r--r-- 1 root root 512K fev 24 21:12 sbl1.bin
+-rw-r--r-- 1 root root  16K fev 24 21:12 sec.bin
+-rw-r--r-- 1 root root  10M fev 24 21:12 splash.bin
+-rw-r--r-- 1 root root 8,0K fev 24 21:12 ssd.bin
+-rw-r--r-- 1 root root 800M fev 24 21:15 system.bin
+-rw-r--r-- 1 root root 512K fev 24 21:12 tzbak.bin
+-rw-r--r-- 1 root root 512K fev 24 21:12 tz.bin
+-rw-r--r-- 1 root root 2,5G fev 24 21:24 userdata.bin
+root@pop-os:~/backup-modem/zhihe_backup# 
+
+
+
+
+root@pop-os:~/backup-modem/zhihe_backup# cd ..
+tar -cvzf zhihe_backup_full.tar.gz zhihe_backup/
+zhihe_backup/
+zhihe_backup/gpt_backup0.bin
+zhihe_backup/gpt_main0.bin
+zhihe_backup/rpmbak.bin
+zhihe_backup/boot.bin
+zhihe_backup/pad.bin
+zhihe_backup/fsg.bin
+zhihe_backup/aboot.bin
+zhihe_backup/cache.bin
+zhihe_backup/userdata.bin
+zhihe_backup/checksums.sha256
+zhihe_backup/modem.bin
+zhihe_backup/sec.bin
+zhihe_backup/sbl1.bin
+zhihe_backup/hypbak.bin
+zhihe_backup/system.bin
+zhihe_backup/modemst1.bin
+zhihe_backup/persist.bin
+zhihe_backup/fsc.bin
+zhihe_backup/hyp.bin
+zhihe_backup/rpm.bin
+zhihe_backup/abootbak.bin
+zhihe_backup/ssd.bin
+zhihe_backup/recovery.bin
+zhihe_backup/sbl1bak.bin
+zhihe_backup/modemst2.bin
+zhihe_backup/tz.bin
+zhihe_backup/misc.bin
+zhihe_backup/tzbak.bin
+zhihe_backup/splash.bin
+zhihe_backup/DDR.bin
+root@pop-os:~/backup-modem# sha256sum zhihe_backup_full.tar.gz > zhihe_backup_full.tar.gz.sha256
+root@pop-os:~/backup-modem# ls
+zhihe_backup  zhihe_backup_full.tar.gz  zhihe_backup_full.tar.gz.sha256
+root@pop-os:~/backup-modem# python3 -m http.server 8080
+Serving HTTP on 0.0.0.0 port 8080 (http://0.0.0.0:8080/) ...
+192.168.4.253 - - [24/Feb/2026 21:32:35] "GET / HTTP/1.1" 200 -
+192.168.4.253 - - [24/Feb/2026 21:32:35] code 404, message File not found
+192.168.4.253 - - [24/Feb/2026 21:32:35] "GET /favicon.ico HTTP/1.1" 404 -
+192.168.4.253 - - [24/Feb/2026 21:32:45] "GET /zhihe_backup_full.tar.gz HTTP/1.1" 200 -
+192.168.4.253 - - [24/Feb/2026 21:32:46] "GET /zhihe_backup_full.tar.gz.sha256 HTTP/1.1" 200 -
+^C
+Keyboard interrupt received, exiting.
+root@pop-os:~/backup-modem# ls
+zhihe_backup  zhihe_backup_full.tar.gz  zhihe_backup_full.tar.gz.sha256
+root@pop-os:~/backup-modem# cd
+root@pop-os:~# pwd
+/root
+root@pop-os:~# ls
+backup-modem
+root@pop-os:~# 
+
+
+root@pop-os:~# 
+root@pop-os:~# 
+root@pop-os:~# pwd
+/root
+root@pop-os:~# git clone https://gitlab.postmarketos.org/postmarketOS/pmbootstrap.git
+cd pmbootstrap
+mkdir -p ~/.local/bin
+ln -s "$PWD/pmbootstrap.py" ~/.local/bin/pmbootstrap
+pmbootstrap --version
+Cloning into 'pmbootstrap'...
+remote: Enumerating objects: 38455, done.
+remote: Counting objects: 100% (1601/1601), done.
+remote: Compressing objects: 100% (263/263), done.
+remote: Total 38455 (delta 1424), reused 1403 (delta 1333), pack-reused 36854 (from 1)
+Receiving objects: 100% (38455/38455), 30.10 MiB | 411.00 KiB/s, done.
+Resolving deltas: 100% (27566/27566), done.
+pmbootstrap: comando não encontrado
+root@pop-os:~/pmbootstrap# 
+root@pop-os:~/pmbootstrap# 
+root@pop-os:~/pmbootstrap# 
+root@pop-os:~/pmbootstrap# ls
+COMMITSTYLE.md   docs     LICENSE          MANIFEST.in  pmbootstrap.py  README.md
+CONTRIBUTING.md  helpers  maintainers.txt  pmb          pyproject.toml  test
+root@pop-os:~/pmbootstrap# cd ~
+root@pop-os:~# ls
+backup-modem  pmbootstrap
+root@pop-os:~# ls -lah
+total 44K
+drwx------  8 root root 4,0K fev 24 21:41 .
+drwxr-xr-x 19 root root 4,0K nov 20 20:50 ..
+drwxr-x---  2 root root 4,0K fev 24 19:59 .android
+drwxr-xr-x  3 root root 4,0K fev 24 21:30 backup-modem
+-rw-------  1 root root 1,1K fev 24 20:47 .bash_history
+-rw-r--r--  1 root root 3,1K out 15  2021 .bashrc
+drwx------  4 root root 4,0K fev 24 20:37 .cache
+drwx------  2 root root 4,0K set 24 15:40 .gnupg
+drwxr-xr-x  3 root root 4,0K fev 24 21:41 .local
+drwxr-xr-x  8 root root 4,0K fev 24 21:41 pmbootstrap
+-rw-r--r--  1 root root  161 jul  9  2019 .profile
+root@pop-os:~# nano .bashrc
+root@pop-os:~# 
+root@pop-os:~# nano .bashrc
+root@pop-os:~# 
+root@pop-os:~# 
+root@pop-os:~# 
+root@pop-os:~# pmbootstrap --VERSION
+pmbootstrap: comando não encontrado
+root@pop-os:~# pmbootstrap --version
+pmbootstrap: comando não encontrado
+root@pop-os:~# bash
+root@pop-os:~# pmbootstrap --version
+Traceback (most recent call last):
+  File "/root/pmbootstrap/pmb/helpers/toml.py", line 10, in <module>
+    from tomllib import TOMLDecodeError, load  # novermin
+ModuleNotFoundError: No module named 'tomllib'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/root/.local/bin/pmbootstrap", line 8, in <module>
+    import pmb
+  File "/root/pmbootstrap/pmb/__init__.py", line 15, in <module>
+    from . import config, parse
+  File "/root/pmbootstrap/pmb/config/__init__.py", line 18, in <module>
+    from pmb.config.other import is_systemd_selected as is_systemd_selected
+  File "/root/pmbootstrap/pmb/config/other.py", line 3, in <module>
+    import pmb.config.pmaports
+  File "/root/pmbootstrap/pmb/config/pmaports.py", line 10, in <module>
+    import pmb.helpers.git
+  File "/root/pmbootstrap/pmb/helpers/git.py", line 13, in <module>
+    import pmb.helpers.pmaports
+  File "/root/pmbootstrap/pmb/helpers/pmaports.py", line 14, in <module>
+    import pmb.parse
+  File "/root/pmbootstrap/pmb/parse/__init__.py", line 17, in <module>
+    from pmb.parse.kconfig import check as check
+  File "/root/pmbootstrap/pmb/parse/kconfig.py", line 10, in <module>
+    import pmb.parse.kconfigcheck
+  File "/root/pmbootstrap/pmb/parse/kconfigcheck.py", line 9, in <module>
+    from pmb.helpers.toml import NonBugError, load_toml_file
+  File "/root/pmbootstrap/pmb/helpers/toml.py", line 13, in <module>
+    from tomli import TOMLDecodeError, load  # type:ignore[import-not-found,no-redef]
+ModuleNotFoundError: No module named 'tomli'
+root@pop-os:~# ls -lah
+total 44K
+drwx------  8 root root 4,0K fev 24 21:44 .
+drwxr-xr-x 19 root root 4,0K nov 20 20:50 ..
+drwxr-x---  2 root root 4,0K fev 24 19:59 .android
+drwxr-xr-x  3 root root 4,0K fev 24 21:30 backup-modem
+-rw-------  1 root root 1,1K fev 24 20:47 .bash_history
+-rw-r--r--  1 root root 3,1K fev 24 21:44 .bashrc
+drwx------  4 root root 4,0K fev 24 20:37 .cache
+drwx------  2 root root 4,0K set 24 15:40 .gnupg
+drwxr-xr-x  4 root root 4,0K fev 24 21:42 .local
+drwxr-xr-x  8 root root 4,0K fev 24 21:41 pmbootstrap
+-rw-r--r--  1 root root  161 jul  9  2019 .profile
+root@pop-os:~# pip3 install tomli
+Collecting tomli
+  Downloading tomli-2.4.0-py3-none-any.whl (14 kB)
+Installing collected packages: tomli
+Successfully installed tomli-2.4.0
+WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv
+root@pop-os:~# pmbootstrap --version
+3.9.0
+root@pop-os:~# 
+
+
+root@pop-os:~# pmbootstrap init
+[21:48:20] ERROR: Do not run pmbootstrap as root!
+[21:48:20] See also: <https://postmarketos.org/troubleshooting>
+
+Run 'pmbootstrap log' for details. Alternatively you can use '--details-to-stdout' to get more output, e.g. 'pmbootstrap --details-to-stdout init'.
+
+Before you report this error, ensure that pmbootstrap is up to date.
+Find the latest version here: https://gitlab.postmarketos.org/postmarketOS/pmbootstrap/-/tags
+Your version: 3.9.0
+[21:48:20] ERROR: pmaports dir not found: /root/.local/var/pmbootstrap/cache_git/pmaports
+[21:48:20] Did you run 'pmbootstrap init'?
+root@pop-os:~# exit
+exit
+root@pop-os:~# 
+root@pop-os:~# 
+root@pop-os:~# exit
+exit
+davinunes@pop-os:~$ 
+davinunes@pop-os:~$ 
+davinunes@pop-os:~$ ls
+'Área de Trabalho'   Documentos   Downloads   edl   Imagens   Modelos   Música   Público   Vídeos
+davinunes@pop-os:~$ cd ~
+davinunes@pop-os:~$ 
+davinunes@pop-os:~$ 
+davinunes@pop-os:~$ 
+davinunes@pop-os:~$ git clone https://gitlab.postmarketos.org/postmarketOS/pmbootstrap.git
+Cloning into 'pmbootstrap'...
+remote: Enumerating objects: 38455, done.
+remote: Counting objects: 100% (1601/1601), done.
+remote: Compressing objects: 100% (263/263), done.
+mkdir -p ~/.local/bin8% (3077/38455), 2.49 MiB | 423.00 KiB/s  
+remote: Total 38455 (delta 1424), reused 1403 (delta 1333), pack-reused 36854 (from 1)
+Receiving objects: 100% (38455/38455), 30.10 MiB | 484.00 KiB/s, done.
+Resolving deltas: 100% (27566/27566), done.
+davinunes@pop-os:~$ mkdir -p ~/.local/bin
+davinunes@pop-os:~$ ln -s "$PWD/pmbootstrap/pmbootstrap.py" ~/.local/bin/pmbootstrap
+davinunes@pop-os:~$ source ~/.profile
+davinunes@pop-os:~$ pmbootstrap init
+[21:52:26] ERROR: Can't find all programs required to run pmbootstrap. Please install the following: kpartx
+davinunes@pop-os:~$ sudo apt install kpartx
+[sudo] senha para davinunes: 
+Lendo listas de pacotes... Pronto
+Construindo árvore de dependências... Pronto
+Lendo informação de estado... Pronto        
+Os NOVOS pacotes a seguir serão instalados:
+  kpartx
+0 pacotes atualizados, 1 pacotes novos instalados, 0 a serem removidos e 221 não atualizados.
+É preciso baixar 28,8 kB de arquivos.
+Depois desta operação, 101 kB adicionais de espaço em disco serão usados.
+Obter:1 http://apt.pop-os.org/ubuntu jammy-updates/main amd64 kpartx amd64 0.8.8-1ubuntu1.22.04.4 [28,8 kB]
+Baixados 28,8 kB em 0s (58,1 kB/s)
+A seleccionar pacote anteriormente não seleccionado kpartx.
+(Lendo banco de dados ... 227627 ficheiros e directórios actualmente instalados.)
+A preparar para desempacotar .../kpartx_0.8.8-1ubuntu1.22.04.4_amd64.deb ...
+A descompactar kpartx (0.8.8-1ubuntu1.22.04.4) ...
+Configurando kpartx (0.8.8-1ubuntu1.22.04.4) ...
+A processar 'triggers' para man-db (2.10.2-1) ...
+davinunes@pop-os:~$ 
+
+
+
+davinunes@pop-os:~$ 
+davinunes@pop-os:~$ 
+davinunes@pop-os:~$ 
+davinunes@pop-os:~$ pmbootstrap init
+[21:54:24] Location of the 'work' path. Multiple chroots (native, device arch, device rootfs) will be created in there.
+[21:54:24] Work path [/home/davinunes/.local/var/pmbootstrap]: 
+[21:54:57] Location of the 'pmaports' path, containing package definitions.
+[21:54:57] pmaports path [/home/davinunes/.local/var/pmbootstrap/cache_git/pmaports]: 
+[21:55:05] Setting up the native chroot and cloning the package build recipes (pmaports)...
+[21:55:05] Clone git repository: https://gitlab.postmarketos.org/postmarketOS/pmaports.git
+Cloning into '/home/davinunes/.local/var/pmbootstrap/cache_git/pmaports'...
+Updating files: 100% (8240/8240), done.
+[21:58:52] Choose the postmarketOS release channel.
+[21:58:52] Available (13):
+[21:58:52] * edge: Rolling release / Most devices / Occasional breakage: https://postmarketos.org/edge
+[21:58:52] * v25.12: Latest release / Recommended for best stability
+[21:58:52] * v25.06: Old release (unsupported)
+[21:58:52] Channel [edge]: v25.12
+[22:06:09] Currently checked out branch 'master' of pmaports.git is on channel 'edge'.
+[22:06:09] Switching to branch 'v25.12' on channel 'v25.12'...
+[22:06:09] Branch v25.12 doesn't exist, attempting to fetch it
+From https://gitlab.postmarketos.org/postmarketOS/pmaports
+ * [new branch]            v25.12     -> v25.12
+Switched to branch 'v25.12'
+[22:06:11] Choose your target device vendor (either an existing one, or a new one for porting).
+[22:06:11] Available vendors (67): acer, alcatel, amediatech, amlogic, apple, ark, arrow, asus, ayn, bananapi, barnesnoble, beelink, blackberry, bq, cubietech, dongshanpi, epson, fairphone, fxtec, generic, google, htc, huawei, jolla, khadas, kobo, lenovo, lg, librecomputer, linksys, lynx, mangopi, microsoft, mnt, motorola, nokia, nothing, nvidia, odroid, oneplus, pine64, postmarketos, purism, qcom, qemu, qualcomm, radxa, realme, rockchip, samsung, shift, sipeed, solidrun, sony, starway, surftab, thundercomm, tolino, trekstor, valve, vivo, volla, wd, wileyfox, xiaomi, xunlong, zte
+[22:06:11] Vendor [qemu]: generic
+[22:06:50] Devices are categorised as follows, from best to worst:
+* Main: ports where mostly everything works.
+* Community: often mostly usable, but may lack important functionality.
+* Testing: anything from "just boots in some sense" to almost fully functioning ports.
+* Downstream: ports that use a downstream kernel — very limited functionality. Not recommended.
+
+Available devices by codename (3): loongarch64 (testing), x86_64 (community), zhihe (testing)
+[22:06:50] Device codename: zhihe
+[22:07:08] Which kernel do you want to use with your device?
+[22:07:08] Available kernels (3):
+[22:07:08] * uf896: UF896
+[22:07:08] * ufi001c: UFI103S / UFI-001C(B) / UFI003
+[22:07:08] * uz801: UZ801 V3.0
+[22:07:08] Kernel [ufi001c]: 
+[22:08:41] Username [user]: ilunne
+[22:08:59] Available providers for postmarketos-base-ui-audio-backend (2):
+[22:08:59] * pulseaudio: Use pulseaudio as the audio backend. (default)
+[22:08:59] * pipewire: Use pipewire as the audio backend. (but may not work with all devices)
+[22:08:59] Provider [default]: 
+[22:09:16] Available providers for postmarketos-base-ui-wifi (2):
+[22:09:16] * wpa_supplicant: Use wpa_supplicant as the WiFi backend. (default)
+[22:09:16] * iwd: Use iwd as the WiFi backend (but may not work with all devices)
+[22:09:16] Provider [default]: 
+[22:09:43] Update package index for aarch64 (5 file(s))
+[22:09:48] Available user interfaces (15): 
+[22:09:48] * none: Bare minimum OS image for testing and manual customization. The "console" UI should be selected if a graphical UI is not desired.
+[22:09:48] * buffyboard: Plain framebuffer console with modern touchscreen keyboard support
+[22:09:48] * console: Console environment, with no graphical/touch UI
+[22:09:48] * fbkeyboard: Plain framebuffer console with touchscreen keyboard support
+[22:09:48] * gnome: (Wayland) Gnome Shell
+[22:09:48] * gnome-mobile: (Wayland) Gnome Shell patched to adapt better to phones (Experimental)
+[22:09:48] * i3wm: (X11) Tiling WM (keyboard required)
+[22:09:48] * lxqt: (X11) Lightweight Qt Desktop Environment (stylus recommended)
+[22:09:48] * mate: (X11) MATE Desktop Environment, fork of GNOME2 (stylus recommended)
+[22:09:48] * openbox: (X11) A highly configurable and lightweight X11 window manager (keyboard required)
+[22:09:48] * os-installer: UI for installing postmarketOS
+[22:09:48] * plasma-desktop: (Wayland) KDE Desktop Environment (works well with tablets)
+[22:09:48] * shelli: Plain console with touchscreen gesture support
+[22:09:48] * sxmo-de-dwm: Simple Mobile: Mobile environment based on SXMO and running on dwm
+[22:09:48] * sxmo-de-i3: Simple Mobile: Mobile environment based on SXMO and running on i3
+[22:09:48] * xfce4: (X11) Lightweight desktop (stylus recommended)
+[22:09:48] NOTE: 11 UIs are hidden because "deviceinfo_drm" is not set (see https://postmarketos.org/deviceinfo).
+[22:09:48] User interface [console]: 
+[22:09:58] Based on your UI selection, 'default' will result in installing systemd.
+[22:09:58] Install systemd? (default/always/never) [default]: 
+[22:10:11] Additional options: extra free space: 0 MB, boot partition size: 256 MB, parallel jobs: 16, ccache per arch: 5G, sudo timer: False, mirror: http://mirror.postmarketos.org/postmarketos/
+[22:10:11] Change them? (y/n) [n]: 
+[22:10:28] Additional packages that will be installed to rootfs. Specify them in a comma separated list (e.g.: vim,file) or "none"
+[22:10:28] Extra packages [none]: nano 
+[22:11:03] ERROR: Input did not pass validation (regex: ^([-.+\w]+)(,[-.+\w]+)*$). Please try again.
+[22:11:03] Extra packages [none]: nano
+[22:11:12] Your host timezone: America/Sao_Paulo
+[22:11:12] Use this timezone instead of GMT? (y/n) [y]: 
+[22:11:27] Choose your preferred locale, like e.g. en_US. Only UTF-8 is supported, it gets appended automatically. Use tab-completion if needed.
+[22:11:27] Locale [en_US]: pt_BR
+[22:11:50] Device hostname (short form, e.g. 'foo') [generic-zhihe]: 
+[22:12:04] NOTE: No SSH public keys found to copy to the device.
+[22:12:04] See https://postmarketos.org/ssh-key-glob for more information.
+[22:12:04] After pmaports are changed, the binary packages may be outdated. If you want to install postmarketOS without changes, reply 'n' for a faster installation.
+[22:12:04] Build outdated packages during 'pmbootstrap install'? (y/n) [y]: 
+[22:12:14] DONE!
+davinunes@pop-os:~$ pmbootstrap install --filesystem btrfs
+[22:13:19] *** (1/4) PREPARE NATIVE CHROOT ***
+[22:13:20] Update package index for x86_64 (4 file(s))
+[22:13:23] Download http://dl-cdn.alpinelinux.org/alpine/v3.23/main/x86_64/apk-tools-static-3.0.4-r0.apk
+[22:13:23] (native) Creating chroot
+[22:13:28] (native) install cryptsetup util-linux parted
+[22:13:30] *** (2/4) CREATE DEVICE ROOTFS ("generic-zhihe") ***
+[22:13:32] (native) install qemu-aarch64
+[22:13:33] Register qemu binfmt (aarch64)
+[22:13:33] (rootfs_generic-zhihe) Creating chroot
+[22:13:33] Update package index for aarch64 (4 file(s))
+[22:13:43] (rootfs_generic-zhihe) install postmarketos-base-systemd
+[22:15:03] (rootfs_generic-zhihe) install postmarketos-base device-generic-zhihe postmarketos-ui-console postmarketos-base-ui-audio-backend-pulseaudio postmarketos-base-ui-wifi-wpa_supplicant device-generic-zhihe-kernel-ufi001c device-generic-zhihe-nonfree-firmware nano postmarketos-base-nofde doas doas-sudo-shim font-droid font-droid-nonlatin font-twemoji lang
+[22:17:25] (rootfs_generic-zhihe) install postmarketos-mkinitfs
+[22:17:26] (rootfs_generic-zhihe) mkinitfs
+[22:17:47]  *** SET LOGIN PASSWORD FOR: 'ilunne' ***
+New password: 
+              Retype new password: 
+                                   passwd: password updated successfully
+                                                                        [22:17:59] NOTE: No valid keymap specified for device
+[22:17:59] *** (3/4) PREPARE INSTALL BLOCKDEVICE ***
+[22:18:00] (native) create generic-zhihe.img (1056M)
+[22:18:00] (native) mount /dev/install (generic-zhihe.img)
+[22:18:01] (native) partition /dev/install (boot: 256M, reserved: 0M, root: the rest)
+[22:18:01] Mounting partitions of /dev/loop0 inside the chroot
+[22:18:01] (native) install btrfs-progs
+[22:18:16] (native) format /dev/installp2 (pmOS_root, btrfs)
+[22:18:16] (native) mount /dev/installp2 to /mnt/install
+[22:18:18] (native) install e2fsprogs
+[22:18:19] (native) format /dev/installp1 (pmOS_boot, ext2)
+[22:18:20] (native) create /etc/fstab
+[22:18:20] (rootfs_generic-zhihe) mkinitfs
+[22:18:48] *** (4/4) FILL INSTALL BLOCKDEVICE ***
+[22:18:48] (native) copy rootfs_generic-zhihe to /mnt/install/
+[22:18:56] (native) make sparse rootfs
+[22:18:56] (native) install android-tools
+[22:19:39] 
+[22:19:39] *** FLASHING INFORMATION ***
+[22:19:39] Run the following to flash your installation to the target device:
+[22:19:39] * pmbootstrap flasher flash_rootfs
+[22:19:39]   Flashes the generated rootfs image to your device:
+[22:19:39]   /home/davinunes/.local/var/pmbootstrap/chroot_native/home/pmos/rootfs/generic-zhihe.img
+[22:19:39]   (NOTE: This file has a partition table, which contains /boot and / subpartitions. That way we don't need to change the partition layout on your device.)
+[22:19:39] * pmbootstrap flasher flash_kernel
+[22:19:39]   Flashes the kernel + initramfs to your device:
+[22:19:39]   /home/davinunes/.local/var/pmbootstrap/chroot_rootfs_generic-zhihe/boot
+[22:19:39]   (NOTE: fastboot also supports booting the kernel/initramfs directly without flashing. Use 'pmbootstrap flasher boot' to do that.)
+[22:19:39] * If the above steps do not work, you can also create symlinks to the generated files with 'pmbootstrap export' and flash outside of pmbootstrap.
+[22:19:39] 
+[22:19:39] *** SSH DAEMON INFORMATION ***
+[22:19:39] SSH daemon is enabled (disable with --no-sshd).
+[22:19:39] Login as 'ilunne' with the password given during installation.
+[22:19:39] 
+[22:19:39] *** FIREWALL INFORMATION ***
+[22:19:39] Firewall is enabled, but will not work (no support in kernel config for nftables).
+[22:19:39] If/when the kernel supports it in the future, it will work automatically.
+[22:19:39] For more information: https://postmarketos.org/firewall
+[22:19:39] 
+[22:19:39] NOTE: chroot is still active (use 'pmbootstrap shutdown' as necessary)
+[22:19:39] DONE!
+davinunes@pop-os:~$ 
+davinunes@pop-os:~$ cp /home/davinunes/.local/var/pmbootstrap/chroot_native/home/pmos/rootfs/generic-zhihe.img .
+
+
+davinunes@pop-os:~$ 
+davinunes@pop-os:~$ 
+davinunes@pop-os:~$ 
+
+davinunes@pop-os:~$ 
+davinunes@pop-os:~$ 
+davinunes@pop-os:~$ echo "Procedimento para trocar o bootloader"
+Procedimento para trocar o bootloader
+davinunes@pop-os:~$ 
+davinunes@pop-os:~$ 
+davinunes@pop-os:~$ git clone https://github.com/msm8916-mainline/qhypstub.git
+Cloning into 'qhypstub'...
+remote: Enumerating objects: 115, done.
+remote: Counting objects: 100% (21/21), done.
+remote: Compressing objects: 100% (15/15), done.
+remote: Total 115 (delta 11), reused 10 (delta 6), pack-reused 94 (from 1)
+Receiving objects: 100% (115/115), 56.52 KiB | 1.26 MiB/s, done.
+Resolving deltas: 100% (66/66), done.
+davinunes@pop-os:~$ cd qhypstub; git clone https://github.com/msm8916-mainline/qtestsign.git
+Cloning into 'qtestsign'...
+remote: Enumerating objects: 154, done.
+remote: Counting objects: 100% (86/86), done.
+remote: Compressing objects: 100% (33/33), done.
+remote: Total 154 (delta 60), reused 60 (delta 53), pack-reused 68 (from 1)
+Receiving objects: 100% (154/154), 49.59 KiB | 2.07 MiB/s, done.
+Resolving deltas: 100% (94/94), done.
+davinunes@pop-os:~/qhypstub$ make CROSS_COMPILE=aarch64-linux-gnu-
+aarch64-linux-gnu-as   -o qhypstub.o qhypstub.s
+make: aarch64-linux-gnu-as: Arquivo ou diretório inexistente
+make: *** [<embutido>: qhypstub.o] Erro 127
+davinunes@pop-os:~/qhypstub$ 
+
+
+avinunes@pop-os:~/qhypstub$ 
+davinunes@pop-os:~/qhypstub$ 
+davinunes@pop-os:~/qhypstub$ 
+davinunes@pop-os:~/qhypstub$ 
+davinunes@pop-os:~/qhypstub$ 
+davinunes@pop-os:~/qhypstub$ sudo apt install gcc-aarch64-linux-gnu gcc-arm-none-eabi
+Lendo listas de pacotes... Pronto
+Construindo árvore de dependências... Pronto
+Lendo informação de estado... Pronto        
+Os pacotes adicionais seguintes serão instalados:
+  binutils binutils-aarch64-linux-gnu binutils-arm-none-eabi binutils-common
+  binutils-x86-64-linux-gnu cpp-11-aarch64-linux-gnu cpp-aarch64-linux-gnu
+  gcc-11-aarch64-linux-gnu gcc-11-aarch64-linux-gnu-base gcc-11-cross-base
+  gcc-12-cross-base libasan6-arm64-cross libatomic1-arm64-cross libbinutils
+  libc6-arm64-cross libc6-dev-arm64-cross libctf0 libgcc-11-dev-arm64-cross
+  libgcc-s1-arm64-cross libgomp1-arm64-cross libhwasan0-arm64-cross
+  libitm1-arm64-cross liblsan0-arm64-cross libnewlib-arm-none-eabi
+  libnewlib-dev libstdc++-arm-none-eabi-dev libstdc++-arm-none-eabi-newlib
+  libstdc++6-arm64-cross libtsan0-arm64-cross libubsan1-arm64-cross
+  linux-libc-dev-arm64-cross
+Pacotes sugeridos:
+  binutils-doc gcc-11-locales cpp-doc gcc-11-doc autoconf automake libtool
+  flex bison gdb-aarch64-linux-gnu gcc-doc libnewlib-doc
+Os NOVOS pacotes a seguir serão instalados:
+  binutils-aarch64-linux-gnu binutils-arm-none-eabi cpp-11-aarch64-linux-gnu
+  cpp-aarch64-linux-gnu gcc-11-aarch64-linux-gnu gcc-11-aarch64-linux-gnu-base
+  gcc-11-cross-base gcc-12-cross-base gcc-aarch64-linux-gnu gcc-arm-none-eabi
+  libasan6-arm64-cross libatomic1-arm64-cross libc6-arm64-cross
+  libc6-dev-arm64-cross libgcc-11-dev-arm64-cross libgcc-s1-arm64-cross
+  libgomp1-arm64-cross libhwasan0-arm64-cross libitm1-arm64-cross
+  liblsan0-arm64-cross libnewlib-arm-none-eabi libnewlib-dev
+  libstdc++-arm-none-eabi-dev libstdc++-arm-none-eabi-newlib
+  libstdc++6-arm64-cross libtsan0-arm64-cross libubsan1-arm64-cross
+  linux-libc-dev-arm64-cross
+Os pacotes a seguir serão atualizados:
+  binutils binutils-common binutils-x86-64-linux-gnu libbinutils libctf0
+5 pacotes atualizados, 28 pacotes novos instalados, 0 a serem removidos e 216 não atualizados.
+É preciso baixar 491 MB de arquivos.
+Depois desta operação, 2.730 MB adicionais de espaço em disco serão usados.
+Você quer continuar? [S/n] s
+Obter:1 http://apt.pop-os.org/ubuntu jammy-security/main amd64 libctf0 amd64 2.38-4ubuntu2.12 [103 kB]
+Obter:2 http://apt.pop-os.org/ubuntu jammy-security/main amd64 binutils-x86-64-linux-gnu amd64 2.38-4ubuntu2.12 [2.324 kB]
+Obter:3 http://apt.pop-os.org/ubuntu jammy-security/main amd64 libbinutils amd64 2.38-4ubuntu2.12 [663 kB]
+Obter:4 http://apt.pop-os.org/ubuntu jammy-security/main amd64 binutils amd64 2.38-4ubuntu2.12 [3.184 B]
+Obter:5 http://apt.pop-os.org/ubuntu jammy-security/main amd64 binutils-common amd64 2.38-4ubuntu2.12 [223 kB]
+Obter:6 http://apt.pop-os.org/ubuntu jammy-security/main amd64 gcc-11-aarch64-linux-gnu-base amd64 11.4.0-1ubuntu1~22.04cross1 [20,5 kB]
+Obter:7 http://apt.pop-os.org/ubuntu jammy-security/main amd64 cpp-11-aarch64-linux-gnu amd64 11.4.0-1ubuntu1~22.04cross1 [9.421 kB]
+Obter:8 http://apt.pop-os.org/ubuntu jammy/main amd64 cpp-aarch64-linux-gnu amd64 4:11.2.0-1ubuntu1 [3.478 B]
+Obter:9 http://apt.pop-os.org/ubuntu jammy-security/main amd64 binutils-aarch64-linux-gnu amd64 2.38-4ubuntu2.12 [3.624 kB]
+Obter:10 http://apt.pop-os.org/ubuntu jammy-security/main amd64 gcc-11-cross-base all 11.4.0-1ubuntu1~22.04cross1 [15,5 kB]
+Obter:11 http://apt.pop-os.org/ubuntu jammy-security/main amd64 gcc-12-cross-base all 12.3.0-1ubuntu1~22.04cross1 [15,7 kB]
+Obter:12 http://apt.pop-os.org/ubuntu jammy/main amd64 libc6-arm64-cross all 2.35-0ubuntu1cross3 [1.147 kB]
+Obter:13 http://apt.pop-os.org/ubuntu jammy-security/main amd64 libgcc-s1-arm64-cross all 12.3.0-1ubuntu1~22.04cross1 [39,8 kB]
+Obter:14 http://apt.pop-os.org/ubuntu jammy-security/main amd64 libgomp1-arm64-cross all 12.3.0-1ubuntu1~22.04cross1 [122 kB]
+Obter:15 http://apt.pop-os.org/ubuntu jammy-security/main amd64 libitm1-arm64-cross all 12.3.0-1ubuntu1~22.04cross1 [28,0 kB]
+Obter:16 http://apt.pop-os.org/ubuntu jammy-security/main amd64 libatomic1-arm64-cross all 12.3.0-1ubuntu1~22.04cross1 [10,6 kB]
+Obter:17 http://apt.pop-os.org/ubuntu jammy-security/main amd64 libasan6-arm64-cross all 11.4.0-1ubuntu1~22.04cross1 [2.228 kB]
+Obter:18 http://apt.pop-os.org/ubuntu jammy-security/main amd64 liblsan0-arm64-cross all 12.3.0-1ubuntu1~22.04cross1 [1.034 kB]
+Obter:19 http://apt.pop-os.org/ubuntu jammy-security/main amd64 libtsan0-arm64-cross all 11.4.0-1ubuntu1~22.04cross1 [2.223 kB]
+Obter:20 http://apt.pop-os.org/ubuntu jammy-security/main amd64 libstdc++6-arm64-cross all 12.3.0-1ubuntu1~22.04cross1 [616 kB]
+Obter:21 http://apt.pop-os.org/ubuntu jammy-security/main amd64 libubsan1-arm64-cross all 12.3.0-1ubuntu1~22.04cross1 [964 kB]
+Obter:22 http://apt.pop-os.org/ubuntu jammy-security/main amd64 libhwasan0-arm64-cross all 12.3.0-1ubuntu1~22.04cross1 [1.117 kB]
+Obter:23 http://apt.pop-os.org/ubuntu jammy-security/main amd64 libgcc-11-dev-arm64-cross all 11.4.0-1ubuntu1~22.04cross1 [1.147 kB]
+Obter:24 http://apt.pop-os.org/ubuntu jammy-security/main amd64 gcc-11-aarch64-linux-gnu amd64 11.4.0-1ubuntu1~22.04cross1 [18,8 MB]
+Obter:25 http://apt.pop-os.org/ubuntu jammy/main amd64 gcc-aarch64-linux-gnu amd64 4:11.2.0-1ubuntu1 [1.242 B]
+Obter:26 http://apt.pop-os.org/ubuntu jammy/universe amd64 binutils-arm-none-eabi amd64 2.38-3ubuntu1+15build1 [3.040 kB]
+Obter:27 http://apt.pop-os.org/ubuntu jammy/universe amd64 gcc-arm-none-eabi amd64 15:10.3-2021.07-4 [47,7 MB]
+Obter:28 http://apt.pop-os.org/ubuntu jammy/universe amd64 libstdc++-arm-none-eabi-dev all 15:10.3-2021.07-4+17 [1.049 kB]
+Obter:29 http://apt.pop-os.org/ubuntu jammy/main amd64 linux-libc-dev-arm64-cross all 5.15.0-22.22cross3 [1.216 kB]
+Obter:30 http://apt.pop-os.org/ubuntu jammy/main amd64 libc6-dev-arm64-cross all 2.35-0ubuntu1cross3 [1.546 kB]
+Obter:31 http://apt.pop-os.org/ubuntu jammy/universe amd64 libnewlib-dev all 3.3.0-1.3 [137 kB]
+Obter:32 http://apt.pop-os.org/ubuntu jammy/universe amd64 libnewlib-arm-none-eabi all 3.3.0-1.3 [43,2 MB]
+Obter:33 http://apt.pop-os.org/ubuntu jammy/universe amd64 libstdc++-arm-none-eabi-newlib all 15:10.3-2021.07-4+17 [347 MB]
+Baixados 491 MB em 16s (29,9 MB/s)                                             
+Extraindo templates dos pacotes: 100%
+(Lendo banco de dados ... 227637 ficheiros e directórios actualmente instalados.
+)
+A preparar para desempacotar .../00-libctf0_2.38-4ubuntu2.12_amd64.deb ...
+A descompactar libctf0:amd64 (2.38-4ubuntu2.12) sobre (2.38-4ubuntu2.8) ...
+A preparar para desempacotar .../01-binutils-x86-64-linux-gnu_2.38-4ubuntu2.12_a
+md64.deb ...
+A descompactar binutils-x86-64-linux-gnu (2.38-4ubuntu2.12) sobre (2.38-4ubuntu2
+.8) ...
+A preparar para desempacotar .../02-libbinutils_2.38-4ubuntu2.12_amd64.deb ...
+A descompactar libbinutils:amd64 (2.38-4ubuntu2.12) sobre (2.38-4ubuntu2.8) ...
+A preparar para desempacotar .../03-binutils_2.38-4ubuntu2.12_amd64.deb ...
+A descompactar binutils (2.38-4ubuntu2.12) sobre (2.38-4ubuntu2.8) ...
+A preparar para desempacotar .../04-binutils-common_2.38-4ubuntu2.12_amd64.deb .
+..
+A descompactar binutils-common:amd64 (2.38-4ubuntu2.12) sobre (2.38-4ubuntu2.8) 
+...
+A seleccionar pacote anteriormente não seleccionado gcc-11-aarch64-linux-gnu-bas
+e:amd64.
+A preparar para desempacotar .../05-gcc-11-aarch64-linux-gnu-base_11.4.0-1ubuntu
+1~22.04cross1_amd64.deb ...
+A descompactar gcc-11-aarch64-linux-gnu-base:amd64 (11.4.0-1ubuntu1~22.04cross1)
+ ...
+A seleccionar pacote anteriormente não seleccionado cpp-11-aarch64-linux-gnu.
+A preparar para desempacotar .../06-cpp-11-aarch64-linux-gnu_11.4.0-1ubuntu1~22.
+04cross1_amd64.deb ...
+A descompactar cpp-11-aarch64-linux-gnu (11.4.0-1ubuntu1~22.04cross1) ...
+A seleccionar pacote anteriormente não seleccionado cpp-aarch64-linux-gnu.
+A preparar para desempacotar .../07-cpp-aarch64-linux-gnu_4%3a11.2.0-1ubuntu1_am
+d64.deb ...
+A descompactar cpp-aarch64-linux-gnu (4:11.2.0-1ubuntu1) ...
+A seleccionar pacote anteriormente não seleccionado binutils-aarch64-linux-gnu.
+A preparar para desempacotar .../08-binutils-aarch64-linux-gnu_2.38-4ubuntu2.12_
+amd64.deb ...
+A descompactar binutils-aarch64-linux-gnu (2.38-4ubuntu2.12) ...
+A seleccionar pacote anteriormente não seleccionado gcc-11-cross-base.
+A preparar para desempacotar .../09-gcc-11-cross-base_11.4.0-1ubuntu1~22.04cross
+1_all.deb ...
+A descompactar gcc-11-cross-base (11.4.0-1ubuntu1~22.04cross1) ...
+A seleccionar pacote anteriormente não seleccionado gcc-12-cross-base.
+A preparar para desempacotar .../10-gcc-12-cross-base_12.3.0-1ubuntu1~22.04cross
+1_all.deb ...
+A descompactar gcc-12-cross-base (12.3.0-1ubuntu1~22.04cross1) ...
+A seleccionar pacote anteriormente não seleccionado libc6-arm64-cross.
+A preparar para desempacotar .../11-libc6-arm64-cross_2.35-0ubuntu1cross3_all.de
+b ...
+A descompactar libc6-arm64-cross (2.35-0ubuntu1cross3) ...
+A seleccionar pacote anteriormente não seleccionado libgcc-s1-arm64-cross.
+A preparar para desempacotar .../12-libgcc-s1-arm64-cross_12.3.0-1ubuntu1~22.04c
+ross1_all.deb ...
+A descompactar libgcc-s1-arm64-cross (12.3.0-1ubuntu1~22.04cross1) ...
+A seleccionar pacote anteriormente não seleccionado libgomp1-arm64-cross.
+A preparar para desempacotar .../13-libgomp1-arm64-cross_12.3.0-1ubuntu1~22.04cr
+oss1_all.deb ...
+A descompactar libgomp1-arm64-cross (12.3.0-1ubuntu1~22.04cross1) ...
+A seleccionar pacote anteriormente não seleccionado libitm1-arm64-cross.
+A preparar para desempacotar .../14-libitm1-arm64-cross_12.3.0-1ubuntu1~22.04cro
+ss1_all.deb ...
+A descompactar libitm1-arm64-cross (12.3.0-1ubuntu1~22.04cross1) ...
+A seleccionar pacote anteriormente não seleccionado libatomic1-arm64-cross.
+A preparar para desempacotar .../15-libatomic1-arm64-cross_12.3.0-1ubuntu1~22.04
+cross1_all.deb ...
+A descompactar libatomic1-arm64-cross (12.3.0-1ubuntu1~22.04cross1) ...
+A seleccionar pacote anteriormente não seleccionado libasan6-arm64-cross.
+A preparar para desempacotar .../16-libasan6-arm64-cross_11.4.0-1ubuntu1~22.04cr
+oss1_all.deb ...
+A descompactar libasan6-arm64-cross (11.4.0-1ubuntu1~22.04cross1) ...
+A seleccionar pacote anteriormente não seleccionado liblsan0-arm64-cross.
+A preparar para desempacotar .../17-liblsan0-arm64-cross_12.3.0-1ubuntu1~22.04cr
+oss1_all.deb ...
+A descompactar liblsan0-arm64-cross (12.3.0-1ubuntu1~22.04cross1) ...
+A seleccionar pacote anteriormente não seleccionado libtsan0-arm64-cross.
+A preparar para desempacotar .../18-libtsan0-arm64-cross_11.4.0-1ubuntu1~22.04cr
+oss1_all.deb ...
+A descompactar libtsan0-arm64-cross (11.4.0-1ubuntu1~22.04cross1) ...
+A seleccionar pacote anteriormente não seleccionado libstdc++6-arm64-cross.
+A preparar para desempacotar .../19-libstdc++6-arm64-cross_12.3.0-1ubuntu1~22.04
+cross1_all.deb ...
+A descompactar libstdc++6-arm64-cross (12.3.0-1ubuntu1~22.04cross1) ...
+A seleccionar pacote anteriormente não seleccionado libubsan1-arm64-cross.
+A preparar para desempacotar .../20-libubsan1-arm64-cross_12.3.0-1ubuntu1~22.04c
+ross1_all.deb ...
+A descompactar libubsan1-arm64-cross (12.3.0-1ubuntu1~22.04cross1) ...
+A seleccionar pacote anteriormente não seleccionado libhwasan0-arm64-cross.
+A preparar para desempacotar .../21-libhwasan0-arm64-cross_12.3.0-1ubuntu1~22.04
+cross1_all.deb ...
+A descompactar libhwasan0-arm64-cross (12.3.0-1ubuntu1~22.04cross1) ...
+A seleccionar pacote anteriormente não seleccionado libgcc-11-dev-arm64-cross.
+A preparar para desempacotar .../22-libgcc-11-dev-arm64-cross_11.4.0-1ubuntu1~22
+.04cross1_all.deb ...
+A descompactar libgcc-11-dev-arm64-cross (11.4.0-1ubuntu1~22.04cross1) ...
+A seleccionar pacote anteriormente não seleccionado gcc-11-aarch64-linux-gnu.
+A preparar para desempacotar .../23-gcc-11-aarch64-linux-gnu_11.4.0-1ubuntu1~22.
+04cross1_amd64.deb ...
+A descompactar gcc-11-aarch64-linux-gnu (11.4.0-1ubuntu1~22.04cross1) ...
+A seleccionar pacote anteriormente não seleccionado gcc-aarch64-linux-gnu.
+A preparar para desempacotar .../24-gcc-aarch64-linux-gnu_4%3a11.2.0-1ubuntu1_am
+d64.deb ...
+A descompactar gcc-aarch64-linux-gnu (4:11.2.0-1ubuntu1) ...
+A seleccionar pacote anteriormente não seleccionado binutils-arm-none-eabi.
+A preparar para desempacotar .../25-binutils-arm-none-eabi_2.38-3ubuntu1+15build
+1_amd64.deb ...
+A descompactar binutils-arm-none-eabi (2.38-3ubuntu1+15build1) ...
+A seleccionar pacote anteriormente não seleccionado gcc-arm-none-eabi.
+A preparar para desempacotar .../26-gcc-arm-none-eabi_15%3a10.3-2021.07-4_amd64.
+deb ...
+A descompactar gcc-arm-none-eabi (15:10.3-2021.07-4) ...
+A seleccionar pacote anteriormente não seleccionado libstdc++-arm-none-eabi-dev.
+A preparar para desempacotar .../27-libstdc++-arm-none-eabi-dev_15%3a10.3-2021.0
+7-4+17_all.deb ...
+A descompactar libstdc++-arm-none-eabi-dev (15:10.3-2021.07-4+17) ...
+A seleccionar pacote anteriormente não seleccionado linux-libc-dev-arm64-cross.
+A preparar para desempacotar .../28-linux-libc-dev-arm64-cross_5.15.0-22.22cross
+3_all.deb ...
+A descompactar linux-libc-dev-arm64-cross (5.15.0-22.22cross3) ...
+A seleccionar pacote anteriormente não seleccionado libc6-dev-arm64-cross.
+A preparar para desempacotar .../29-libc6-dev-arm64-cross_2.35-0ubuntu1cross3_al
+l.deb ...
+A descompactar libc6-dev-arm64-cross (2.35-0ubuntu1cross3) ...
+A seleccionar pacote anteriormente não seleccionado libnewlib-dev.
+A preparar para desempacotar .../30-libnewlib-dev_3.3.0-1.3_all.deb ...
+A descompactar libnewlib-dev (3.3.0-1.3) ...
+A seleccionar pacote anteriormente não seleccionado libnewlib-arm-none-eabi.
+A preparar para desempacotar .../31-libnewlib-arm-none-eabi_3.3.0-1.3_all.deb ..
+.
+A descompactar libnewlib-arm-none-eabi (3.3.0-1.3) ...
+A seleccionar pacote anteriormente não seleccionado libstdc++-arm-none-eabi-newl
+ib.
+A preparar para desempacotar .../32-libstdc++-arm-none-eabi-newlib_15%3a10.3-202
+1.07-4+17_all.deb ...
+A descompactar libstdc++-arm-none-eabi-newlib (15:10.3-2021.07-4+17) ...
+Configurando gcc-11-aarch64-linux-gnu-base:amd64 (11.4.0-1ubuntu1~22.04cross1) .
+..
+Configurando binutils-arm-none-eabi (2.38-3ubuntu1+15build1) ...
+Configurando gcc-12-cross-base (12.3.0-1ubuntu1~22.04cross1) ...
+Configurando gcc-arm-none-eabi (15:10.3-2021.07-4) ...
+Configurando binutils-common:amd64 (2.38-4ubuntu2.12) ...
+Configurando binutils-aarch64-linux-gnu (2.38-4ubuntu2.12) ...
+Configurando libc6-arm64-cross (2.35-0ubuntu1cross3) ...
+Configurando libnewlib-dev (3.3.0-1.3) ...
+Configurando libitm1-arm64-cross (12.3.0-1ubuntu1~22.04cross1) ...
+Configurando libnewlib-arm-none-eabi (3.3.0-1.3) ...
+Configurando linux-libc-dev-arm64-cross (5.15.0-22.22cross3) ...
+Configurando cpp-11-aarch64-linux-gnu (11.4.0-1ubuntu1~22.04cross1) ...
+Configurando gcc-11-cross-base (11.4.0-1ubuntu1~22.04cross1) ...
+Configurando libbinutils:amd64 (2.38-4ubuntu2.12) ...
+Configurando libgcc-s1-arm64-cross (12.3.0-1ubuntu1~22.04cross1) ...
+Configurando libctf0:amd64 (2.38-4ubuntu2.12) ...
+Configurando libatomic1-arm64-cross (12.3.0-1ubuntu1~22.04cross1) ...
+Configurando liblsan0-arm64-cross (12.3.0-1ubuntu1~22.04cross1) ...
+Configurando libgomp1-arm64-cross (12.3.0-1ubuntu1~22.04cross1) ...
+Configurando libasan6-arm64-cross (11.4.0-1ubuntu1~22.04cross1) ...
+Configurando libstdc++-arm-none-eabi-dev (15:10.3-2021.07-4+17) ...
+Configurando libtsan0-arm64-cross (11.4.0-1ubuntu1~22.04cross1) ...
+Configurando libhwasan0-arm64-cross (12.3.0-1ubuntu1~22.04cross1) ...
+Configurando libc6-dev-arm64-cross (2.35-0ubuntu1cross3) ...
+Configurando libstdc++6-arm64-cross (12.3.0-1ubuntu1~22.04cross1) ...
+Configurando cpp-aarch64-linux-gnu (4:11.2.0-1ubuntu1) ...
+Configurando libstdc++-arm-none-eabi-newlib (15:10.3-2021.07-4+17) ...
+Configurando binutils-x86-64-linux-gnu (2.38-4ubuntu2.12) ...
+Configurando libubsan1-arm64-cross (12.3.0-1ubuntu1~22.04cross1) ...
+Configurando binutils (2.38-4ubuntu2.12) ...
+Configurando libgcc-11-dev-arm64-cross (11.4.0-1ubuntu1~22.04cross1) ...
+Configurando gcc-11-aarch64-linux-gnu (11.4.0-1ubuntu1~22.04cross1) ...
+Configurando gcc-aarch64-linux-gnu (4:11.2.0-1ubuntu1) ...
+A processar 'triggers' para man-db (2.10.2-1) ...
+A processar 'triggers' para libc-bin (2.35-0ubuntu3.11) ...
+davinunes@pop-os:~/qhypstub$ sudo apt install device-tree-compiler 
+Lendo listas de pacotes... Pronto
+Construindo árvore de dependências... Pronto
+Lendo informação de estado... Pronto        
+Os NOVOS pacotes a seguir serão instalados:
+  device-tree-compiler
+0 pacotes atualizados, 1 pacotes novos instalados, 0 a serem removidos e 216 não atualizados.
+É preciso baixar 228 kB de arquivos.
+Depois desta operação, 424 kB adicionais de espaço em disco serão usados.
+Obter:1 http://apt.pop-os.org/ubuntu jammy/main amd64 device-tree-compiler amd64 1.6.1-1 [228 kB]
+Baixados 228 kB em 1s (310 kB/s)             
+A seleccionar pacote anteriormente não seleccionado device-tree-compiler.
+(Lendo banco de dados ... 233778 ficheiros e directórios actualmente instalados.
+)
+A preparar para desempacotar .../device-tree-compiler_1.6.1-1_amd64.deb ...
+A descompactar device-tree-compiler (1.6.1-1) ...
+Configurando device-tree-compiler (1.6.1-1) ...
+A processar 'triggers' para man-db (2.10.2-1) ...
+davinunes@pop-os:~/qhypstub$ 
+
+davinunes@pop-os:~/qhypstub$ 
+davinunes@pop-os:~/qhypstub$ make CROSS_COMPILE=aarch64-linux-gnu-
+aarch64-linux-gnu-as   -o qhypstub.o qhypstub.s
+aarch64-linux-gnu-ld -n -T qhypstub.ld  -o qhypstub.elf qhypstub.o
+aarch64-linux-gnu-objcopy -O binary qhypstub.elf qhypstub.bin
+qtestsign/qtestsign.py hyp -o qhypstub-test-signed.mbn qhypstub.elf
+Before: Elf(ehdr=Ehdr(ei_magic=b'\x7fELF', ei_class=2, ei_data=1, ei_version=1, ei_os_abi=0, ei_abi_version=0, e_type=2, e_machine=183, e_version=1, e_entry=2252341248, e_phoff=64, e_shoff=8728, e_flags=0, e_ehsize=64, e_phentsize=56, e_phnum=1, e_shentsize=64, e_shnum=8, e_shstrndx=7), phdrs=[Phdr(p_type=1, p_offset=2048, p_vaddr=2252341248, p_paddr=2252341248, p_filesz=4096, p_memsz=4096, p_flags=7, p_align=2048)])
+HashSegmentV3(image_id=0, version=3, flash_addr=0, dest_addr=2252345384, total_size=2192, hash_size=96, signature_addr=2252345480, signature_size=256, cert_chain_addr=2252345736, cert_chain_size=1840)
+After: Elf(ehdr=Ehdr(ei_magic=b'\x7fELF', ei_class=2, ei_data=1, ei_version=1, ei_os_abi=0, ei_abi_version=0, e_type=2, e_machine=183, e_version=1, e_entry=2252341248, e_phoff=64, e_shoff=0, e_flags=0, e_ehsize=64, e_phentsize=56, e_phnum=3, e_shentsize=64, e_shnum=0, e_shstrndx=0), phdrs=[Phdr(p_type=0, p_offset=0, p_vaddr=0, p_paddr=0, p_filesz=232, p_memsz=0, p_flags=117440512, p_align=0), Phdr(p_type=0, p_offset=8192, p_vaddr=2252345344, p_paddr=2252345344, p_filesz=2232, p_memsz=4096, p_flags=35651584, p_align=4096), Phdr(p_type=1, p_offset=2048, p_vaddr=2252341248, p_paddr=2252341248, p_filesz=4096, p_memsz=4096, p_flags=7, p_align=2048)])
+davinunes@pop-os:~/qhypstub$ 
+
+
+davinunes@pop-os:~/qhypstub$ cd ..; git clone https://github.com/msm8916-mainline/lk2nd.git
+Cloning into 'lk2nd'...
+remote: Enumerating objects: 65184, done.
+remote: Counting objects: 100% (904/904), done.
+remote: Compressing objects: 100% (375/375), done.
+remote: Total 65184 (delta 737), reused 529 (delta 529), pack-reused 64280 (from 3)
+Receiving objects: 100% (65184/65184), 15.85 MiB | 8.01 MiB/s, done.
+Resolving deltas: 100% (47322/47322), done.
+davinunes@pop-os:~$ 
+
+
+davinunes@pop-os:~$ cd lk2nd
+davinunes@pop-os:~/lk2nd$ make LK2ND_BUNDLE_DTB="msm8916-512mb-mtp.dtb" LK2ND_COMPATIBLE="zhihe,various" TOOLCHAIN_PREFIX=arm-none-eabi- lk1st-msm8916
+make[1]: Entrando no diretório '/home/davinunes/lk2nd'
+NOTE: Display support is disabled without display/panel selection
+including app/aboot dev/fbcon dev/gcdb/display dev/keys dev/pmic/pm8x41 dev/vib lib/debug lib/heap lib/libc lib/libfdt lib/ptable lk2nd lk2nd/boot lk2nd/device lk2nd/fastboot lk2nd/fastboot/debug lk2nd/hw/gpio lk2nd/hw/i2c lk2nd/ramoops lk2nd/serialno lk2nd/smp lk2nd/smp/spin-table lk2nd/version
+including lib/bio lib/fs lib/zlib_inflate lk2nd/hw/bdev lk2nd/hw/regulator
+including lib/fs/ext2 lib/partition
+including lib/bcache
+generating build-lk1st-msm8916/config.h
+compiling arch/arm/crt0.S
+compiling target/msm8916/init.c
+compiling target/msm8916/meminfo.c
+compiling target/msm8916/target_display.c
+compiling target/msm8916/oem_panel.c
+compiling platform/msm8916/platform.c
+compiling platform/msm8916/acpuclock.c
+compiling platform/msm8916/msm8916-clock.c
+compiling platform/msm8916/gpio.c
+compiling platform/msm_shared/debug.c
+compiling platform/msm_shared/smem.c
+compiling platform/msm_shared/smem_ptable.c
+compiling platform/msm_shared/partition_parser.c
+compiling platform/msm_shared/ab_partition_parser.c
+compiling platform/msm_shared/hsusb.c
+compiling platform/msm_shared/boot_stats.c
+compiling platform/msm_shared/qgic_common.c
+compiling platform/msm_shared/crc32.c
+compiling platform/msm_shared/sdhci.c
+compiling platform/msm_shared/sdhci_msm.c
+compiling platform/msm_shared/mmc_sdhci.c
+compiling platform/msm_shared/mmc_wrapper.c
+compiling platform/msm_shared/rpm-ipc.c
+compiling platform/msm_shared/qgic.c
+compiling platform/msm_shared/qtimer.c
+compiling platform/msm_shared/qtimer_mmap.c
+compiling platform/msm_shared/interrupts.c
+compiling platform/msm_shared/clock.c
+compiling platform/msm_shared/clock_pll.c
+compiling platform/msm_shared/clock_lib2.c
+compiling platform/msm_shared/uart_dm.c
+compiling platform/msm_shared/board.c
+compiling platform/msm_shared/spmi.c
+compiling platform/msm_shared/bam.c
+compiling platform/msm_shared/scm.c
+compiling platform/msm_shared/dload_util.c
+compiling platform/msm_shared/gpio.c
+compiling platform/msm_shared/dev_tree.c
+compiling platform/msm_shared/mdp5.c
+compiling platform/msm_shared/display.c
+compiling platform/msm_shared/mipi_dsi.c
+compiling platform/msm_shared/mipi_dsi_phy.c
+compiling platform/msm_shared/mipi_dsi_autopll.c
+compiling platform/msm_shared/shutdown_detect.c
+compiling platform/msm_shared/certificate.c
+compiling platform/msm_shared/crypto_hash.c
+compiling platform/msm_shared/crypto5_eng.c
+compiling platform/msm_shared/crypto5_wrapper.c
+compiling platform/msm_shared/i2c_qup.c
+compiling platform/msm_shared/mipi_dsi_i2c.c
+compiling platform/msm_shared/regulator.c
+compiling platform/msm_shared/reboot.c
+compiling arch/arm/arch.c
+compiling arch/arm/asm.S
+compiling arch/arm/cache.c
+compiling arch/arm/cache-ops.S
+compiling arch/arm/ops.S
+compiling arch/arm/exceptions.S
+compiling arch/arm/faults.c
+compiling arch/arm/thread.c
+compiling arch/arm/dcc.S
+compiling arch/arm/mmu.c
+compiling platform/debug.c
+compiling platform/init.c
+compiling target/init.c
+compiling target/target_display.c
+compiling kernel/debug.c
+compiling kernel/dpc.c
+compiling kernel/event.c
+compiling kernel/main.c
+compiling kernel/mutex.c
+compiling kernel/thread.c
+compiling kernel/timer.c
+compiling dev/dev.c
+compiling app/app.c
+compiling app/aboot/aboot.c
+compiling app/aboot/fastboot.c
+compiling dev/fbcon/fbcon.c
+compiling dev/gcdb/display/gcdb_display.c
+compiling dev/gcdb/display/gcdb_display_param.c
+compiling dev/gcdb/display/panel_display.c
+compiling dev/gcdb/display/gcdb_autopll.c
+compiling dev/keys/keys.c
+compiling dev/pmic/pm8x41/pm8x41.c
+compiling dev/pmic/pm8x41/pm8x41_adc.c
+compiling dev/pmic/pm8x41/pm8x41_wled.c
+compiling dev/pmic/pm8x41/pm8x41_vib.c
+compiling dev/pmic/pm8x41/pm_pwm.c
+compiling dev/vib/vibrator.c
+compiling lib/debug/debug.c
+compiling lib/heap/heap.c
+compiling lib/libc/atoi.c
+compiling lib/libc/bsearch.c
+compiling lib/libc/ctype.c
+compiling lib/libc/errno.c
+compiling lib/libc/gcd_lcm.c
+compiling lib/libc/itoa.c
+compiling lib/libc/printf.c
+compiling lib/libc/malloc.c
+compiling lib/libc/rand.c
+compiling lib/libc/stdio.c
+compiling lib/libc/eabi.c
+compiling lib/libc/string/arch/arm/memcpy.S
+compiling lib/libc/string/arch/arm/memset.S
+compiling lib/libc/string/memchr.c
+compiling lib/libc/string/memcmp.c
+compiling lib/libc/string/memscpy.c
+compiling lib/libc/string/strcasecmp.c
+compiling lib/libc/string/strcat.c
+compiling lib/libc/string/strchr.c
+compiling lib/libc/string/strcmp.c
+compiling lib/libc/string/strcoll.c
+compiling lib/libc/string/strcpy.c
+compiling lib/libc/string/strdup.c
+compiling lib/libc/string/strerror.c
+compiling lib/libc/string/strlcat.c
+compiling lib/libc/string/strlcpy.c
+compiling lib/libc/string/strlen.c
+compiling lib/libc/string/strncat.c
+compiling lib/libc/string/strncpy.c
+compiling lib/libc/string/strncmp.c
+compiling lib/libc/string/strnicmp.c
+compiling lib/libc/string/strnlen.c
+compiling lib/libc/string/strpbrk.c
+compiling lib/libc/string/strrchr.c
+compiling lib/libc/string/strrev.c
+compiling lib/libc/string/strspn.c
+compiling lib/libc/string/strstr.c
+compiling lib/libc/string/strtok.c
+compiling lib/libc/string/strxfrm.c
+compiling lib/libfdt/fdt.c
+compiling lib/libfdt/fdt_ro.c
+compiling lib/libfdt/fdt_wip.c
+compiling lib/libfdt/fdt_sw.c
+compiling lib/libfdt/fdt_rw.c
+compiling lib/libfdt/fdt_strerror.c
+compiling lib/libfdt/fdt_empty_tree.c
+compiling lib/libfdt/fdt_addresses.c
+compiling lib/libfdt/fdt_overlay.c
+compiling lib/libfdt/fdt_check.c
+compiling lib/ptable/ptable.c
+compiling lk2nd/init.c
+compiling lk2nd/util/cmdline.c
+compiling lk2nd/util/lkfdt.c
+compiling lk2nd/util/mmu.c
+compiling lk2nd/boot/boot.c
+compiling lk2nd/boot/extlinux.c
+compiling lk2nd/boot/util.c
+compiling lk2nd/device/dts/msm8916/msm8916-512mb-mtp.dts
+compiling lk2nd/device/device.c
+compiling lk2nd/device/panel.c
+compiling lk2nd/device/keys.c
+compiling lk2nd/device/leds.c
+compiling lk2nd/device/regulator-fixed.c
+compiling lk2nd/device/regulator-ldo.c
+compiling lk2nd/device/sdhc.c
+compiling lk2nd/device/smb1360/smb1360.c
+compiling lk2nd/device/smb1360/gpl/battery-idol347.c
+compiling lk2nd/device/smb1360/gpl/battery-wt88047.c
+compiling lk2nd/device/smb1360/gpl/battery-qcom.c
+compiling lk2nd/fastboot/fetch.c
+compiling lk2nd/fastboot/hash.c
+compiling lk2nd/fastboot/misc.c
+compiling lk2nd/fastboot/dtb.c
+compiling lk2nd/fastboot/debug/cpuid.c
+compiling lk2nd/fastboot/debug/register.c
+compiling lk2nd/fastboot/debug/regulator.c
+compiling lk2nd/hw/gpio/gpio.c
+compiling lk2nd/hw/gpio/tlmm.c
+compiling lk2nd/hw/gpio/pm8x41.c
+lk2nd/hw/gpio/pm8x41.c: In function 'lk2nd_gpio_pmic_config':
+lk2nd/hw/gpio/pm8x41.c:22:2: warning: missing initializer for field 'inv_int_pol' of 'struct pm8x41_gpio' [-Wmissing-field-initializers]
+   22 |  };
+      |  ^
+In file included from lk2nd/hw/gpio/pm8x41.c:8:
+dev/pmic/pm8x41/include/pm8x41.h:98:6: note: 'inv_int_pol' declared here
+   98 |  int inv_int_pol;
+      |      ^~~~~~~~~~~
+compiling lk2nd/hw/i2c/dt.c
+compiling lk2nd/hw/i2c/gpio_i2c.c
+compiling lk2nd/ramoops/ramoops.c
+compiling lk2nd/serialno/mac.c
+compiling lk2nd/serialno/serialno.c
+compiling lk2nd/smp/clock-msm8916.c
+compiling lk2nd/smp/cpu-boot.c
+compiling lk2nd/smp/cortex-a.c
+compiling lk2nd/smp/spin-table/spin-table.c
+compiling lk2nd/version/version.c
+generating build-lk1st-msm8916/lk2nd/version/tag.c for lk2nd 22.0-next-e28c3939-20260219
+compiling build-lk1st-msm8916/lk2nd/version/tag.c
+compiling lib/bio/bio.c
+compiling lib/bio/debug.c
+compiling lib/bio/mem.c
+compiling lib/bio/subdev.c
+compiling lib/fs/fs.c
+compiling lib/fs/debug.c
+compiling lib/zlib_inflate/zutil.c
+compiling lib/zlib_inflate/adler32.c
+compiling lib/zlib_inflate/inftrees.c
+compiling lib/zlib_inflate/inflate.c
+compiling lib/zlib_inflate/inffast.c
+compiling lib/zlib_inflate/uncompr.c
+compiling lib/zlib_inflate/decompress.c
+compiling lk2nd/hw/bdev/bdev.c
+compiling lk2nd/hw/bdev/util.c
+compiling lk2nd/hw/bdev/wrapper.c
+compiling lk2nd/hw/bdev/mmc_sdhci.c
+compiling lk2nd/hw/regulator/gpl/qcom_spmi-regulator.c
+compiling lib/fs/ext2/ext2.c
+compiling lib/fs/ext2/dir.c
+compiling lib/fs/ext2/io.c
+compiling lib/fs/ext2/file.c
+compiling lib/partition/partition.c
+compiling lib/bcache/bcache.c
+generating build-lk1st-msm8916/system-onesegment.ld
+linking build-lk1st-msm8916/lk
+generating image: build-lk1st-msm8916/lk.bin
+   text	   data	    bss	    dec	    hex	filename
+ 204368	  58444	 224656	 487468	  7702c	build-lk1st-msm8916/lk
+arm-none-eabi-objcopy -O binary build-lk1st-msm8916/lk build-lk1st-msm8916/lk.bin
+generating listing: build-lk1st-msm8916/lk.lst
+generating listing: build-lk1st-msm8916/lk.debug.lst
+generating symbols: build-lk1st-msm8916/lk.sym
+generating size map: build-lk1st-msm8916/lk.size
+generating stripped elf: build-lk1st-msm8916/lk_s.elf
+cp -f ./build-lk1st-msm8916/lk_s.elf ./build-lk1st-msm8916/emmc_appsboot.mbn
+make[1]: Saindo do diretório '/home/davinunes/lk2nd'
+davinunes@pop-os:~/lk2nd$ ../qhypstub/qtestsign/qtestsign.py aboot build-lk1st-msm8916/emmc_appsboot.mbn
+Before: Elf(ehdr=Ehdr(ei_magic=b'\x7fELF', ei_class=1, ei_data=1, ei_version=1, ei_os_abi=0, ei_abi_version=0, e_type=2, e_machine=40, e_version=1, e_entry=2405433344, e_phoff=52, e_shoff=408876, e_flags=83886592, e_ehsize=52, e_phentsize=32, e_phnum=2, e_shentsize=40, e_shnum=11, e_shstrndx=10), phdrs=[Phdr(p_type=1879048193, p_offset=319792, p_vaddr=2405687600, p_paddr=2405687600, p_filesz=8, p_memsz=8, p_flags=4, p_align=4), Phdr(p_type=1, p_offset=65536, p_vaddr=2405433344, p_paddr=2405433344, p_filesz=262820, p_memsz=503184, p_flags=7, p_align=65536)])
+HashSegmentV3(image_id=0, version=3, flash_addr=0, dest_addr=2405937192, total_size=2224, hash_size=128, signature_addr=2405937320, signature_size=256, cert_chain_addr=2405937576, cert_chain_size=1840)
+After: Elf(ehdr=Ehdr(ei_magic=b'\x7fELF', ei_class=1, ei_data=1, ei_version=1, ei_os_abi=0, ei_abi_version=0, e_type=2, e_machine=40, e_version=1, e_entry=2405433344, e_phoff=52, e_shoff=0, e_flags=83886592, e_ehsize=52, e_phentsize=32, e_phnum=4, e_shentsize=40, e_shnum=0, e_shstrndx=0), phdrs=[Phdr(p_type=0, p_offset=0, p_vaddr=0, p_paddr=0, p_filesz=180, p_memsz=0, p_flags=117440512, p_align=0), Phdr(p_type=0, p_offset=4096, p_vaddr=2405937152, p_paddr=2405937152, p_filesz=2264, p_memsz=4096, p_flags=35651584, p_align=4096), Phdr(p_type=1879048193, p_offset=328356, p_vaddr=2405687600, p_paddr=2405687600, p_filesz=8, p_memsz=8, p_flags=4, p_align=4), Phdr(p_type=1, p_offset=65536, p_vaddr=2405433344, p_paddr=2405433344, p_filesz=262820, p_memsz=503184, p_flags=7, p_align=65536)])
+davinunes@pop-os:~/lk2nd$ 
+
+
+
+davinunes@pop-os:~/lk2nd$ 
+davinunes@pop-os:~/lk2nd$ cd
+davinunes@pop-os:~$ wget https://releases.linaro.org/96boards/dragonboard410c/linaro/rescue/17.09/dragonboard410c_bootloader_emmc_android-88.zip
+--2026-02-24 22:41:57--  https://releases.linaro.org/96boards/dragonboard410c/linaro/rescue/17.09/dragonboard410c_bootloader_emmc_android-88.zip
+Resolvendo releases.linaro.org (releases.linaro.org)... 52.215.200.125
+Conectando-se a releases.linaro.org (releases.linaro.org)|52.215.200.125|:443... conectado.
+A requisição HTTP foi enviada, aguardando resposta... 302 Found
+Localização: https://publishing-ie-linaro-org.s3.amazonaws.com/releases/96boards/dragonboard410c/linaro/rescue/17.09/dragonboard410c_bootloader_emmc_android-88.zip?Signature=nAz7rcvjDVF8%2BkYE%2FKyjf7YOwwA%3D&Expires=1771983809&AWSAccessKeyId=AKIAIELXV2RYNAHFUP7A [redirecionando]
+--2026-02-24 22:41:59--  https://publishing-ie-linaro-org.s3.amazonaws.com/releases/96boards/dragonboard410c/linaro/rescue/17.09/dragonboard410c_bootloader_emmc_android-88.zip?Signature=nAz7rcvjDVF8%2BkYE%2FKyjf7YOwwA%3D&Expires=1771983809&AWSAccessKeyId=AKIAIELXV2RYNAHFUP7A
+Resolvendo publishing-ie-linaro-org.s3.amazonaws.com (publishing-ie-linaro-org.s3.amazonaws.com)... 52.92.36.241, 3.5.64.248, 3.5.74.91, ...
+Conectando-se a publishing-ie-linaro-org.s3.amazonaws.com (publishing-ie-linaro-org.s3.amazonaws.com)|52.92.36.241|:443... conectado.
+A requisição HTTP foi enviada, aguardando resposta... 200 OK
+Tamanho: 12774138 (12M) [application/octet-stream]
+Salvando em: ‘dragonboard410c_bootloader_emmc_android-88.zip’
+
+dragonboard410c_boo 100%[===================>]  12,18M  1,34MB/s    em 67s     
+
+2026-02-24 22:43:09 (185 KB/s) - ‘dragonboard410c_bootloader_emmc_android-88.zip’ salvo [12774138/12774138]
+
+davinunes@pop-os:~$ unzip dragonboard410c_bootloader_emmc_android-88.zip -d dragonboard410_fw
+Archive:  dragonboard410c_bootloader_emmc_android-88.zip
+  inflating: dragonboard410_fw/MD5SUMS.txt  
+  inflating: dragonboard410_fw/hyp.mbn  
+  inflating: dragonboard410_fw/emmc_appsboot.mbn  
+  inflating: dragonboard410_fw/license.txt  
+  inflating: dragonboard410_fw/rpm.mbn  
+  inflating: dragonboard410_fw/tz.mbn  
+  inflating: dragonboard410_fw/NON-HLOS.bin  
+  inflating: dragonboard410_fw/sbl1.mbn  
+  inflating: dragonboard410_fw/gpt_both0.bin  
+  inflating: dragonboard410_fw/flashall  
+davinunes@pop-os:~$ 
+
+
+davinunes@pop-os:~$ ls
+'Área de Trabalho'                                lk2nd
+ Documentos                                       Modelos
+ Downloads                                        Música
+ dragonboard410c_bootloader_emmc_android-88.zip   pmbootstrap
+ dragonboard410_fw                                Público
+ edl                                              qhypstub
+ generic-zhihe.img                                Vídeos
+ Imagens
+davinunes@pop-os:~$ 
+
+
+davinunes@pop-os:~/postmarket-zhihe$ tree
+.
+├── emmc_appsboot-test-signed.mbn
+├── generic-zhihe.img
+├── qhypstub-test-signed.mbn
+└── tz.mbn
+
+0 directories, 4 files
+davinunes@pop-os:~/postmarket-zhihe$ 
+
+
+
+davinunes@pop-os:~/postmarket-zhihe$ lsusb
+Bus 002 Device 003: ID 05c6:9008 Qualcomm, Inc. Gobi Wireless Modem (QDL mode)
+Bus 002 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+Bus 001 Device 004: ID 0e0f:0008 VMware, Inc. Virtual Bluetooth Adapter
+Bus 001 Device 003: ID 0e0f:0002 VMware, Inc. Virtual USB Hub
+Bus 001 Device 002: ID 0e0f:0003 VMware, Inc. Virtual Mouse
+Bus 001 Device 001: ID 1d6b:0001 Linux Foundation 1.1 root hub
+davinunes@pop-os:~/postmarket-zhihe$ edl w hyp '/home/davinunes/postmarket-zhihe/qhypstub-test-signed.mbn' 
+Qualcomm Sahara / Firehose Client V3.62 (c) B.Kerler 2018-2025.
+main - Trying with no loader given ...
+main - Waiting for the device
+main - Device detected :)
+main - Mode detected: firehose
+firehose
+firehose - [LIB]: Host's payload to target size is too large
+firehose
+firehose - [LIB]: logbuf@0x0801BDA8 fh@0x08018C10
+firehose
+firehose - [LIB]: Sector size in XML 4096 does not match disk sector size 512
+Progress: |██████████| 100.0% Write (Sector 0x14 of 0x14, ) 5.29 MB/s         
+Wrote /home/davinunes/postmarket-zhihe/qhypstub-test-signed.mbn to sector 272384.
+davinunes@pop-os:~/postmarket-zhihe$ 
+
+
+davinunes@pop-os:~/postmarket-zhihe$ edl w tz '/home/davinunes/postmarket-zhihe/tz.mbn' 
+Qualcomm Sahara / Firehose Client V3.62 (c) B.Kerler 2018-2025.
+main - Trying with no loader given ...
+main - Waiting for the device
+main - Device detected :)
+main - Mode detected: firehose
+firehose
+firehose - [LIB]: Host's payload to target size is too large
+firehose
+firehose - [LIB]: logbuf@0x0801BDA8 fh@0x08018C10
+firehose
+firehose - [LIB]: Sector size in XML 4096 does not match disk sector size 512
+Progress: |██--------|  23.7% Write (Sector 0xE0 of 0x3B0, 01m:01s left) 0.00 MBProgress: |███-------|  27.1% Write (Sector 0x100 of 0x3B0, 01m:02s left) 0.00 MProgress: |███-------|  30.5% Write (Sector 0x120 of 0x3B0, 01m:01s left) 0.00 MProgress: |██████████| 100.0% Write (Sector 0x3B0 of 0x3B0, ) 0.00 MB/s       s
+firehose
+firehose - [LIB]: Error:{}
+Error writing /home/davinunes/postmarket-zhihe/tz.mbn to sector 270336.
+davinunes@pop-os:~/postmarket-zhihe$ 
+
+
+davinunes@pop-os:~/postmarket-zhihe$ 
+davinunes@pop-os:~/postmarket-zhihe$ 
+davinunes@pop-os:~/postmarket-zhihe$ lsusb 
+Bus 002 Device 003: ID 05c6:9008 Qualcomm, Inc. Gobi Wireless Modem (QDL mode)
+Bus 002 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+Bus 001 Device 004: ID 0e0f:0008 VMware, Inc. Virtual Bluetooth Adapter
+Bus 001 Device 003: ID 0e0f:0002 VMware, Inc. Virtual USB Hub
+Bus 001 Device 002: ID 0e0f:0003 VMware, Inc. Virtual Mouse
+Bus 001 Device 001: ID 1d6b:0001 Linux Foundation 1.1 root hub
+davinunes@pop-os:~/postmarket-zhihe$ edl --maxpayload=16384 --memory=eMMC w tz /home/davinunes/postmarket-zhihe/tz.mbn
+Usage:
+    edl.py -h | --help
+    edl.py [--vid=vid] [--pid=pid] [--portname=portname] [--serial]
+    edl.py [--loader=filename] [--memory=memtype] [--portname=portname] [--serial]
+    edl.py [--debugmode] [--portname=portname] [--serial]
+    edl.py [--gpt-num-part-entries=number] [--gpt-part-entry-size=number] [--gpt-part-entry-start-lba=number] [--portname=portname] [--serial]
+    edl.py [--memory=memtype] [--skipstorageinit] [--maxpayload=bytes] [--sectorsize==bytes] [--pagesperblock=number] [--portname=portname] [--serial]
+    edl.py server [--tcpport=portnumber] [--loader=filename] [--debugmode] [--skipresponse] [--vid=vid] [--pid=pid] [--skipstorageinit] [--portname=portname] [--serial]  [--devicemodel=value]
+    edl.py memorydump [--partitions=partnames] [--debugmode] [--vid=vid] [--pid=pid] [--portname=portname] [--serial] [--serial_number=serial_number]
+    edl.py printgpt [--memory=memtype] [--lun=lun] [--sectorsize==bytes] [--pagesperblock=number] [--loader=filename] [--debugmode]  [--skipresponse] [--vid=vid] [--pid=pid] [--skipstorageinit] [--portname=portname] [--serial] [--devicemodel=value]
+    edl.py gpt <directory> [--memory=memtype] [--lun=lun] [--genxml] [--loader=filename]  [--skipresponse] [--debugmode] [--vid=vid] [--pid=pid] [--skipstorageinit] [--pagesperblock=number] [--portname=portname] [--serial] [--devicemodel=value]
+    edl.py r <partitionname> <filename> [--memory=memtype] [--sectorsize==bytes] [--pagesperblock=number] [--lun=lun] [--loader=filename]  [--skipresponse] [--debugmode] [--vid=vid] [--pid=pid] [--skipstorageinit] [--portname=portname] [--serial] [--devicemodel=value]
+    edl.py rl <directory> [--memory=memtype] [--lun=lun] [--sectorsize==bytes] [--pagesperblock=number] [--skip=partnames] [--genxml]  [--skipresponse] [--loader=filename] [--debugmode] [--vid=vid] [--pid=pid] [--skipstorageinit] [--portname=portname] [--serial] [--devicemodel=value]
+    edl.py rf <filename> [--memory=memtype] [--lun=lun] [--sectorsize==bytes] [--pagesperblock=number] [--loader=filename] [--debugmode]  [--skipresponse] [--vid=vid] [--pid=pid] [--skipstorageinit] [--portname=portname] [--serial] [--devicemodel=value]
+    edl.py rs <start_sector> <sectors> <filename> [--lun=lun] [--sectorsize==bytes] [--pagesperblock=number] [--memory=memtype] [--loader=filename] [--debugmode] [--skipresponse] [--vid=vid] [--pid=pid] [--skipstorageinit] [--portname=portname] [--serial] [--devicemodel=value]
+    edl.py w <partitionname> <filename> [--partitionfilename=filename] [--memory=memtype] [--lun=lun] [--sectorsize==bytes] [--pagesperblock=number] [--skipwrite] [--skipresponse] [--loader=filename] [--debugmode] [--vid=vid] [--pid=pid] [--devicemodel=value] [--skipstorageinit] [--portname=portname] [--serial]
+    edl.py wl <directory> [--memory=memtype] [--lun=lun] [--sectorsize==bytes] [--pagesperblock=number] [--skip=partnames] [--skipresponse] [--loader=filename] [--debugmode] [--vid=vid] [--pid=pid] [--devicemodel=value] [--skipstorageinit] [--portname=portname] [--serial]
+    edl.py wf <filename> [--memory=memtype] [--lun=lun] [--sectorsize==bytes] [--pagesperblock=number] [--loader=filename] [--skipresponse] [--debugmode] [--vid=vid] [--pid=pid] [--devicemodel=value] [--skipstorageinit] [--portname=portname] [--serial]
+    edl.py ws <start_sector> <filename> [--memory=memtype] [--lun=lun] [--sectorsize==bytes] [--pagesperblock=number] [--skipwrite] [--skipresponse] [--loader=filename] [--debugmode] [--vid=vid] [--pid=pid] [--devicemodel=value] [--skipstorageinit] [--portname=portname] [--serial]
+    edl.py e <partitionname> [--memory=memtype] [--skipwrite] [--lun=lun] [--sectorsize==bytes] [--pagesperblock=number] [--loader=filename] [--debugmode] [--skipresponse] [--vid=vid] [--pid=pid] [--devicemodel=value] [--skipstorageinit] [--portname=portname] [--serial]
+    edl.py es <start_sector> <sectors> [--memory=memtype] [--lun=lun] [--sectorsize==bytes] [--pagesperblock=number] [--skipwrite] [--loader=filename] [--skipresponse] [--debugmode] [--vid=vid] [--pid=pid] [--devicemodel=value] [--skipstorageinit] [--portname=portname] [--serial]
+    edl.py ep <partitionname> <sectors> [--memory=memtype] [--skipwrite] [--lun=lun] [--sectorsize==bytes] [--pagesperblock=number] [--loader=filename] [--debugmode] [--skipresponse] [--vid=vid] [--pid=pid] [--devicemodel=value] [--skipstorageinit] [--portname=portname] [--serial]
+    edl.py footer <filename> [--memory=memtype] [--lun=lun] [--loader=filename] [--debugmode] [--skipresponse] [--vid=vid] [--pid=pid] [--skipstorageinit] [--portname=portname] [--serial]  [--devicemodel=value]
+    edl.py peek <offset> <length> <filename> [--loader=filename] [--debugmode] [--skipresponse] [--vid=vid] [--pid=pid] [--portname=portname] [--serial]
+    edl.py peekhex <offset> <length> [--loader=filename] [--debugmode] [--vid=vid] [--pid=pid] [--portname=portname] [--serial]
+    edl.py peekdword <offset> [--loader=filename] [--debugmode] [--vid=vid] [--pid=pid] [--skipstorageinit] [--portname=portname] [--serial]
+    edl.py peekqword <offset> [--loader=filename] [--debugmode] [--vid=vid] [--pid=pid] [--skipstorageinit] [--portname=portname] [--serial]
+    edl.py memtbl <filename> [--loader=filename] [--debugmode] [--vid=vid] [--pid=pid] [--skipstorageinit] [--portname=portname] [--serial]
+    edl.py poke <offset> <filename> [--loader=filename] [--debugmode] [--vid=vid] [--pid=pid] [--skipstorageinit] [--portname=portname] [--serial]
+    edl.py pokehex <offset> <data> [--loader=filename] [--debugmode] [--vid=vid] [--pid=pid] [--skipstorageinit] [--portname=portname] [--serial]
+    edl.py pokedword <offset> <data> [--loader=filename] [--debugmode] [--vid=vid] [--pid=pid] [--skipstorageinit] [--portname=portname] [--serial]
+    edl.py pokeqword <offset> <data> [--loader=filename] [--debugmode] [--vid=vid] [--pid=pid] [--skipstorageinit] [--portname=portname] [--serial]
+    edl.py memcpy <offset> <size> [--loader=filename] [--debugmode] [--vid=vid] [--pid=pid] [--portname=portname] [--serial]
+    edl.py secureboot [--loader=filename] [--debugmode] [--vid=vid] [--pid=pid] [--skipstorageinit] [--portname=portname] [--serial]
+    edl.py pbl <filename> [--loader=filename] [--debugmode] [--vid=vid] [--pid=pid] [--skipstorageinit] [--portname=portname] [--serial]
+    edl.py qfp <filename> [--loader=filename] [--debugmode] [--vid=vid] [--pid=pid] [--skipstorageinit] [--portname=portname] [--serial]
+    edl.py getstorageinfo [--loader=filename] [--memory=memtype] [--pagesperblock=number] [--debugmode] [--skipresponse] [--vid=vid] [--pid=pid] [--skipstorageinit] [--portname=portname] [--serial]  [--devicemodel=value]
+    edl.py setbootablestoragedrive <lun> [--loader=filename] [--debugmode] [--skipresponse] [--vid=vid] [--pid=pid] [--portname=portname] [--serial]  [--devicemodel=value]
+    edl.py getactiveslot [--memory=memtype] [--loader=filename] [--debugmode] [--vid=vid] [--pid=pid] [--portname=portname] [--serial]  [--devicemodel=value]
+    edl.py setactiveslot <slot> [--loader=filename] [--debugmode] [--skipresponse] [--vid=vid] [--pid=pid] [--portname=portname] [--serial]  [--devicemodel=value]
+    edl.py send <command> [--loader=filename] [--debugmode] [--skipresponse] [--vid=vid] [--pid=pid] [--portname=portname] [--serial]  [--devicemodel=value]
+    edl.py xml <xmlfile> [--loader=filename] [--debugmode] [--skipresponse] [--vid=vid] [--pid=pid] [--skipstorageinit] [--portname=portname] [--serial]  [--devicemodel=value]
+    edl.py rawxml <xmlstring> [--loader=filename] [--debugmode] [--skipresponse] [--vid=vid] [--pid=pid] [--skipstorageinit] [--portname=portname] [--serial]  [--devicemodel=value]
+    edl.py reset [--resetmode=mode] [--loader=filename] [--debugmode] [--vid=vid] [--pid=pid] [--portname=portname] [--serial] [--devicemodel=value]
+    edl.py nop [--loader=filename] [--debugmode] [--vid=vid] [--pid=pid] [--skipstorageinit] [--portname=portname] [--serial] [--devicemodel=value]
+    edl.py modules <command> <options> [--memory=memtype] [--lun=lun] [--loader=filename] [--debugmode] [--skipresponse] [--vid=vid] [--pid=pid] [--devicemodel=value] [--portname=portname] [--serial]
+    edl.py provision <xmlfile> [--loader=filename] [--debugmode] [--skipresponse] [--vid=vid] [--pid=pid] [--portname=portname] [--serial]  [--devicemodel=value]
+    edl.py qfil <rawprogram> <patch> <imagedir> [--loader=filename] [--memory=memtype] [--pagesperblock=number] [--debugmode] [--skipresponse] [--vid=vid] [--pid=pid] [--portname=portname] [--serial]  [--devicemodel=value]
+davinunes@pop-os:~/postmarket-zhihe$ edl w tz '/home/davinunes/postmarket-zhihe/tz.mbn' 
+Qualcomm Sahara / Firehose Client V3.62 (c) B.Kerler 2018-2025.
+main - Trying with no loader given ...
+main - Waiting for the device
+main - Device detected :)
+
+^C
+[!] Exiting cleanly…
+davinunes@pop-os:~/postmarket-zhihe$ 
+
+davinunes@pop-os:~/postmarket-zhihe$ edl ws 270336 /home/davinunes/postmarket-zhihe/tz.mbn --memory eMMC
+Qualcomm Sahara / Firehose Client V3.62 (c) B.Kerler 2018-2025.
+main - Trying with no loader given ...
+main - Waiting for the device
+main - Device detected :)
+main - Mode detected: firehose
+firehose
+firehose - [LIB]: Host's payload to target size is too large
+firehose
+firehose - [LIB]: logbuf@0x0801BDA8 fh@0x08018C10
+Progress: |██--------|  23.7% Write (Sector 0xE0 of 0x3B0, 01m:01s left) 0.00 MBProgress: |███-------|  27.1% Write (Sector 0x100 of 0x3B0, 01m:02s left) 0.00 MProgress: |███-------|  30.5% Write (Sector 0x120 of 0x3B0, 01m:01s left) 0.00 MProgress: |██████████| 100.0% Write (Sector 0x3B0 of 0x3B0, ) 0.00 MB/s       s
+firehose
+firehose - [LIB]: Error:{}
+firehose_client
+firehose_client - [LIB]: Error on writing /home/davinunes/postmarket-zhihe/tz.mbn to sector 270336
+davinunes@pop-os:~/postmarket-zhihe$ 
+davinunes@pop-os:~/postmarket-zhihe$ 
+davinunes@pop-os:~/postmarket-zhihe$ 
+davinunes@pop-os:~/postmarket-zhihe$ edl ws 270336 /home/davinunes/postmarket-zhihe/tz.mbn --memory=eMMC --sectorsize=512
+Qualcomm Sahara / Firehose Client V3.62 (c) B.Kerler 2018-2025.
+main - Trying with no loader given ...
+main - Waiting for the device
+main - Device detected :)
+sahara - Protocol version: 2, Version supported: 1
+main - Mode detected: sahara
+sahara - 
+Version 0x2
+------------------------
+HWID:              0x007050e100000000 (MSM_ID:0x007050e1,OEM_ID:0x0000,MODEL_ID:0x0000)
+CPU detected:      "MSM8916"
+PK_HASH:           0xcc3153a80293939b90d02d3bf8b23e0292e452fef662c74998421adad42a380f
+Serial:            0x25b647a6
+
+sahara - Possibly unfused device detected, so any loader should be fine...
+sahara - Possible loader available: /home/davinunes/edl/edlclient/../Loaders/longcheer/007050e100000000_3022817d373fd7f9_fhprg_peek.bin
+sahara - Possible loader available: /home/davinunes/edl/edlclient/../Loaders/cyanogen/007050e100000000_4e3eefa63a67eb7a_fhprg_peek.bin
+sahara - Possible loader available: /home/davinunes/edl/edlclient/../Loaders/cyanogen/007050e100000000_d36c6073c9c2cb1c_fhprg_peek.bin
+sahara - Possible loader available: /home/davinunes/edl/edlclient/../Loaders/cyanogen/007050e100000000_4614048173062ae4_fhprg_peek.bin
+sahara - Possible loader available: /home/davinunes/edl/edlclient/../Loaders/lenovo_motorola/007050e100000000_99c8c13e374c34d8_fhprg_peek.bin
+sahara - Possible loader available: /home/davinunes/edl/edlclient/../Loaders/xiaomi/007050e100000000_50838757eab7c632_fhprg_peek_wt88047.bin
+sahara - Possible loader available: /home/davinunes/edl/edlclient/../Loaders/xiaomi/007050e100000000_278448179ac756a1_fhprg_peek.bin
+sahara - Possible loader available: /home/davinunes/edl/edlclient/../Loaders/qualcomm/factory/msm8916/007050e100000000_394a2e47cf830150_fhprg_peek.bin
+sahara - Possible loader available: /home/davinunes/edl/edlclient/../Loaders/qualcomm/factory/msm8916/007050e100000000_8ecf3eaa03f772e2_fhprg_peek.bin
+sahara - Trying loader: /home/davinunes/edl/edlclient/../Loaders/longcheer/007050e100000000_3022817d373fd7f9_fhprg_peek.bin
+sahara - Protocol version: 2, Version supported: 1
+sahara - Uploading loader /home/davinunes/edl/edlclient/../Loaders/longcheer/007050e100000000_3022817d373fd7f9_fhprg_peek.bin ...
+sahara - 32-Bit mode detected.
+sahara - Firehose mode detected, uploading...
+sahara - Loader successfully uploaded.
+main - Trying to connect to firehose loader ...
+firehose - TargetName=
+firehose - MemoryName=emmc
+firehose - Version=
+firehose - Trying to read first storage sector...
+firehose - Running configure...
+firehose_client - Supported functions:
+-----------------
+firehose
+firehose - [LIB]: XML (0 bytes) not validated
+firehose
+firehose - [LIB]: XML (0 bytes) not validated
+firehose - 
+Writing to physical partition 0, sector 270336, sectors 945
+Progress: |██████████| 100.0% Write (Sector 0x3B0 of 0x3B0, ) 3.09 MB/s                                                               
+Wrote /home/davinunes/postmarket-zhihe/tz.mbn to sector 270336.
+davinunes@pop-os:~/postmarket-zhihe$ 
+
+
+
+davinunes@pop-os:~/postmarket-zhihe$ edl w aboot '/home/davinunes/postmarket-zhihe/emmc_appsboot-test-signed.mbn' 
+Qualcomm Sahara / Firehose Client V3.62 (c) B.Kerler 2018-2025.
+main - Trying with no loader given ...
+main - Waiting for the device
+main - Device detected :)
+main - Mode detected: firehose
+firehose
+firehose - [LIB]: Host's payload to target size is too large
+firehose
+firehose - [LIB]: logbuf@0x0801BDA8 fh@0x08018C10
+firehose
+firehose - [LIB]: Sector size in XML 4096 does not match disk sector size 512
+Progress: |██████████| 100.0% Write (Sector 0x281 of 0x281, ) 0.00 MB/s                   
+firehose
+firehose - [LIB]: Error:{}
+Error writing /home/davinunes/postmarket-zhihe/emmc_appsboot-test-signed.mbn to sector 264192.
+davinunes@pop-os:~/postmarket-zhihe$ 
+
+
+davinunes@pop-os:~/postmarket-zhihe$ edl ws 262144 /home/davinunes/postmarket-zhihe/emmc_appsboot-test-signed.mbn --memory=eMMC --sectorsize=512
+Qualcomm Sahara / Firehose Client V3.62 (c) B.Kerler 2018-2025.
+main - Trying with no loader given ...
+main - Waiting for the device
+main - Device detected :)
+sahara - Protocol version: 2, Version supported: 1
+main - Mode detected: sahara
+sahara - 
+Version 0x2
+------------------------
+HWID:              0x007050e100000000 (MSM_ID:0x007050e1,OEM_ID:0x0000,MODEL_ID:0x0000)
+CPU detected:      "MSM8916"
+PK_HASH:           0xcc3153a80293939b90d02d3bf8b23e0292e452fef662c74998421adad42a380f
+Serial:            0x25b647a6
+
+sahara - Possibly unfused device detected, so any loader should be fine...
+sahara - Possible loader available: /home/davinunes/edl/edlclient/../Loaders/longcheer/007050e100000000_3022817d373fd7f9_fhprg_peek.bin
+sahara - Possible loader available: /home/davinunes/edl/edlclient/../Loaders/cyanogen/007050e100000000_4e3eefa63a67eb7a_fhprg_peek.bin
+sahara - Possible loader available: /home/davinunes/edl/edlclient/../Loaders/cyanogen/007050e100000000_d36c6073c9c2cb1c_fhprg_peek.bin
+sahara - Possible loader available: /home/davinunes/edl/edlclient/../Loaders/cyanogen/007050e100000000_4614048173062ae4_fhprg_peek.bin
+sahara - Possible loader available: /home/davinunes/edl/edlclient/../Loaders/lenovo_motorola/007050e100000000_99c8c13e374c34d8_fhprg_peek.bin
+sahara - Possible loader available: /home/davinunes/edl/edlclient/../Loaders/xiaomi/007050e100000000_50838757eab7c632_fhprg_peek_wt88047.bin
+sahara - Possible loader available: /home/davinunes/edl/edlclient/../Loaders/xiaomi/007050e100000000_278448179ac756a1_fhprg_peek.bin
+sahara - Possible loader available: /home/davinunes/edl/edlclient/../Loaders/qualcomm/factory/msm8916/007050e100000000_394a2e47cf830150_fhprg_peek.bin
+sahara - Possible loader available: /home/davinunes/edl/edlclient/../Loaders/qualcomm/factory/msm8916/007050e100000000_8ecf3eaa03f772e2_fhprg_peek.bin
+sahara - Trying loader: /home/davinunes/edl/edlclient/../Loaders/longcheer/007050e100000000_3022817d373fd7f9_fhprg_peek.bin
+sahara - Protocol version: 2, Version supported: 1
+sahara - Uploading loader /home/davinunes/edl/edlclient/../Loaders/longcheer/007050e100000000_3022817d373fd7f9_fhprg_peek.bin ...
+sahara - 32-Bit mode detected.
+sahara - Firehose mode detected, uploading...
+sahara - Loader successfully uploaded.
+main - Trying to connect to firehose loader ...
+firehose - TargetName=
+firehose - MemoryName=emmc
+firehose - Version=
+firehose - Trying to read first storage sector...
+firehose - Running configure...
+firehose_client - Supported functions:
+-----------------
+firehose
+firehose - [LIB]: XML (0 bytes) not validated
+firehose
+firehose - [LIB]: XML (0 bytes) not validated
+firehose - 
+Writing to physical partition 0, sector 262144, sectors 642
+Progress: |██████████| 100.0% Write (Sector 0x281 of 0x281, ) 2.45 MB/s                   
+Wrote /home/davinunes/postmarket-zhihe/emmc_appsboot-test-signed.mbn to sector 262144.
+davinunes@pop-os:~/postmarket-zhihe$ 
+
+
+davinunes@pop-os:~/postmarket-zhihe$ edl printgpt --memory=eMMC
+Qualcomm Sahara / Firehose Client V3.62 (c) B.Kerler 2018-2025.
+main - Trying with no loader given ...
+main - Waiting for the device
+main - Device detected :)
+main - Mode detected: firehose
+firehose
+firehose - [LIB]: Host's payload to target size is too large
+firehose
+firehose - [LIB]: logbuf@0x0801BDA8 fh@0x08018C10
+
+Parsing Lun 0:
+
+GPT Table:
+-------------
+modem:               Offset 0x0000000004000000, Length 0x0000000004000000, Flags 0x1000000000000000, UUID f202334c-7239-17e5-2f23-93572e235c8f, Type EFI_BASIC_DATA, Active False
+sbl1:                Offset 0x0000000008000000, Length 0x0000000000080000, Flags 0x0000000000000000, UUID 240d65b6-cae4-4f02-7575-e5c7852d2cc1, Type 0xdea0ba2c, Active False
+sbl1bak:             Offset 0x0000000008080000, Length 0x0000000000080000, Flags 0x0000000000000000, UUID 5cd3b64c-2081-bd72-306c-d8a497592506, Type EFI_BASIC_DATA, Active False
+aboot:               Offset 0x0000000008100000, Length 0x0000000000100000, Flags 0x0000000000000000, UUID cdc87237-a238-aa25-ee11-0ac6094db845, Type 0x400ffdcd, Active False
+abootbak:            Offset 0x0000000008200000, Length 0x0000000000100000, Flags 0x0000000000000000, UUID 13d52bce-8c77-a4e2-4235-5a47803b956f, Type EFI_BASIC_DATA, Active False
+rpm:                 Offset 0x0000000008300000, Length 0x0000000000080000, Flags 0x0000000000000000, UUID 4d5f212f-7dde-08d3-bd6b-c3f4faeb9b46, Type 0x98df793, Active False
+rpmbak:              Offset 0x0000000008380000, Length 0x0000000000080000, Flags 0x0000000000000000, UUID 1d3926af-b3c2-4f7c-77ea-b80cede253f4, Type EFI_BASIC_DATA, Active False
+tz:                  Offset 0x0000000008400000, Length 0x0000000000080000, Flags 0x0000000000000000, UUID 2c6f74be-4f53-e91d-a493-ccdf6b083658, Type 0xa053aa7f, Active False
+tzbak:               Offset 0x0000000008480000, Length 0x0000000000080000, Flags 0x0000000000000000, UUID ad543db5-3b76-23ed-e7f0-0bfc76a20867, Type EFI_BASIC_DATA, Active False
+hyp:                 Offset 0x0000000008500000, Length 0x0000000000080000, Flags 0x0000000000000000, UUID 59a6cc8e-96fb-3cc0-6bf3-5298e5a15505, Type 0xe1a6a689, Active False
+hypbak:              Offset 0x0000000008580000, Length 0x0000000000080000, Flags 0x0000000000000000, UUID e53d6b40-0bac-0eb5-837e-5f9acd1894bc, Type EFI_BASIC_DATA, Active False
+pad:                 Offset 0x0000000008600000, Length 0x0000000000100000, Flags 0x0000000000000000, UUID 10c9a0a4-5b33-fcf6-06bd-5d61b1541231, Type EFI_BASIC_DATA, Active False
+modemst1:            Offset 0x0000000008700000, Length 0x0000000000180000, Flags 0x0000000000000000, UUID 59d29285-5cfa-deed-0146-e1ff8e5ae01a, Type 0xebbeadaf, Active False
+modemst2:            Offset 0x0000000008880000, Length 0x0000000000180000, Flags 0x0000000000000000, UUID 42088f49-e2e5-4cbe-4d35-a5054776d23a, Type 0xa288b1f, Active False
+misc:                Offset 0x0000000008a00000, Length 0x0000000000100000, Flags 0x0000000000000000, UUID 50988588-e26b-8be4-093d-6427a25cee72, Type 0x20117f86, Active False
+fsc:                 Offset 0x0000000008b00000, Length 0x0000000000000400, Flags 0x0000000000000000, UUID 189f41d8-77f9-194b-38db-c80357bbf011, Type 0x57b90a16, Active False
+ssd:                 Offset 0x0000000008b00400, Length 0x0000000000002000, Flags 0x0000000000000000, UUID 996dc2d2-1e53-4ceb-f5a5-e355011c0cfb, Type 0x2c86e742, Active False
+splash:              Offset 0x0000000008b02400, Length 0x0000000000a00000, Flags 0x0000000000000000, UUID 7af86780-46c2-7c2d-8346-2e2749611479, Type 0x20117f86, Active False
+DDR:                 Offset 0x000000000c000000, Length 0x0000000000008000, Flags 0x1000000000000000, UUID 50956725-b15d-198a-fb4f-889cb5a5ecde, Type 0x20a0c19c, Active False
+fsg:                 Offset 0x000000000c008000, Length 0x0000000000180000, Flags 0x1000000000000000, UUID 486ca85e-96fe-765a-cdec-2137b4fd7a97, Type 0x638ff8e2, Active False
+sec:                 Offset 0x000000000c188000, Length 0x0000000000004000, Flags 0x1000000000000000, UUID f3904d7f-7282-9d53-0a34-74a55c59f9ef, Type 0x303e6ac3, Active False
+boot:                Offset 0x000000000c18c000, Length 0x0000000001000000, Flags 0x1000000000000000, UUID ee8de777-10d5-9d19-2a57-18e0f3c3de69, Type 0x20117f86, Active False
+system:              Offset 0x000000000d18c000, Length 0x0000000032000000, Flags 0x1000000000000000, UUID 809a5a3f-fb5c-4d6f-d655-d561d2c33140, Type EFI_BASIC_DATA, Active False
+persist:             Offset 0x000000003f18c000, Length 0x0000000002000000, Flags 0x1000000000000000, UUID 7b8ddecb-a286-77e1-d30c-8439e1ea51fe, Type EFI_BASIC_DATA, Active False
+cache:               Offset 0x000000004118c000, Length 0x0000000008000000, Flags 0x1000000000000000, UUID 4da06896-4ab8-392b-992e-ac032a5824d2, Type EFI_BASIC_DATA, Active False
+recovery:            Offset 0x000000004918c000, Length 0x0000000001000000, Flags 0x1000000000000000, UUID bce9c7c5-0a2f-19f3-9275-16209bc53829, Type 0x20117f86, Active False
+userdata:            Offset 0x000000004a18c000, Length 0x000000009ee6fe00, Flags 0x1000000000000000, UUID 598664a9-7976-e692-dd1c-010c5d49b568, Type EFI_BASIC_DATA, Active False
+
+Total disk size:0x00000000e9000000, sectors:0x0000000000748000
+
+davinunes@pop-os:~/postmarket-zhihe$ 
+
+
+
+
