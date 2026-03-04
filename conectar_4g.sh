@@ -15,13 +15,11 @@ conectar() {
     sleep 2
 
     echo "[*] Tentando conexão Dual Stack (IPv4v6)..."
-    # Tenta 4v6 primeiro
-    OUT=$(sudo qmicli -d $DEV --device-open-net='net-raw-ip|net-no-qos-header' --wds-start-network="apn='$APN',ip-type=4v6" --wds-follow-network > /tmp/qmi_log 2>&1 &)
+    sudo qmicli -d $DEV --device-open-net='net-raw-ip|net-no-qos-header' --wds-start-network="apn='$APN',ip-type=4v6" --wds-follow-network > /tmp/qmi_log 2>&1 &
     sleep 8
 
-    # Verifica se a Vivo rejeitou o v4
     if grep -q "pdn-ipv4-call-disallowed\|ipv6-only-allowed" /tmp/qmi_log; then
-        echo "[!] IPv4 recusado pela operadora. Mudando para IPv6-only..."
+        echo "[!] IPv4 recusado. Mudando para IPv6-only..."
         sudo killall -9 qmicli 2>/dev/null
         sudo qmicli -d $DEV --device-open-net='net-raw-ip|net-no-qos-header' --wds-start-network="apn='$APN',ip-type=6" --wds-follow-network > /tmp/qmi_log 2>&1 &
         sleep 8
@@ -38,21 +36,29 @@ conectar() {
         echo "[+] IPv6 configurado: $IP6"
     fi
 
-    # Configura IPv4 (se a Vivo permitir)
+    # Configura IPv4 (se disponível)
     IP4=$(echo "$SETTINGS" | grep "IP address" | grep -v "IPv6" | awk '{print $3}')
     if [ ! -z "$IP4" ]; then
         sudo ip addr add $IP4/30 dev $INT
         sudo ip route add default dev $INT metric 200
         echo "[+] IPv4 configurado: $IP4"
     fi
+
+    # --- A VACINA AGORA FICA AQUI ---
+    echo "[*] Injetando DNS IPv6 para garantir a VPN..."
+    echo -e "nameserver 2001:4860:4860::8888\nnameserver 2606:4700:4700::1111" | sudo tee /etc/resolv.conf > /dev/null
+
+    echo "[*] Reiniciando o WireGuard para forçar nova resolução..."
+    sudo systemctl restart wg-quick@wg0
 }
 
 # LOOP DE RESILIÊNCIA (Watchdog)
+echo "[*] Iniciando Watchdog do Frankenstein..."
 while true; do
-    # Testa se o Google responde via interface 4G
+    # Testa se o Google responde via interface 4G (IPv6)
     if ! ping6 -c 2 -I $INT 2001:4860:4860::8888 > /dev/null 2>&1; then
         echo "[!] Conexão caiu ou não iniciada. Reconectando..."
         conectar
     fi
-    sleep 30 # Verifica a cada 30 segundos
+    sleep 30
 done
