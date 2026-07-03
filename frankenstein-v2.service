@@ -1,0 +1,14 @@
+[Unit]
+Description=Frankenstein v2 - Modem 4G UFI003 (4G+WiFi+WG+CLAT)
+After=network.target
+Wants=network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/frankenstein-v2.sh watch
+Restart=on-failure
+RestartSec=10
+User=root
+
+[Install]
+WantedBy=multi-user.target
