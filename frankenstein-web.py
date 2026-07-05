@@ -5,6 +5,7 @@
 
 import http.server
 import socketserver
+import socket
 import json
 import subprocess
 import os
@@ -1244,11 +1245,17 @@ class FrankensteinHandler(http.server.BaseHTTPRequestHandler):
 """
         return ""
 
+class DualStackTCPServer(socketserver.TCPServer):
+    address_family = socket.AF_INET6
+    def server_bind(self):
+        self.socket.setsockopt(socket.IPPROTO_IPV6, socket.IPV6_V6ONLY, 0)
+        super().server_bind()
+
 # Rodar o Servidor
 if __name__ == '__main__':
     # Aguardar um instante na inicialização para garantir que as interfaces básicas estão prontas
     time.sleep(2)
-    socketserver.TCPServer.allow_reuse_address = True
-    with socketserver.TCPServer(("", PORT), FrankensteinHandler) as httpd:
-        print(f"Servidor Web Frankenstein ativo na porta {PORT}")
+    DualStackTCPServer.allow_reuse_address = True
+    with DualStackTCPServer(("", PORT), FrankensteinHandler) as httpd:
+        print(f"Servidor Web Frankenstein ativo na porta {PORT} (Dual-Stack)")
         httpd.serve_forever()

@@ -439,7 +439,9 @@ WantedBy=multi-user.target
 
 ## 🖥️ Passo 5: Painel Web de Controle (`/usr/local/bin/frankenstein-web.py`)
 
-O painel web roda em segundo plano na porta 80 e manipula o arquivo central `/etc/frankenstein.json` ao alterar configurações, permitindo aplicar modificações sem manipulação manual.
+O painel web roda em segundo plano na porta 80 e manipula o arquivo central `/etc/frankenstein.json` ao alterar configurações, permitindo aplicar modificações sem manipulação manual. 
+
+Ele é desenvolvido utilizando uma subclasse de `socketserver.TCPServer` configurada com suporte a **Dual-Stack (IPv4 e IPv6)** no mesmo socket (desativando a opção `IPV6_V6ONLY` no socket de escuta), o que torna o painel administrativo 100% acessível tanto via IPv4 local quanto por qualquer IP IPv6 global ou link-local do modem.
 
 *Como o arquivo `frankenstein-web.py` possui cerca de 1250 linhas, faça o download ou cópia do script do repositório diretamente para o modem em `/usr/local/bin/frankenstein-web.py` e torne-o executável:*
 
