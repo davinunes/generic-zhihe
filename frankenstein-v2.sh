@@ -227,6 +227,8 @@ start_clat() {
     if command -v clatd > /dev/null 2>&1; then
         echo "[*] Iniciando CLAT..."
         killall clatd tayga 2>/dev/null || true
+        # Limpar qualquer regra de roteamento IPv6 órfã deixada pelo clatd
+        ip -6 rule del from 64:ff9b::/96 2>/dev/null || true
         sleep 1
         clatd -c /etc/clatd.conf
         echo "[+] CLAT iniciado"

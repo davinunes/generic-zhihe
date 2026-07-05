@@ -64,6 +64,9 @@ O `clatd` cria a interface de tradução virtual. Configure o prefixo NAT64 corr
 plat-prefix=64:ff9b::/96
 plat-dev=wwan0
 clat-v4-addr=192.0.0.1
+
+# Desativar verificação de conectividade IPv4 nativa (essencial se VPN ou bridge local estiverem ativos)
+v4-conncheck-enable=0
 ```
 
 ### 2. Configuração do DHCP/RA (`/etc/dnsmasq.conf`)
@@ -329,6 +332,8 @@ start_clat() {
     if command -v clatd > /dev/null 2>&1; then
         echo "[*] Iniciando CLAT..."
         killall clatd tayga 2>/dev/null || true
+        # Limpar qualquer regra de roteamento IPv6 órfã deixada pelo clatd
+        ip -6 rule del from 64:ff9b::/96 2>/dev/null || true
         sleep 1
         clatd -c /etc/clatd.conf
         echo "[+] CLAT iniciado"
