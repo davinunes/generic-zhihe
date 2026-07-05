@@ -40,7 +40,14 @@ Crie o arquivo `/etc/frankenstein.json` no modem com a seguinte estrutura:
     "endpoint": "rb.davinunes.eti.br:13500",
     "allowed_ips": "0.0.0.0/0, ::/0",
     "persistent_keepalive": 25
-  }
+  },
+  "routes": [
+    {
+      "network": "192.168.20.0/24",
+      "gateway": "198.19.1.13",
+      "interface": "wg0"
+    }
+  ]
 }
 ```
 
@@ -330,6 +337,31 @@ start_clat() {
     fi
 }
 
+apply_static_routes() {
+    if [ -f "$CONFIG_FILE" ]; then
+        echo "[*] Aplicando rotas estáticas do config..."
+        python3 -c "
+import json, subprocess
+try:
+    d = json.load(open('$CONFIG_FILE'))
+    routes = d.get('routes', [])
+    for r in routes:
+        net = r.get('network')
+        gw = r.get('gateway')
+        iface = r.get('interface')
+        if not net or not iface:
+            continue
+        ip_ver = '-6' if ':' in net else '-4'
+        cmd = ['ip', ip_ver, 'route', 'replace', net, 'dev', iface]
+        if gw:
+            cmd = ['ip', ip_ver, 'route', 'replace', net, 'via', gw, 'dev', iface]
+        subprocess.run(cmd, stderr=subprocess.DEVNULL)
+except Exception as e:
+    pass
+"
+    fi
+}
+
 # ============================================================
 # EXECUÇÃO PRINCIPAL
 # ============================================================
@@ -353,6 +385,7 @@ start_wireguard
 # wg-quick flushes nftables, então o firewall deve vir DEPOIS do WG
 setup_firewall
 start_clat
+apply_static_routes
 
 echo "[+] Frankenstein v2 pronto. Interfaces:"
 ip -4 addr show dev br0 2>/dev/null
@@ -395,6 +428,7 @@ if [ "${1:-}" = "watch" ]; then
                 start_wireguard
                 setup_firewall
                 start_clat
+                apply_static_routes
                 echo "[+] Rota e serviços IPv6 restaurados"
             else
                 echo "[!] Bearer perdido do QMI. Reconectando 4G do zero..."
@@ -402,6 +436,7 @@ if [ "${1:-}" = "watch" ]; then
                 start_wireguard
                 setup_firewall
                 start_clat
+                apply_static_routes
             fi
         fi
         sleep 30

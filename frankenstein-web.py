@@ -10,6 +10,7 @@ import json
 import subprocess
 import os
 import urllib.parse
+import urllib.request
 import hashlib
 import time
 
@@ -189,6 +190,62 @@ class FrankensteinHandler(http.server.BaseHTTPRequestHandler):
                     self.send_json({"error": "Ação inválida"}, status=400)
             except Exception as e:
                 self.send_json({"error": str(e)}, status=500)
+        elif self.path == '/api/routes/add':
+            content_length = int(self.headers.get('Content-Length', 0))
+            post_data = self.rfile.read(content_length).decode('utf-8')
+            try:
+                route = json.loads(post_data)
+                net = route.get('network')
+                gw = route.get('gateway')
+                iface = route.get('interface')
+                
+                if not net or not iface:
+                    self.send_json({"error": "Parâmetros network e interface são obrigatórios"}, status=400)
+                    return
+                
+                config = read_config()
+                if 'routes' not in config:
+                    config['routes'] = []
+                config['routes'] = [r for r in config['routes'] if r.get('network') != net]
+                config['routes'].append({"network": net, "gateway": gw, "interface": iface})
+                write_config(config)
+                
+                ip_ver = '-6' if ':' in net else '-4'
+                cmd = ["ip", ip_ver, "route", "replace", net, "dev", iface]
+                if gw:
+                    cmd = ["ip", ip_ver, "route", "replace", net, "via", gw, "dev", iface]
+                subprocess.run(cmd, stderr=subprocess.DEVNULL)
+                
+                self.send_json({"success": True, "message": "Rota adicionada e aplicada com sucesso!"})
+            except Exception as e:
+                self.send_json({"error": str(e)}, status=500)
+                
+        elif self.path == '/api/routes/delete':
+            content_length = int(self.headers.get('Content-Length', 0))
+            post_data = self.rfile.read(content_length).decode('utf-8')
+            try:
+                params = json.loads(post_data)
+                net = params.get('network')
+                
+                config = read_config()
+                routes = config.get('routes', [])
+                to_delete = [r for r in routes if r.get('network') == net]
+                if to_delete:
+                    r = to_delete[0]
+                    gw = r.get('gateway')
+                    iface = r.get('interface')
+                    ip_ver = '-6' if ':' in net else '-4'
+                    cmd = ["ip", ip_ver, "route", "del", net, "dev", iface]
+                    if gw:
+                        cmd = ["ip", ip_ver, "route", "del", net, "via", gw, "dev", iface]
+                    subprocess.run(cmd, stderr=subprocess.DEVNULL)
+                
+                config['routes'] = [r for r in routes if r.get('network') != net]
+                write_config(config)
+                
+                self.send_json({"success": True, "message": "Rota removida com sucesso!"})
+            except Exception as e:
+                self.send_json({"error": str(e)}, status=500)
         else:
             self.send_response(404)
             self.end_headers()
@@ -261,7 +318,16 @@ class FrankensteinHandler(http.server.BaseHTTPRequestHandler):
         except Exception:
             pass
 
-        # 5. Clientes Conectados (DHCP Leases + Neighbours)
+        # 5. Public IPv4 Lookup (via api.ipify.org)
+        status['public_ipv4'] = "Desconhecido"
+        try:
+            req = urllib.request.Request("http://api.ipify.org", headers={'User-Agent': 'Mozilla/5.0'}, method='GET')
+            with urllib.request.urlopen(req, timeout=3) as r:
+                status['public_ipv4'] = r.read().decode('utf-8').strip()
+        except Exception:
+            pass
+
+        # 6. Clientes Conectados (DHCP Leases + Neighbours)
         status['clients'] = self.get_connected_clients()
 
         return status
@@ -379,7 +445,42 @@ class FrankensteinHandler(http.server.BaseHTTPRequestHandler):
                     "status": "Leased"
                 })
 
-        return clients
+        # Agrupar múltiplos IPs para o mesmo MAC
+        grouped = {}
+        for c in clients:
+            mac = c["mac"]
+            if mac not in grouped:
+                grouped[mac] = {
+                    "hostname": c["hostname"],
+                    "mac": mac,
+                    "interface": c["interface"],
+                    "signal": c["signal"],
+                    "status": c["status"],
+                    "ips": [c["ip"]]
+                }
+            else:
+                if c["ip"] not in grouped[mac]["ips"]:
+                    grouped[mac]["ips"].append(c["ip"])
+                if grouped[mac]["hostname"] == "N/A" and c["hostname"] != "N/A":
+                    grouped[mac]["hostname"] = c["hostname"]
+                if c["status"] == "REACHABLE":
+                    grouped[mac]["status"] = "REACHABLE"
+                if c["interface"] != "Inativo/DHCP" and grouped[mac]["interface"] == "Inativo/DHCP":
+                    grouped[mac]["interface"] = c["interface"]
+                    grouped[mac]["signal"] = c["signal"]
+                    
+        result = []
+        for mac, info in grouped.items():
+            result.append({
+                "hostname": info["hostname"],
+                "mac": mac,
+                "interface": info["interface"],
+                "signal": info["signal"],
+                "status": info["status"],
+                "ip": ", ".join(info["ips"])
+            })
+
+        return result
 
     # ============================================================
     # FRONTEND (HTML / CSS / JS)
@@ -1024,6 +1125,46 @@ class FrankensteinHandler(http.server.BaseHTTPRequestHandler):
                     </div>
                 </div>
 
+                <div class="form-section">
+                    <h4>Rotas Estáticas</h4>
+                    <table id="routes-table" style="margin-top: 12px; font-size: 13px;">
+                        <thead>
+                            <tr>
+                                <th>Rede</th>
+                                <th>Gateway (Opcional)</th>
+                                <th>Interface de Saída</th>
+                                <th>Ação</th>
+                            </tr>
+                        </thead>
+                        <tbody id="routes-tbody">
+                            <tr>
+                                <td colspan="4" style="text-align: center; color: var(--text-muted);">Carregando rotas...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)) auto; gap: 12px; align-items: flex-end; margin-top: 16px;">
+                        <div>
+                            <label for="route-net">Rede (IP/Máscara)</label>
+                            <input type="text" id="route-net" placeholder="Ex: 192.168.1.0/24">
+                        </div>
+                        <div>
+                            <label for="route-gw">Gateway (Opcional)</label>
+                            <input type="text" id="route-gw" placeholder="Ex: 198.19.1.13">
+                        </div>
+                        <div>
+                            <label for="route-iface">Interface de Saída</label>
+                            <select id="route-iface">
+                                <option value="wg0">wg0 (VPN)</option>
+                                <option value="wwan0">wwan0 (Celular)</option>
+                                <option value="clat">clat (Tayga NAT64)</option>
+                                <option value="br0">br0 (LAN/Bridge)</option>
+                            </select>
+                        </div>
+                        <button type="button" class="btn btn-primary" onclick="addStaticRoute()" style="height: 38px;">Adicionar</button>
+                    </div>
+                </div>
+
                 <div class="action-bar">
                     <button type="button" class="btn btn-outline" onclick="loadConfig()">Descartar Alterações</button>
                     <button type="submit" class="btn btn-primary">Salvar e Aplicar Alterações</button>
@@ -1098,10 +1239,10 @@ class FrankensteinHandler(http.server.BaseHTTPRequestHandler):
                 if (wan.ipv6 !== "N/A") {
                     document.getElementById('val-wan-ip').innerText = wan.ipv6;
                     const prefix = wan.ipv6.split(':').slice(0, 4).join(':') + '::/64';
-                    document.getElementById('val-wan-prefix').innerText = 'Prefixo: ' + prefix;
+                    document.getElementById('val-wan-prefix').innerText = 'Prefixo: ' + prefix + ' | IPv4 Público: ' + status.public_ipv4;
                 } else {
                     document.getElementById('val-wan-ip').innerText = 'Desconectado';
-                    document.getElementById('val-wan-prefix').innerText = 'Prefixo: N/A';
+                    document.getElementById('val-wan-prefix').innerText = 'Prefixo: N/A | IPv4 Público: ' + status.public_ipv4;
                 }
 
                 // CLAT status
@@ -1188,8 +1329,78 @@ class FrankensteinHandler(http.server.BaseHTTPRequestHandler):
                 document.getElementById('cfg-wg-endpoint').value = config.wireguard.endpoint;
                 document.getElementById('cfg-wg-allowed').value = config.wireguard.allowed_ips;
                 document.getElementById('cfg-wg-keepalive').value = config.wireguard.persistent_keepalive;
+                
+                // Rotas Estáticas
+                const tbody = document.getElementById('routes-tbody');
+                tbody.innerHTML = '';
+                const routes = config.routes || [];
+                if (routes.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="4" style="text-align: center; color: var(--text-muted);">Nenhuma rota estática configurada</td></tr>';
+                } else {
+                    routes.forEach(r => {
+                        const tr = document.createElement('tr');
+                        tr.innerHTML = `
+                            <td><span class="ip-pill">${r.network}</span></td>
+                            <td>${r.gateway || 'N/A'}</td>
+                            <td><span class="ip-pill" style="background: rgba(16, 185, 129, 0.1); color: var(--accent);">${r.interface}</span></td>
+                            <td><button type="button" class="btn btn-danger" style="padding: 4px 8px; font-size: 11px;" onclick="deleteStaticRoute('${r.network}')">Excluir</button></td>
+                        `;
+                        tbody.appendChild(tr);
+                    });
+                }
             } catch (e) {
                 alert("Erro ao carregar configurações do modem.");
+            }
+        }
+
+        async function addStaticRoute() {
+            const net = document.getElementById('route-net').value.trim();
+            const gw = document.getElementById('route-gw').value.trim();
+            const iface = document.getElementById('route-iface').value;
+            
+            if (!net) {
+                alert("O campo Rede é obrigatório!");
+                return;
+            }
+            
+            try {
+                const response = await fetch('/api/routes/add', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ network: net, gateway: gw, interface: iface })
+                });
+                const res = await response.json();
+                if (response.ok) {
+                    alert(res.message);
+                    loadConfig();
+                    document.getElementById('route-net').value = '';
+                    document.getElementById('route-gw').value = '';
+                } else {
+                    alert("Erro: " + res.error);
+                }
+            } catch (e) {
+                alert("Erro ao adicionar rota.");
+            }
+        }
+
+        async function deleteStaticRoute(net) {
+            if (confirm("Tem certeza que deseja excluir a rota para " + net + "?")) {
+                try {
+                    const response = await fetch('/api/routes/delete', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ network: net })
+                    });
+                    const res = await response.json();
+                    if (response.ok) {
+                        alert(res.message);
+                        loadConfig();
+                    } else {
+                        alert("Erro: " + res.error);
+                    }
+                } catch (e) {
+                    alert("Erro ao excluir rota.");
+                }
             }
         }
 
