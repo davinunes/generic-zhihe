@@ -330,6 +330,9 @@ class FrankensteinHandler(http.server.BaseHTTPRequestHandler):
         # 6. Clientes Conectados (DHCP Leases + Neighbours)
         status['clients'] = self.get_connected_clients()
 
+        # 7. Interface Traffic Stats
+        status['traffic'] = self.get_interface_traffic()
+
         return status
 
     def get_interface_ips(self, iface):
@@ -345,6 +348,26 @@ class FrankensteinHandler(http.server.BaseHTTPRequestHandler):
         except Exception:
             pass
         return ips
+
+    def get_interface_traffic(self):
+        traffic = {}
+        try:
+            with open('/proc/net/dev', 'r') as f:
+                for line in f:
+                    parts = line.strip().split()
+                    if not parts or len(parts) < 10 or not parts[0].endswith(':'):
+                        continue
+                    iface = parts[0][:-1]
+                    if iface in ['wwan0', 'br0', 'clat', 'wg0', 'wlan0', 'usb0']:
+                        try:
+                            rx = int(parts[1])
+                            tx = int(parts[9])
+                            traffic[iface] = {"rx": rx, "tx": tx}
+                        except ValueError:
+                            pass
+        except Exception:
+            pass
+        return traffic
 
     def get_wifi_signals(self):
         signals = {}
@@ -1022,6 +1045,66 @@ class FrankensteinHandler(http.server.BaseHTTPRequestHandler):
                 </div>
             </div>
 
+            <h3 style="font-size: 18px; font-weight: 600; margin-bottom: 16px; margin-top: 28px;">Consumo de Tráfego em Tempo Real</h3>
+            <div class="grid-cards" style="grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); margin-bottom: 28px;">
+                <!-- Card wwan0 -->
+                <div class="card" style="padding: 16px;">
+                    <h3 style="font-size: 12px; margin-bottom: 8px; color: #a5b4fc;">Celular (wwan0)</h3>
+                    <div style="display: flex; justify-content: space-between; align-items: baseline;">
+                        <span id="speed-rx-wwan0" style="font-size: 18px; font-weight: 600; color: var(--accent);">↓ 0 KB/s</span>
+                        <span id="speed-tx-wwan0" style="font-size: 18px; font-weight: 600; color: var(--orange);">↑ 0 KB/s</span>
+                    </div>
+                    <div style="font-size: 11px; color: var(--text-muted); margin-top: 8px;" id="total-wwan0">
+                        Total: RX: 0 B | TX: 0 B
+                    </div>
+                    <div style="height: 40px; margin-top: 10px;">
+                        <svg id="spark-wwan0" width="100%" height="40" style="overflow: visible;"></svg>
+                    </div>
+                </div>
+                <!-- Card br0 -->
+                <div class="card" style="padding: 16px;">
+                    <h3 style="font-size: 12px; margin-bottom: 8px; color: #a5b4fc;">LAN/WiFi/USB (br0)</h3>
+                    <div style="display: flex; justify-content: space-between; align-items: baseline;">
+                        <span id="speed-rx-br0" style="font-size: 18px; font-weight: 600; color: var(--accent);">↓ 0 KB/s</span>
+                        <span id="speed-tx-br0" style="font-size: 18px; font-weight: 600; color: var(--orange);">↑ 0 KB/s</span>
+                    </div>
+                    <div style="font-size: 11px; color: var(--text-muted); margin-top: 8px;" id="total-br0">
+                        Total: RX: 0 B | TX: 0 B
+                    </div>
+                    <div style="height: 40px; margin-top: 10px;">
+                        <svg id="spark-br0" width="100%" height="40" style="overflow: visible;"></svg>
+                    </div>
+                </div>
+                <!-- Card wg0 -->
+                <div class="card" style="padding: 16px;">
+                    <h3 style="font-size: 12px; margin-bottom: 8px; color: #a5b4fc;">VPN (wg0)</h3>
+                    <div style="display: flex; justify-content: space-between; align-items: baseline;">
+                        <span id="speed-rx-wg0" style="font-size: 18px; font-weight: 600; color: var(--accent);">↓ 0 KB/s</span>
+                        <span id="speed-tx-wg0" style="font-size: 18px; font-weight: 600; color: var(--orange);">↑ 0 KB/s</span>
+                    </div>
+                    <div style="font-size: 11px; color: var(--text-muted); margin-top: 8px;" id="total-wg0">
+                        Total: RX: 0 B | TX: 0 B
+                    </div>
+                    <div style="height: 40px; margin-top: 10px;">
+                        <svg id="spark-wg0" width="100%" height="40" style="overflow: visible;"></svg>
+                    </div>
+                </div>
+                <!-- Card clat -->
+                <div class="card" style="padding: 16px;">
+                    <h3 style="font-size: 12px; margin-bottom: 8px; color: #a5b4fc;">Tradução CLAT (clat)</h3>
+                    <div style="display: flex; justify-content: space-between; align-items: baseline;">
+                        <span id="speed-rx-clat" style="font-size: 18px; font-weight: 600; color: var(--accent);">↓ 0 KB/s</span>
+                        <span id="speed-tx-clat" style="font-size: 18px; font-weight: 600; color: var(--orange);">↑ 0 KB/s</span>
+                    </div>
+                    <div style="font-size: 11px; color: var(--text-muted); margin-top: 8px;" id="total-clat">
+                        Total: RX: 0 B | TX: 0 B
+                    </div>
+                    <div style="height: 40px; margin-top: 10px;">
+                        <svg id="spark-clat" width="100%" height="40" style="overflow: visible;"></svg>
+                    </div>
+                </div>
+            </div>
+
             <div class="card" style="margin-bottom: 28px;">
                 <div class="table-title">
                     <span>Clientes Conectados (USB / Wi-Fi)</span>
@@ -1208,6 +1291,71 @@ class FrankensteinHandler(http.server.BaseHTTPRequestHandler):
             }
         }
 
+        // Histórico de velocidades (para os sparklines)
+        const historyLength = 20;
+        const speedHistory = {
+            wwan0: { rx: [], tx: [] },
+            br0: { rx: [], tx: [] },
+            wg0: { rx: [], tx: [] },
+            clat: { rx: [], tx: [] }
+        };
+        let lastTrafficData = null;
+        let lastTrafficTime = null;
+
+        function formatBytes(bytes) {
+            if (bytes === 0) return '0 B';
+            const k = 1024;
+            const sizes = ['B', 'KiB', 'MiB', 'GiB', 'TiB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+        }
+
+        function formatSpeed(bytesPerSec) {
+            if (bytesPerSec < 1024) return bytesPerSec.toFixed(0) + ' B/s';
+            if (bytesPerSec < 1024 * 1024) return (bytesPerSec / 1024).toFixed(1) + ' KB/s';
+            return (bytesPerSec / (1024 * 1024)).toFixed(1) + ' MB/s';
+        }
+
+        function drawSparkline(svgId, rxData, txData) {
+            const svg = document.getElementById(svgId);
+            if (!svg) return;
+            svg.innerHTML = '';
+            
+            const w = svg.clientWidth || 200;
+            const h = svg.clientHeight || 40;
+            
+            const maxVal = Math.max(...rxData, ...txData, 1024);
+            
+            const getPointsPath = (data) => {
+                if (data.length < 2) return '';
+                const step = w / (historyLength - 1);
+                return data.map((val, idx) => {
+                    const x = idx * step;
+                    const y = h - (val / maxVal) * (h - 4) - 2;
+                    return `${x},${y}`;
+                }).join(' ');
+            };
+
+            if (rxData.length >= 2) {
+                const polyline = document.createElementNS('http://www.w3.org/2000/svg', 'polyline');
+                polyline.setAttribute('fill', 'none');
+                polyline.setAttribute('stroke', '#a5b4fc');
+                polyline.setAttribute('stroke-width', '1.5');
+                polyline.setAttribute('points', getPointsPath(rxData));
+                svg.appendChild(polyline);
+            }
+            
+            if (txData.length >= 2) {
+                const polyline = document.createElementNS('http://www.w3.org/2000/svg', 'polyline');
+                polyline.setAttribute('fill', 'none');
+                polyline.setAttribute('stroke', '#f59e0b');
+                polyline.setAttribute('stroke-width', '1.5');
+                polyline.setAttribute('stroke-dasharray', '2,2');
+                polyline.setAttribute('points', getPointsPath(txData));
+                svg.appendChild(polyline);
+            }
+        }
+
         async function loadStatus() {
             try {
                 const response = await fetch('/api/status');
@@ -1305,6 +1453,45 @@ class FrankensteinHandler(http.server.BaseHTTPRequestHandler):
                         tbody.appendChild(tr);
                     });
                 }
+
+                // Tráfego e Velocidades
+                const traffic = status.traffic;
+                const now = Date.now();
+                if (traffic && lastTrafficData && lastTrafficTime) {
+                    const elapsed = (now - lastTrafficTime) / 1000;
+                    ['wwan0', 'br0', 'wg0', 'clat'].forEach(iface => {
+                        const cur = traffic[iface] || { rx: 0, tx: 0 };
+                        const prev = lastTrafficData[iface] || { rx: 0, tx: 0 };
+                        
+                        let rxSpeed = elapsed > 0 ? (cur.rx - prev.rx) / elapsed : 0;
+                        let txSpeed = elapsed > 0 ? (cur.tx - prev.tx) / elapsed : 0;
+                        if (rxSpeed < 0) rxSpeed = 0;
+                        if (txSpeed < 0) txSpeed = 0;
+                        
+                        document.getElementById('speed-rx-' + iface).innerText = '↓ ' + formatSpeed(rxSpeed);
+                        document.getElementById('speed-tx-' + iface).innerText = '↑ ' + formatSpeed(txSpeed);
+                        document.getElementById('total-' + iface).innerText = 'Total: RX: ' + formatBytes(cur.rx) + ' | TX: ' + formatBytes(cur.tx);
+                        
+                        const hist = speedHistory[iface];
+                        hist.rx.push(rxSpeed);
+                        hist.tx.push(txSpeed);
+                        if (hist.rx.length > historyLength) hist.rx.shift();
+                        if (hist.tx.length > historyLength) hist.tx.shift();
+                        
+                        drawSparkline('spark-' + iface, hist.rx, hist.tx);
+                    });
+                } else if (traffic) {
+                    ['wwan0', 'br0', 'wg0', 'clat'].forEach(iface => {
+                        const cur = traffic[iface] || { rx: 0, tx: 0 };
+                        document.getElementById('total-' + iface).innerText = 'Total: RX: ' + formatBytes(cur.rx) + ' | TX: ' + formatBytes(cur.tx);
+                        
+                        const hist = speedHistory[iface];
+                        while(hist.rx.length < historyLength) hist.rx.push(0);
+                        while(hist.tx.length < historyLength) hist.tx.push(0);
+                    });
+                }
+                lastTrafficData = traffic;
+                lastTrafficTime = now;
 
             } catch (e) {
                 console.error("Erro ao ler status", e);
