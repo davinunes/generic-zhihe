@@ -213,19 +213,31 @@ class FrankensteinHandler(http.server.BaseHTTPRequestHandler):
         # 2. QMI Signal info (com proxy)
         try:
             res = subprocess.run(
-                ["qmicli", "-p", "-d", "/dev/wwan0qmi0", "--nas-get-signal-strength"],
+                ["qmicli", "-p", "-d", "/dev/wwan0qmi0", "--nas-get-signal-info"],
                 capture_output=True, text=True, timeout=5
             )
-            rssi = "N/A"
-            sinr = "N/A"
+            sig_data = {}
+            current_tech = "Unknown"
             for line in res.stdout.split('\n'):
-                if 'RSSI:' in line:
-                    rssi = line.split(':')[-1].strip().replace("'", "")
-                elif 'SINR' in line:
-                    sinr = line.split(':')[-1].strip().replace("'", "")
-            status['signal'] = {"rssi": rssi, "sinr": sinr}
+                line = line.strip()
+                if not line:
+                    continue
+                if line.endswith(':'):
+                    current_tech = line[:-1]
+                elif ':' in line:
+                    parts = line.split(':', 1)
+                    key = parts[0].strip().lower()
+                    val = parts[1].strip().replace("'", "")
+                    sig_data[key] = val
+            status['signal'] = {
+                "tech": current_tech,
+                "rssi": sig_data.get("rssi", "N/A"),
+                "rsrq": sig_data.get("rsrq", "N/A"),
+                "rsrp": sig_data.get("rsrp", "N/A"),
+                "snr": sig_data.get("snr", "N/A")
+            }
         except Exception:
-            status['signal'] = {"rssi": "Erro ao ler", "sinr": "N/A"}
+            status['signal'] = {"tech": "Erro", "rssi": "N/A", "rsrq": "N/A", "rsrp": "N/A", "snr": "N/A"}
 
         # 3. Interfaces IP
         status['interfaces'] = {}
@@ -268,6 +280,24 @@ class FrankensteinHandler(http.server.BaseHTTPRequestHandler):
             pass
         return ips
 
+    def get_wifi_signals(self):
+        signals = {}
+        try:
+            res = subprocess.run(["hostapd_cli", "all_sta"], capture_output=True, text=True, timeout=3)
+            current_mac = None
+            for line in res.stdout.split('\n'):
+                line = line.strip()
+                if not line:
+                    continue
+                if ':' in line and '=' not in line:
+                    current_mac = line.lower()
+                elif line.startswith('signal=') and current_mac:
+                    sig = line.split('=')[-1].strip()
+                    signals[current_mac] = f"{sig} dBm"
+        except Exception:
+            pass
+        return signals
+
     def get_connected_clients(self):
         clients = []
         leases = {}
@@ -288,6 +318,8 @@ class FrankensteinHandler(http.server.BaseHTTPRequestHandler):
                 except Exception:
                     pass
                 break
+
+        wifi_signals = self.get_wifi_signals()
 
         # Ler tabela NDP e ARP para identificar as interfaces físicas dos clientes
         try:
@@ -316,14 +348,20 @@ class FrankensteinHandler(http.server.BaseHTTPRequestHandler):
                         if mac in leases:
                             hostname = leases[mac]["hostname"]
                             
-                        # Determinar tipo de conexão baseada na interface física detectada pelo kernel
-                        conn_type = "Wi-Fi" if "wlan" in dev else "USB" if "usb" in dev else dev
+                        # Determinar tipo de conexão baseada na presença no hostapd (Wi-Fi)
+                        if mac in wifi_signals:
+                            conn_type = "Wi-Fi"
+                            sig = wifi_signals[mac]
+                        else:
+                            conn_type = "USB" if "usb" in dev else "USB" if dev == "br0" else dev
+                            sig = "N/A"
                         
                         clients.append({
                             "ip": ip,
                             "mac": mac,
                             "hostname": hostname,
                             "interface": conn_type,
+                            "signal": sig,
                             "status": state
                         })
         except Exception:
@@ -337,6 +375,7 @@ class FrankensteinHandler(http.server.BaseHTTPRequestHandler):
                     "mac": mac,
                     "hostname": lease["hostname"],
                     "interface": "Inativo/DHCP",
+                    "signal": "N/A",
                     "status": "Leased"
                 })
 
@@ -894,12 +933,13 @@ class FrankensteinHandler(http.server.BaseHTTPRequestHandler):
                             <th>Endereço IP</th>
                             <th>Endereço MAC</th>
                             <th>Interface Física</th>
+                            <th>Sinal Wi-Fi</th>
                             <th>Status</th>
                         </tr>
                     </thead>
                     <tbody id="clients-tbody">
                         <tr>
-                            <td colspan="5" style="text-align: center; color: var(--text-muted);">Buscando informações dos clientes...</td>
+                            <td colspan="6" style="text-align: center; color: var(--text-muted);">Buscando informações dos clientes...</td>
                         </tr>
                     </tbody>
                 </table>
@@ -1038,9 +1078,9 @@ class FrankensteinHandler(http.server.BaseHTTPRequestHandler):
                 
                 // Status QMI
                 const signal = status.signal;
-                if (signal.rssi !== "N/A" && signal.rssi !== "Erro ao ler") {
-                    document.getElementById('val-signal').innerText = signal.rssi;
-                    document.getElementById('val-sinr').innerText = 'SINR: ' + signal.sinr;
+                if (signal.rssi !== "N/A" && signal.rssi !== "Erro") {
+                    document.getElementById('val-signal').innerText = signal.rssi + " (" + signal.tech + ")";
+                    document.getElementById('val-sinr').innerText = 'RSRP: ' + signal.rsrp + ' | RSRQ: ' + signal.rsrq + ' | SNR: ' + signal.snr;
                     
                     // Dot Status
                     document.getElementById('global-status-dot').className = 'status-dot online';
@@ -1088,7 +1128,7 @@ class FrankensteinHandler(http.server.BaseHTTPRequestHandler):
                 const tbody = document.getElementById('clients-tbody');
                 tbody.innerHTML = '';
                 if (status.clients.length === 0) {
-                    tbody.innerHTML = '<tr><td colspan="5" style="text-align: center; color: var(--text-muted);">Nenhum cliente conectado detectado</td></tr>';
+                    tbody.innerHTML = '<tr><td colspan="6" style="text-align: center; color: var(--text-muted);">Nenhum cliente conectado detectado</td></tr>';
                 } else {
                     status.clients.forEach(client => {
                         const tr = document.createElement('tr');
@@ -1105,6 +1145,9 @@ class FrankensteinHandler(http.server.BaseHTTPRequestHandler):
                         const tdIface = document.createElement('td');
                         tdIface.innerText = client.interface;
                         
+                        const tdSignal = document.createElement('td');
+                        tdSignal.innerText = client.signal;
+                        
                         const tdStatus = document.createElement('td');
                         let badgeClass = 'stale';
                         if (client.status === 'REACHABLE') badgeClass = 'reachable';
@@ -1116,6 +1159,7 @@ class FrankensteinHandler(http.server.BaseHTTPRequestHandler):
                         tr.appendChild(tdIp);
                         tr.appendChild(tdMac);
                         tr.appendChild(tdIface);
+                        tr.appendChild(tdSignal);
                         tr.appendChild(tdStatus);
                         tbody.appendChild(tr);
                     });
