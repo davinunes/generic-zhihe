@@ -1,0 +1,17 @@
+{
+  "admin_password": "yuk11nn4_admin",
+  "apn": "zap.vivo.com.br",
+  "wifi": {
+    "ssid": "UFI003_4G",
+    "wpa_passphrase": "yuk11nn4_wifi"
+  },
+  "wireguard": {
+    "enabled": true,
+    "address": "198.19.1.14/30",
+    "private_key": "wIQPZEI+qy+rRoPvf5BHJyd7BanLcmdxUrEPEMcfr18=",
+    "peer_public_key": "qjScjwzWLqw/zHrP5HsjeOsNuuQEgW2NkapRG821Lwk=",
+    "endpoint": "rb.davinunes.eti.br:13500",
+    "allowed_ips": "0.0.0.0/0, ::/0",
+    "persistent_keepalive": 25
+  }
+}

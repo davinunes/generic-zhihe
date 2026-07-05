@@ -3,11 +3,32 @@
 # Uso: ./frankenstein-v2.sh (roda uma vez, sem watchdog)
 #       ./frankenstein-v2.sh watch (roda com watchdog)
 
-APN="zap.vivo.com.br"
+CONFIG_FILE="/etc/frankenstein.json"
+
+get_cfg() {
+    python3 -c "import json; d=json.load(open('$CONFIG_FILE')); print(d$1)" 2>/dev/null
+}
+
+# Carregar variáveis do JSON
+APN=$(get_cfg "['apn']")
+SSID=$(get_cfg "['wifi']['ssid']")
+PASSPHRASE=$(get_cfg "['wifi']['wpa_passphrase']")
+
+WG_ENABLED=$(get_cfg "['wireguard']['enabled']")
+WG_ADDRESS=$(get_cfg "['wireguard']['address']")
+WG_PRIVATE_KEY=$(get_cfg "['wireguard']['private_key']")
+WG_PEER_PUBLIC_KEY=$(get_cfg "['wireguard']['peer_public_key']")
+WG_ENDPOINT=$(get_cfg "['wireguard']['endpoint']")
+WG_ALLOWED_IPS=$(get_cfg "['wireguard']['allowed_ips']")
+WG_KEEPALIVE=$(get_cfg "['wireguard']['persistent_keepalive']")
+
+# Fallbacks padrão caso não exista no JSON
+[ -z "$APN" ] && APN="zap.vivo.com.br"
+[ -z "$SSID" ] && SSID="UFI003_4G"
+[ -z "$PASSPHRASE" ] && PASSPHRASE="yuk11nn4_wifi"
+
 DEV="/dev/wwan0qmi0"
 INT="wwan0"
-WG_ENDPOINT="2804:6368:c0:8::2"
-WG_PORT="13500"
 
 # ============================================================
 # FUNÇÕES
@@ -71,17 +92,17 @@ conectar_4g() {
     ip link set $INT down
     sleep 1
 
-    qmicli -d $DEV --dms-set-operating-mode=online 2>/dev/null
-    qmicli -d $DEV --wda-set-data-format=raw-ip
+    qmicli -p -d $DEV --dms-set-operating-mode=online 2>/dev/null
+    qmicli -p -d $DEV --wda-set-data-format=raw-ip
     ip link set $INT up
     sleep 2
 
-    qmicli -d $DEV --device-open-net='net-raw-ip|net-no-qos-header' \
+    qmicli -p -d $DEV --device-open-net='net-raw-ip|net-no-qos-header' \
         --wds-start-network="apn='$APN',ip-type=6" \
         --wds-follow-network > /tmp/qmi_log 2>&1 &
     sleep 8
 
-    SETTINGS=$(qmicli -d $DEV --wds-get-current-settings 2>/dev/null)
+    SETTINGS=$(qmicli -p -d $DEV --wds-get-current-settings 2>/dev/null)
 
     IP6=$(echo "$SETTINGS" | grep "IPv6 address" | awk '{print $3}' | cut -d'/' -f1)
     GW6=$(echo "$SETTINGS" | grep "IPv6 gateway" | awk '{print $4}' | cut -d'/' -f1)
@@ -91,6 +112,18 @@ conectar_4g() {
         echo "Debug: $SETTINGS"
         return 1
     fi
+
+    # Garantir que a interface WAN está UP
+    ip link set $INT up
+
+    # Aguardar a interface WAN ficar operacional (LOWER_UP) antes de aplicar as rotas
+    echo "[*] Aguardando interface $INT ficar pronta..."
+    for i in $(seq 1 10); do
+        if ip link show dev $INT | grep -q "LOWER_UP"; then
+            break
+        fi
+        sleep 1
+    done
 
     # Configurar wwan0 como /128 para evitar conflito de rota local no bridge br0 (/64)
     ip -6 addr add "$IP6/128" dev $INT
@@ -135,6 +168,24 @@ check_4g() {
 }
 
 start_wifi() {
+    echo "[*] Gerando /etc/hostapd/hostapd.conf..."
+    cat <<EOF > /etc/hostapd/hostapd.conf
+interface=wlan0
+driver=nl80211
+ssid=${SSID}
+hw_mode=g
+channel=6
+wmm_enabled=1
+auth_algs=1
+wpa=2
+wpa_passphrase=${PASSPHRASE}
+wpa_key_mgmt=WPA-PSK
+rsn_pairwise=CCMP
+ctrl_interface=/var/run/hostapd
+ctrl_interface_group=0
+bridge=br0
+EOF
+
     killall hostapd dnsmasq 2>/dev/null || true
     sleep 1
     /usr/sbin/hostapd -B /etc/hostapd/hostapd.conf
@@ -143,13 +194,32 @@ start_wifi() {
 }
 
 start_wireguard() {
-    echo "[*] Iniciando WireGuard..."
-    systemctl restart wg-quick@wg0 2>/dev/null || rc-service wg-quick@wg0 restart 2>/dev/null || wg-quick up wg0 2>/dev/null
-    sleep 2
-    if wg show wg0 2>/dev/null | grep -q "latest handshake"; then
-        echo "[+] WireGuard handshake OK"
+    if [ "$WG_ENABLED" = "True" ]; then
+        echo "[*] Gerando /etc/wireguard/wg0.conf..."
+        mkdir -p /etc/wireguard
+        cat <<EOF > /etc/wireguard/wg0.conf
+[Interface]
+Address = ${WG_ADDRESS}
+PrivateKey = ${WG_PRIVATE_KEY}
+MTU = 1280
+
+[Peer]
+PublicKey = ${WG_PEER_PUBLIC_KEY}
+Endpoint = ${WG_ENDPOINT}
+AllowedIPs = ${WG_ALLOWED_IPS}
+PersistentKeepalive = ${WG_KEEPALIVE}
+EOF
+        echo "[*] Iniciando WireGuard..."
+        systemctl restart wg-quick@wg0 2>/dev/null || rc-service wg-quick@wg0 restart 2>/dev/null || wg-quick up wg0 2>/dev/null
+        sleep 2
+        if wg show wg0 2>/dev/null | grep -q "latest handshake"; then
+            echo "[+] WireGuard handshake OK"
+        else
+            echo "[!] WireGuard: sem handshake ainda"
+        fi
     else
-        echo "[!] WireGuard: sem handshake ainda"
+        echo "[*] WireGuard desativado nas configurações."
+        wg-quick down wg0 2>/dev/null || true
     fi
 }
 
@@ -202,7 +272,7 @@ if [ "${1:-}" = "watch" ]; then
     while true; do
         if ! check_4g; then
             echo "[!] 4G caiu ou sem rota default. Tentando recuperar..."
-            SETTINGS=$(qmicli -d $DEV --wds-get-current-settings 2>/dev/null)
+            SETTINGS=$(qmicli -p -d $DEV --wds-get-current-settings 2>/dev/null)
             IP6=$(echo "$SETTINGS" | grep "IPv6 address" | awk '{print $3}' | cut -d'/' -f1)
             GW6=$(echo "$SETTINGS" | grep "IPv6 gateway" | awk '{print $4}' | cut -d'/' -f1)
             
