@@ -1,89 +1,96 @@
-# Tutorial: Configuração de Modem 4G (UFI003) no postmarketOS (Alpine Linux)
+# Tutorial: Configuração Completa do Ecossistema Frankenstein (UFI003)
 
-Este tutorial demonstra como configurar um modem 4G UFI003 a partir de uma instalação limpa do **postmarketOS** (utilizando systemd) para:
-*   Conectar na rede IPv6 da operadora (ex: Vivo) usando QMI (`wwan0`).
-*   Configurar uma bridge (`br0`) unificando as interfaces Wi-Fi (`wlan0`) e USB Gadget (`usb0`).
-*   Distribuir prefixo global IPv6 dinâmico aos clientes na bridge via **SLAAC/DHCPv6** (`dnsmasq`).
-*   Implementar **NDP Proxying nativo do kernel** para repassar solicitações Neighbor Solicitations (NS/NA) sem dependências externas (`ndppd`).
-*   Configurar **CLAT** (`clatd` + `tayga` NAT64) para prover tráfego IPv4 transparente aos clientes em uma rede puramente IPv6 WAN.
-*   Configurar regras de firewall (`nftables`) para masquerading e ajuste automático de MSS (MTU clamping).
+Este tutorial demonstra como configurar um modem 4G UFI003 a partir de uma instalação limpa do **postmarketOS** (utilizando systemd) para rodar o ecossistema Frankenstein. O ecossistema unifica a conexão 4G celular via QMI, Wi-Fi local bridgeado, tradução IPv4/IPv6 via CLAT, criptografia com WireGuard e um Painel Web de controle centralizado.
 
 ---
 
 ## 🛠️ Passo 1: Instalação de Pacotes Necessários
 
-Com o modem conectado à internet (você pode usar uma conexão temporária ou habilitar os repositórios oficiais do Alpine Linux), instale os pacotes principais.
-
-> [!IMPORTANT]
-> Certifique-se de que os repositórios `main` e `community` correspondentes à sua versão do Alpine estão habilitados em `/etc/apk/repositories`.
+Com o modem conectado à internet, atualize os repositórios e instale os pacotes necessários:
 
 ```bash
-# Atualizar a lista de repositórios
+# Atualizar repositórios do Alpine Linux
 apk update
 
-# Instalar ferramentas de telefonia, redes, tradução e firewall
-apk add qmicli dnsmasq hostapd clatd tayga nftables wireguard-tools
+# Instalar telefonia, rede, tradução, firewall, Python3 e doas para elevação de privilégio
+apk add qmicli dnsmasq hostapd clatd tayga nftables wireguard-tools python3 doas
 ```
 
 ---
 
-## 📐 Passo 2: Arquivos de Configuração
+## ⚙️ Passo 2: Configuração Centralizada (`/etc/frankenstein.json`)
 
-Configure cada um dos serviços essenciais abaixo.
+Toda a configuração do modem (redes, credenciais de Wi-Fi, VPN) fica centralizada em `/etc/frankenstein.json`.
+
+Crie o arquivo `/etc/frankenstein.json` no modem com a seguinte estrutura:
+
+```json
+{
+  "admin_password": "yuk11nn4_admin",
+  "apn": "zap.vivo.com.br",
+  "wifi": {
+    "ssid": "UFI003_4G",
+    "wpa_passphrase": "yuk11nn4_wifi"
+  },
+  "wireguard": {
+    "enabled": true,
+    "address": "198.19.1.14/30",
+    "private_key": "SUA_CHAVE_PRIVADA_AQUI",
+    "peer_public_key": "CHAVE_PUBLICA_DO_PEER_AQUI",
+    "endpoint": "rb.davinunes.eti.br:13500",
+    "allowed_ips": "0.0.0.0/0, ::/0",
+    "persistent_keepalive": 25
+  }
+}
+```
+
+---
+
+## 📐 Passo 3: Configuração de Serviços de Suporte
 
 ### 1. Configuração do CLAT (`/etc/clatd.conf`)
-O `clatd` gerencia a interface virtual de tradução. Use o prefixo padrão Well-Known da Vivo/NAT64 (`64:ff9b::/96`).
+O `clatd` cria a interface de tradução virtual. Configure o prefixo NAT64 correspondente da Vivo (`64:ff9b::/96`) e aponte para a WAN física `wwan0`.
 
 ```ini
 # /etc/clatd.conf
-clat-interface=clat
+# Configuração do CLAT (464XLAT) para modem UFI003
 plat-prefix=64:ff9b::/96
-# wwan0 é a nossa interface WAN física
 plat-dev=wwan0
+clat-v4-addr=192.0.0.1
 ```
 
 ### 2. Configuração do DHCP/RA (`/etc/dnsmasq.conf`)
-O `dnsmasq` gerenciará a distribuição de IPs na bridge local `br0`. Ele irá escutar nela e utilizar a diretiva `constructor:br0` para construir dinamicamente o prefixo global IPv6 de anúncio a partir do IP atribuído à bridge.
+O `dnsmasq` distribui endereços locais IPv4 e IPv6 dinâmicos na bridge `br0` construindo o prefixo dinâmico por SLAAC.
 
 ```ini
 # /etc/dnsmasq.conf
+# Configuração do dnsmasq para o bridge br0 (modem UFI003)
 interface=br0
-bind-interfaces
+port=53
+bind-dynamic
 
-# Desabilitar resolução DNS interna do dnsmasq (ou configure como desejar)
-port=0
-
-# Range IPv4 para USB/WLAN
+# DHCP IPv4 para os clientes (WLAN + USB)
 dhcp-range=192.168.10.10,192.168.10.50,12h
-dhcp-option=option:router,192.168.10.1
 
-# Anúncio IPv6 (SLAAC e DHCPv6 Stateful usando o prefixo global dinâmico da bridge)
-dhcp-range=::10,::50,constructor:br0,ra-names,12h
+# DHCP IPv6 & RA ULA (Garante IP IPv6 interno estável)
+dhcp-range=fd00:42:42::10,fd00:42:42::50,slaac,ra-names,12h
 
-# Anúncio IPv6 local estático ULA (opcional, para conectividade local persistente)
-dhcp-range=fd00:42:42::10,fd00:42:42::50,12h
+# DHCP IPv6 & RA Global (Dinâmico, construído a partir dos prefixos do br0)
+dhcp-range=::10,::50,constructor:br0,ra-names,slaac,12h
+
+# Habilita o envio de Router Advertisements (RA)
 enable-ra
 
-# Enviar rotas e DNS IPv6 padrão nas propagações de anúncios de roteador (RA)
-quiet-ra
-```
-
-### 3. Associação da Bridge no Hostapd (`/etc/hostapd/hostapd.conf`)
-Edite o arquivo de configuração do seu ponto de acesso Wi-Fi para que a interface de rádio (`wlan0`) seja colocada de forma automática no bridge `br0` quando o AP subir:
-
-```ini
-# No arquivo /etc/hostapd/hostapd.conf adicione ou edite:
-interface=wlan0
-bridge=br0
+# DNS Servers para os clientes
+dhcp-option=option:dns-server,8.8.8.8,8.8.4.4
+dhcp-option=option6:dns-server,2001:4860:4860::8888,2606:4700:4700::1111
 ```
 
 ---
 
-## 📜 Passo 3: Script Frankenstein v2 (`/usr/local/bin/frankenstein-v2.sh`)
+## 📜 Passo 4: Daemon Frankenstein (`/usr/local/bin/frankenstein-v2.sh`)
 
-Este é o coração da automação. Ele configura as interfaces, faz a discagem QMI, extrai o prefixo global da WAN, sobe a bridge com o IP de gateway do cliente, configura o **NDP Proxying nativo no kernel**, ativa o firewall e inicializa os daemons de suporte.
-
-Crie o arquivo `/usr/local/bin/frankenstein-v2.sh` com o conteúdo abaixo:
+Crie o script principal do daemon que gerencia a interface de rede, o firewall e a conexão 4G/WireGuard:
 
 ```bash
 #!/bin/bash
@@ -91,7 +98,30 @@ Crie o arquivo `/usr/local/bin/frankenstein-v2.sh` com o conteúdo abaixo:
 # Uso: ./frankenstein-v2.sh (roda uma vez, sem watchdog)
 #       ./frankenstein-v2.sh watch (roda com watchdog)
 
-APN="zap.vivo.com.br"
+CONFIG_FILE="/etc/frankenstein.json"
+
+get_cfg() {
+    python3 -c "import json; d=json.load(open('$CONFIG_FILE')); print(d$1)" 2>/dev/null
+}
+
+# Carregar variáveis do JSON
+APN=$(get_cfg "['apn']")
+SSID=$(get_cfg "['wifi']['ssid']")
+PASSPHRASE=$(get_cfg "['wifi']['wpa_passphrase']")
+
+WG_ENABLED=$(get_cfg "['wireguard']['enabled']")
+WG_ADDRESS=$(get_cfg "['wireguard']['address']")
+WG_PRIVATE_KEY=$(get_cfg "['wireguard']['private_key']")
+WG_PEER_PUBLIC_KEY=$(get_cfg "['wireguard']['peer_public_key']")
+WG_ENDPOINT=$(get_cfg "['wireguard']['endpoint']")
+WG_ALLOWED_IPS=$(get_cfg "['wireguard']['allowed_ips']")
+WG_KEEPALIVE=$(get_cfg "['wireguard']['persistent_keepalive']")
+
+# Fallbacks padrão caso não exista no JSON
+[ -z "$APN" ] && APN="zap.vivo.com.br"
+[ -z "$SSID" ] && SSID="UFI003_4G"
+[ -z "$PASSPHRASE" ] && PASSPHRASE="yuk11nn4_wifi"
+
 DEV="/dev/wwan0qmi0"
 INT="wwan0"
 
@@ -109,15 +139,16 @@ setup_firewall() {
     echo "[*] Configurando firewall (nftables)..."
     nft flush ruleset
     nft add table inet filter
-    nft add chain inet filter input { type filter hook input priority 0 ; policy accept ; }
-    nft add chain inet filter forward { type filter hook forward priority 0 ; policy accept ; }
+    nft add chain inet filter input { type filter hook input priority 0 \; policy accept \; }
+    nft add chain inet filter forward { type filter hook forward priority 0 \; policy accept \; }
 
     nft add table ip nat
-    nft add chain ip nat postrouting { type nat hook postrouting priority 100 ; }
+    nft add chain ip nat postrouting { type nat hook postrouting priority 100 \; }
+    nft add rule ip nat postrouting oifname "wg0" masquerade
     nft add rule ip nat postrouting oifname "clat" masquerade
 
     nft add table ip6 nat
-    nft add chain ip6 nat postrouting { type nat hook postrouting priority 100 ; }
+    nft add chain ip6 nat postrouting { type nat hook postrouting priority 100 \; }
     nft add rule ip6 nat postrouting oifname "$INT" masquerade
 
     nft add rule inet filter forward tcp flags syn tcp option maxseg size set 1300
@@ -156,17 +187,17 @@ conectar_4g() {
     ip link set $INT down
     sleep 1
 
-    qmicli -d $DEV --dms-set-operating-mode=online 2>/dev/null
-    qmicli -d $DEV --wda-set-data-format=raw-ip
+    qmicli -p -d $DEV --dms-set-operating-mode=online 2>/dev/null
+    qmicli -p -d $DEV --wda-set-data-format=raw-ip
     ip link set $INT up
     sleep 2
 
-    qmicli -d $DEV --device-open-net='net-raw-ip|net-no-qos-header' \
+    qmicli -p -d $DEV --device-open-net='net-raw-ip|net-no-qos-header' \
         --wds-start-network="apn='$APN',ip-type=6" \
         --wds-follow-network > /tmp/qmi_log 2>&1 &
     sleep 8
 
-    SETTINGS=$(qmicli -d $DEV --wds-get-current-settings 2>/dev/null)
+    SETTINGS=$(qmicli -p -d $DEV --wds-get-current-settings 2>/dev/null)
 
     IP6=$(echo "$SETTINGS" | grep "IPv6 address" | awk '{print $3}' | cut -d'/' -f1)
     GW6=$(echo "$SETTINGS" | grep "IPv6 gateway" | awk '{print $4}' | cut -d'/' -f1)
@@ -176,6 +207,18 @@ conectar_4g() {
         echo "Debug: $SETTINGS"
         return 1
     fi
+
+    # Garantir que a interface WAN está UP
+    ip link set $INT up
+
+    # Aguardar a interface WAN ficar operacional (LOWER_UP) antes de aplicar as rotas
+    echo "[*] Aguardando interface $INT ficar pronta..."
+    for i in $(seq 1 10); do
+        if ip link show dev $INT | grep -q "LOWER_UP"; then
+            break
+        fi
+        sleep 1
+    done
 
     # Configurar wwan0 como /128 para evitar conflito de rota local no bridge br0 (/64)
     ip -6 addr add "$IP6/128" dev $INT
@@ -194,7 +237,7 @@ conectar_4g() {
     # Adicionar o novo IP global
     ip -6 addr add "${PREFIX6}1/64" dev br0
 
-    # Configurar proxy NDP nativo no kernel para repassar solicitações dos clientes
+    # Configurar proxy NDP nativo no kernel para repassar Neighbor Solicitations
     echo "[*] Configurando proxy NDP nativo no kernel..."
     sysctl -w net.ipv6.conf.wwan0.proxy_ndp=1 >/dev/null
 
@@ -220,11 +263,59 @@ check_4g() {
 }
 
 start_wifi() {
+    echo "[*] Gerando /etc/hostapd/hostapd.conf..."
+    cat <<EOF > /etc/hostapd/hostapd.conf
+interface=wlan0
+driver=nl80211
+ssid=${SSID}
+hw_mode=g
+channel=6
+wmm_enabled=1
+auth_algs=1
+wpa=2
+wpa_passphrase=${PASSPHRASE}
+wpa_key_mgmt=WPA-PSK
+rsn_pairwise=CCMP
+ctrl_interface=/var/run/hostapd
+ctrl_interface_group=0
+bridge=br0
+EOF
+
     killall hostapd dnsmasq 2>/dev/null || true
     sleep 1
     /usr/sbin/hostapd -B /etc/hostapd/hostapd.conf
     /usr/sbin/dnsmasq -C /etc/dnsmasq.conf
     echo "[+] WiFi AP (bridge br0) e DHCP ativos"
+}
+
+start_wireguard() {
+    if [ "$WG_ENABLED" = "True" ]; then
+        echo "[*] Gerando /etc/wireguard/wg0.conf..."
+        mkdir -p /etc/wireguard
+        cat <<EOF > /etc/wireguard/wg0.conf
+[Interface]
+Address = ${WG_ADDRESS}
+PrivateKey = ${WG_PRIVATE_KEY}
+MTU = 1280
+
+[Peer]
+PublicKey = ${WG_PEER_PUBLIC_KEY}
+Endpoint = ${WG_ENDPOINT}
+AllowedIPs = ${WG_ALLOWED_IPS}
+PersistentKeepalive = ${WG_KEEPALIVE}
+EOF
+        echo "[*] Iniciando WireGuard..."
+        systemctl restart wg-quick@wg0 2>/dev/null || rc-service wg-quick@wg0 restart 2>/dev/null || wg-quick up wg0 2>/dev/null
+        sleep 2
+        if wg show wg0 2>/dev/null | grep -q "latest handshake"; then
+            echo "[+] WireGuard handshake OK"
+        else
+            echo "[!] WireGuard: sem handshake ainda"
+        fi
+    else
+        echo "[*] WireGuard desativado nas configurações."
+        wg-quick down wg0 2>/dev/null || true
+    fi
 }
 
 start_clat() {
@@ -258,6 +349,8 @@ conectar_4g || {
 echo "[*] DNS fixo..."
 echo -e "nameserver 2001:4860:4860::8888\nnameserver 2606:4700:4700::1111" > /etc/resolv.conf
 
+start_wireguard
+# wg-quick flushes nftables, então o firewall deve vir DEPOIS do WG
 setup_firewall
 start_clat
 
@@ -274,7 +367,7 @@ if [ "${1:-}" = "watch" ]; then
     while true; do
         if ! check_4g; then
             echo "[!] 4G caiu ou sem rota default. Tentando recuperar..."
-            SETTINGS=$(qmicli -d $DEV --wds-get-current-settings 2>/dev/null)
+            SETTINGS=$(qmicli -p -d $DEV --wds-get-current-settings 2>/dev/null)
             IP6=$(echo "$SETTINGS" | grep "IPv6 address" | awk '{print $3}' | cut -d'/' -f1)
             GW6=$(echo "$SETTINGS" | grep "IPv6 gateway" | awk '{print $4}' | cut -d'/' -f1)
             
@@ -284,11 +377,12 @@ if [ "${1:-}" = "watch" ]; then
                 ip -6 route add "$GW6" dev $INT 2>/dev/null || true
                 ip -6 route add default via "$GW6" dev $INT metric 100 2>/dev/null || true
                 
-                # Restaurar IP do bridge e proxy NDP
+                # Restaurar IP do bridge e ndppd.conf
                 PREFIX6=$(echo "$IP6" | cut -d: -f1-4)::
                 ip -6 addr show dev br0 | grep "global" | awk '{print $2}' | xargs -r ip -6 addr del dev br0 2>/dev/null || true
                 ip -6 addr add "${PREFIX6}1/64" dev br0 2>/dev/null || true
                 
+                # Configurar proxy NDP nativo no kernel
                 sysctl -w net.ipv6.conf.wwan0.proxy_ndp=1 >/dev/null
                 ip -6 neigh show proxy dev wwan0 | awk '{print $1}' | xargs -r ip -6 neigh del proxy dev wwan0 2>/dev/null || true
                 for i in $(seq 10 80); do
@@ -298,12 +392,14 @@ if [ "${1:-}" = "watch" ]; then
 
                 # Reiniciar serviços dependentes do IP WAN
                 systemctl restart dnsmasq 2>/dev/null || rc-service dnsmasq restart 2>/dev/null
+                start_wireguard
                 setup_firewall
                 start_clat
                 echo "[+] Rota e serviços IPv6 restaurados"
             else
                 echo "[!] Bearer perdido do QMI. Reconectando 4G do zero..."
                 conectar_4g
+                start_wireguard
                 setup_firewall
                 start_clat
             fi
@@ -311,3 +407,172 @@ if [ "${1:-}" = "watch" ]; then
         sleep 30
     done
 fi
+```
+
+Salve-o como `/usr/local/bin/frankenstein-v2.sh` e torne-o executável:
+```bash
+chmod +x /usr/local/bin/frankenstein-v2.sh
+```
+
+### 3. Configurando o Serviço Systemd (`/etc/systemd/system/frankenstein-v2.service`)
+
+Crie a unit do Systemd para gerenciar o daemon e o watchdog do Frankenstein:
+
+```ini
+[Unit]
+Description=Frankenstein v2 - Modem 4G UFI003 (4G+WiFi+WG+CLAT)
+After=network.target
+Wants=network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/frankenstein-v2.sh watch
+Restart=on-failure
+RestartSec=10
+User=root
+
+[Install]
+WantedBy=multi-user.target
+```
+
+---
+
+## 🖥️ Passo 5: Painel Web de Controle (`/usr/local/bin/frankenstein-web.py`)
+
+O painel web roda em segundo plano na porta 80 e manipula o arquivo central `/etc/frankenstein.json` ao alterar configurações, permitindo aplicar modificações sem manipulação manual.
+
+*Como o arquivo `frankenstein-web.py` possui cerca de 1250 linhas, faça o download ou cópia do script do repositório diretamente para o modem em `/usr/local/bin/frankenstein-web.py` e torne-o executável:*
+
+```bash
+chmod +x /usr/local/bin/frankenstein-web.py
+```
+
+### Criando o Serviço Systemd (`/etc/systemd/system/frankenstein-web.service`)
+
+```ini
+[Unit]
+Description=Frankenstein Web Administration Dashboard
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/python3 /usr/local/bin/frankenstein-web.py
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
+```
+
+---
+
+## 🛠️ Passo 6: Utilitário de Teste de IPs (`/usr/local/bin/test-ips-modem.sh`)
+
+Este script adiciona e remove temporariamente 50 IPs IPv6 no modem para testes de limitação de IP pela operadora (NDP Proxy e SLAAC).
+
+Crie `/usr/local/bin/test-ips-modem.sh`:
+
+```bash
+#!/bin/bash
+# Script para testar se a Vivo permite múltiplos IPs IPv6 na WAN (wwan0)
+# Uso: ./test-ips-modem.sh add   (para adicionar 50 IPs)
+#      ./test-ips-modem.sh clean (para remover os 50 IPs)
+
+INT="wwan0"
+
+get_prefix() {
+    SETTINGS=$(qmicli -p -d /dev/wwan0qmi0 --wds-get-current-settings 2>/dev/null)
+    IP6=$(echo "$SETTINGS" | grep "IPv6 address" | awk '{print $3}' | cut -d'/' -f1)
+    if [ -z "$IP6" ]; then
+        # Tentar obter direto do comando ip addr
+        IP6=$(ip -6 addr show dev $INT | grep "global" | awk '{print $2}' | cut -d'/' -f1 | head -n1)
+    fi
+    if [ -z "$IP6" ]; then
+        echo "[!] Erro: Não foi possível obter o IP global da interface $INT."
+        exit 1
+    fi
+    echo "$IP6" | cut -d: -f1-4
+}
+
+PREFIX=$(get_prefix)
+if [ -z "$PREFIX" ]; then
+    echo "[!] Falha ao extrair prefixo."
+    exit 1
+fi
+
+echo "[+] Prefixo detectado: ${PREFIX}::/64"
+
+case "${1:-}" in
+    add)
+        echo "[*] Adicionando 50 IPs de teste na interface $INT..."
+        for i in $(seq 100 149); do
+            HEX=$(printf '%x' $i)
+            IP="${PREFIX}::${HEX}"
+            echo "Adicionando: $IP"
+            ip -6 addr add "$IP/128" dev $INT 2>/dev/null || true
+        done
+        echo "[+] Concluído! Copie a lista de IPs abaixo para testar o ping a partir de um servidor remoto:"
+        echo "--------------------------------------------------"
+        for i in $(seq 100 149); do
+            HEX=$(printf '%x' $i)
+            echo "${PREFIX}::${HEX}"
+        done
+        echo "--------------------------------------------------"
+        echo "Para remover estes IPs após o teste, rode: ./test-ips-modem.sh clean"
+        ;;
+        
+    clean)
+        echo "[*] Removendo os 50 IPs de teste da interface $INT..."
+        for i in $(seq 100 149); do
+            HEX=$(printf '%x' $i)
+            IP="${PREFIX}::${HEX}"
+            echo "Removendo: $IP"
+            ip -6 addr del "$IP/128" dev $INT 2>/dev/null || true
+        done
+        echo "[+] IPs removidos!"
+        ;;
+        
+    *)
+        echo "Uso: $0 [add|clean]"
+        exit 1
+        ;;
+esac
+```
+
+E torne-o executável:
+```bash
+chmod +x /usr/local/bin/test-ips-modem.sh
+```
+
+---
+
+## ⚡ Passo 7: Habilitar e Iniciar os Serviços
+
+Para ativar tudo e habilitar para subir no boot automaticamente:
+
+```bash
+# Recarregar as configurações de serviços do systemd
+systemctl daemon-reload
+
+# Habilitar os serviços para o boot
+systemctl enable frankenstein-v2.service
+systemctl enable frankenstein-web.service
+
+# Iniciar os serviços imediatamente
+systemctl start frankenstein-v2.service
+systemctl start frankenstein-web.service
+```
+
+---
+
+## 🔍 Passo 8: Verificação de Funcionamento
+
+*   **Logs da inicialização de rede e QMI:**
+    ```bash
+    journalctl -u frankenstein-v2.service -f
+    ```
+*   **Logs do painel web:**
+    ```bash
+    journalctl -u frankenstein-web.service -f
+    ```
+*   **Acesso Web:** Navegue para [http://172.16.42.1](http://172.16.42.1) ou [http://192.168.10.1](http://192.168.10.1) e use a senha configurada no seu JSON para monitorar as interfaces e conexões!

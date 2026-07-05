@@ -6,7 +6,7 @@
 INT="wwan0"
 
 get_prefix() {
-    SETTINGS=$(qmicli -d /dev/wwan0qmi0 --wds-get-current-settings 2>/dev/null)
+    SETTINGS=$(qmicli -p -d /dev/wwan0qmi0 --wds-get-current-settings 2>/dev/null)
     IP6=$(echo "$SETTINGS" | grep "IPv6 address" | awk '{print $3}' | cut -d'/' -f1)
     if [ -z "$IP6" ]; then
         # Tentar obter direto do comando ip addr
