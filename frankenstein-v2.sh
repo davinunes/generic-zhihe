@@ -230,7 +230,7 @@ start_clat() {
         # Limpar qualquer regra de roteamento IPv6 órfã deixada pelo clatd
         ip -6 rule del from 64:ff9b::/96 2>/dev/null || true
         sleep 1
-        clatd -c /etc/clatd.conf
+        clatd -c /etc/clatd.conf &
         echo "[+] CLAT iniciado"
     else
         echo "[-] CLAT não instalado"
@@ -339,6 +339,16 @@ if [ "${1:-}" = "watch" ]; then
                 apply_static_routes
             fi
         fi
+        # Sincronizar vizinhos IPv6 da bridge (SLAAC) com o proxy NDP do wwan0
+        ip -6 neigh show dev br0 | grep -E "REACHABLE|STALE|DELAY|PROBE" | awk '{print $1}' | while read -r ip; do
+            if [[ "$ip" != fe80:* && "$ip" != fd00:* && "$ip" != ff00:* && -n "$ip" ]]; then
+                if ! ip -6 neigh show proxy dev wwan0 | grep -q "$ip"; then
+                    echo "[*] NDP Proxy: mapeando dinamicamente o vizinho SLAAC $ip"
+                    ip -6 neigh add proxy "$ip" dev wwan0 2>/dev/null || true
+                fi
+            fi
+        done
+
         sleep 30
     done
 fi
