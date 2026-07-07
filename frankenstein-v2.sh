@@ -52,9 +52,10 @@ setup_firewall() {
     nft add rule ip nat postrouting oifname "wg0" masquerade
     nft add rule ip nat postrouting oifname "clat" masquerade
 
-    nft add table ip6 nat
-    nft add chain ip6 nat postrouting { type nat hook postrouting priority 100 \; }
-    nft add rule ip6 nat postrouting oifname "$INT" masquerade
+    # O NAT66 (masquerade) foi removido para que o NDP proxy entregue os IPs globais nativamente
+    # nft add table ip6 nat
+    # nft add chain ip6 nat postrouting { type nat hook postrouting priority 100 \; }
+    # nft add rule ip6 nat postrouting oifname "$INT" masquerade
 
     nft add rule inet filter forward tcp flags syn tcp option maxseg size set 1300
 }
@@ -299,12 +300,16 @@ if [ "${1:-}" = "watch" ]; then
     echo "[*] Watchdog ativo (verificando a cada 30s)..."
     while true; do
         if ! check_4g; then
-            echo "[!] 4G caiu ou sem rota default. Tentando recuperar..."
-            SETTINGS=$(qmicli -p -d $DEV --wds-get-current-settings 2>/dev/null)
-            IP6=$(echo "$SETTINGS" | grep "IPv6 address" | awk '{print $3}' | cut -d'/' -f1)
-            GW6=$(echo "$SETTINGS" | grep "IPv6 gateway" | awk '{print $4}' | cut -d'/' -f1)
+            echo "[!] 4G caiu ou sem rota default. Verificando status WDS..."
+            STATUS=$(qmicli -p -d $DEV --wds-get-packet-service-status 2>/dev/null | grep -o "connected")
             
-            if [ -n "$IP6" ] && [ -n "$GW6" ]; then
+            if [ "$STATUS" = "connected" ]; then
+                echo "[*] WDS conectado, tentando recuperar rotas..."
+                SETTINGS=$(qmicli -p -d $DEV --wds-get-current-settings 2>/dev/null)
+                IP6=$(echo "$SETTINGS" | grep "IPv6 address" | awk '{print $3}' | cut -d'/' -f1)
+                GW6=$(echo "$SETTINGS" | grep "IPv6 gateway" | awk '{print $4}' | cut -d'/' -f1)
+                
+                if [ -n "$IP6" ] && [ -n "$GW6" ]; then
                 # Tentar re-adicionar rotas e IPs (caso a interface tenha dado bounce)
                 ip -6 addr add "$IP6/128" dev $INT 2>/dev/null || true
                 ip -6 route add "$GW6" dev $INT 2>/dev/null || true
@@ -330,8 +335,16 @@ if [ "${1:-}" = "watch" ]; then
                 start_clat
                 apply_static_routes
                 echo "[+] Rota e serviços IPv6 restaurados"
+                else
+                    echo "[!] Falha ao obter IPs. Reconectando 4G do zero..."
+                    conectar_4g
+                    start_wireguard
+                    setup_firewall
+                    start_clat
+                    apply_static_routes
+                fi
             else
-                echo "[!] Bearer perdido do QMI. Reconectando 4G do zero..."
+                echo "[!] WDS desconectado (ou crash). Reconectando do zero..."
                 conectar_4g
                 start_wireguard
                 setup_firewall
