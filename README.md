@@ -2,101 +2,83 @@
 
 Roteador 4G + WiFi + WireGuard + CLAT num modem UFI003 rodando postmarketOS/Alpine Linux.
 
-## Arquivos
+## Visão Geral do Projeto
 
-| Arquivo | Destino no modem | Descrição |
-|---|---|---|
-| `frankenstein-v2.sh` | `/usr/local/bin/frankenstein-v2.sh` | Script unificado (4G + WiFi + WG + CLAT + watchdog) |
-| `frankenstein-v2.service` | `/etc/systemd/system/frankenstein-v2.service` | Systemd service |
-| `conectar_4g.sh` | `/home/ilunne/conectar_4g.sh` | Script legado de conexão 4G |
-| `clatd.conf` | `/etc/clatd.conf` | Configuração do CLAT (464XLAT) |
-| `processo-instalacao.txt` | — | Log da instalação do postmarketOS |
+O Frankenstein é um sistema projetado para contornar as limitações de roteadores 4G (especialmente a ausência nativa de IPv4 em provedores como a Vivo). Ele converte um modem UFI003 básico em um roteador avançado com kernel Linux, entregando:
+- **NDP Proxy (IPv6):** Distribuição nativa de endereços IPv6 públicos (via SLAAC) para todos os dispositivos na rede local, sem depender de NAT66.
+- **CLAT (464XLAT):** Tradução de IPv4 para IPv6. O modem opera numa rede puramente IPv6, mas o CLAT cria uma rede local IPv4 artificial e encapsula o tráfego via NAT64 da operadora, restaurando o acesso a sites antigos.
+- **WireGuard:** VPN moderna e extremamente leve rodando direto no modem.
+- **Painel Web:** Uma interface administrativa Dual-Stack para verificar status e editar o JSON de configuração rapidamente.
 
-## Configurações no modem
+## Arquivos do Projeto
 
-### hostapd (`/etc/hostapd/hostapd.conf`)
-- SSID: `Modem_Frankenstein`, senha: `celestia`
-- Canal 6, 2.4GHz, WPA2
-- Interface `wlan0`
+- `frankenstein-v2.sh`: O script unificado ou "cérebro" da rede. Ele sobe a bridge (`br0`), o firewall, o WiFi, o WireGuard e gerencia o modem (via QMI raw-ip). Fica em modo `watchdog` monitorando quedas do hardware.
+- `frankenstein-web.py`: Servidor web administrativo desenvolvido em Python puro (porta 80).
+- `frankenstein.json`: Arquivo central de configurações.
+- `tutorial-setup-modem.md`: Passo-a-passo técnico para instalação do ecossistema a partir de uma instalação limpa do postmarketOS.
 
-### dnsmasq (`/etc/dnsmasq.conf`)
-- DHCP: `192.168.10.10-50` (wlan0) e `172.16.42.10-50` (usb0)
-- RA para IPv6 ULA `fd00:42:42::/64`
-- DNS: 8.8.8.8, 8.8.4.4
+## IPs Padrão de Acesso (Modem)
 
-### WireGuard (`/etc/wireguard/wg0.conf`)
-- Endpoint: `2804:6368:c0:8::2:13500` (MikroTik em casa)
-- AllowedIPs: `0.0.0.0/0`
-- NAT via MikroTik para IPv4
-- Rota default IPv6 via wwan0 é essencial para o handshake funcionar
+Após a configuração do Frankenstein, o modem pode ser acessado localmente no Painel Web ou via SSH usando três IPs estáticos diferentes, a depender de como você está conectado:
+- **`192.168.10.1`** (Pela rede WiFi `UFI003_4G`)
+- **`172.16.42.1`** (Pela porta USB, conectado como RNDIS)
+- **`fd00:42:42::1`** (IP Local IPv6 seguro ULA)
 
-### CLAT (`/etc/clatd.conf`)
-- Converte IPv4 -> IPv6 via NAT64 da Vivo (prefixo `64:ff9b::/96`)
-- Permite clients WiFi acessarem IPv4 mesmo com WAN IPv6-only
+## Pontos de Atenção (Avisos Importantes)
 
-## Sequência de inicialização
+### WireGuard - Sequestro de Rotas (Default Route)
+O comportamento padrão do WireGuard é rotear **todo o tráfego** da sua rede para dentro da VPN quando a configuração `AllowedIPs = 0.0.0.0/0, ::/0` é utilizada. Isso significa que, se o outro lado da VPN cair, o seu modem ficará sem acesso à internet.
+> **Dica:** Se você deseja usar a VPN **apenas** para acessar a rede de outra casa ou empresa e navegar livremente pelo 4G para os demais sites, altere o `AllowedIPs` no JSON para conter *apenas* a rede de destino (ex: `192.168.20.0/24, 198.19.1.13/32`).
 
-1. `sysctl`: IP forwarding ativado (IPv4 e IPv6)
-2. `nftables`: Firewall + NAT (WG para IPv4, wwan0 para IPv6) + MSS clamping
-3. IPs locais: `192.168.10.1/24` (wlan0), `172.16.42.1/24` (usb0), `fd00:42:42::1/64` (ULA)
-4. `hostapd` + `dnsmasq`: WiFi AP + DHCP
-5. `qmicli raw`: Conexão 4G (APN `zap.vivo.com.br`, IPv6-only)
-6. DNS fixo: Google IPv6
-7. `wg-quick@wg0`: WireGuard
-8. `clatd`: CLAT (464XLAT)
+### Firewall (nftables) e NAT66
+- **IPv4:** Utilizamos NAT (Masquerade) para a VPN (`wg0`) e para o CLAT (`clat`), pois toda a internet IPv4 local do modem é emulada/artificial.
+- **IPv6:** O NAT66 (Masquerade) **ESTÁ DESABILITADO INTENCIONALMENTE**. Implementamos um recurso sofisticado chamado **NDP Proxy**. Isso garante que computadores na sua rede local recebam IPs IPv6 públicos *reais* (SLAAC) e não fiquem "escondidos" pelo firewall do modem. Isso é essencial para que o tráfego chegue com o IP real do seu PC em firewalls superiores (Mikrotik) ou se você quiser liberar portas externas (RDP 3389).
 
-## Watchdog
+### CLAT (464XLAT)
+A Vivo (e várias outras operadoras) só entrega redes IPv6-only nativamente (APN `zap.vivo.com.br`). Tentar requisitar um IP IPv4 causa desconexão. Sem o CLAT, seus dispositivos não conseguiriam acessar sites, jogos ou aplicativos que só usam IPv4. O `clatd` no modem cuida dessa mágica rodando em background.
 
-O watchdog verifica a cada 30s:
-- Rota default IPv6 existe na wwan0?
-- Ping6 para 2001:4860:4860::8888 funciona?
+## Comandos Principais de Diagnóstico
 
-Se a rota sumiu mas o bearer QMI ainda existe: reaplica IP/gateway.
-Se o bearer morreu: reconecta o 4G do zero (kill qmicli + qmi commands).
+Se a internet cair, o 4G ficar instável ou houver lentidão, acesse o SSH do modem e utilize as ferramentas abaixo para diagnosticar a causa raiz:
 
-## Instalação (no modem)
-
+**1. Analisar Travamentos de Hardware (Crash do Modem)**
+Esses modems (chips Qualcomm) costumam dar kernel panic em cargas altas (`A2 DL PER deadlock timer expired`). O watchdog foi feito para recuperar isso, mas se quiser confirmar o que ocorreu, veja as últimas 50 linhas de log do kernel:
 ```bash
-# Copiar os arquivos
-chmod +x /usr/local/bin/frankenstein-v2.sh
-cp frankenstein-v2.service /etc/systemd/system/
-
-# Desabilitar serviços conflitantes
-systemctl disable --now NetworkManager wpa_supplicant systemd-resolved
-systemctl disable --now conectar-4g-init conectar-4g-watchdog frankenstein
-
-# DNS estático (não usar systemd-resolved)
-echo -e "nameserver 2001:4860:4860::8888\nnameserver 2606:4700:4700::1111" > /etc/resolv.conf
-
-# Habilitar e iniciar
-systemctl daemon-reload
-systemctl enable frankenstein-v2.service
-systemctl start frankenstein-v2.service
-
-# Verificar
-systemctl status frankenstein-v2.service
-journalctl -u frankenstein-v2.service -f
+dmesg | tail -n 50
 ```
 
-## Testes
-
+**2. Checar a Conexão com a Torre (Sinal e QMI)**
+Para ver se o chip perdeu sinal ou o provedor cortou a conexão:
 ```bash
-# 4G
-ping6 -c 2 -I wwan0 2001:4860:4860::8888
+# O status deve ser 'online' (Modem ligado)
+qmicli -d /dev/wwan0qmi0 --dms-get-operating-mode
 
-# WireGuard
-ping -c 2 -I wg0 198.19.1.13
+# O status deve ser 'connected' (Sessão de dados estabelecida)
+qmicli -d /dev/wwan0qmi0 --wds-get-packet-service-status
 
-# WiFi clients
-ping -c 2 192.168.10.1
-
-# CLAT (de um client WiFi)
-ping 8.8.8.8
+# Ver a força do sinal em dBm (RSSI / RSRP)
+qmicli -d /dev/wwan0qmi0 --nas-get-signal-info
 ```
 
-## Notas
+**3. Ver Logs do Watchdog (O que o script está tentando fazer)**
+```bash
+journalctl -u frankenstein-v2.service -n 50 --no-pager
+```
 
-- A Vivo só entrega IPv6 (APN `zap.vivo.com.br`). IPv4 é recusado.
-- NetworkManager e wpa_supplicant entram em conflito com hostapd — manter desabilitados.
-- O mirror `dl-cdn.alpinelinux.org` pode time out por IPv6 (problema de rota). Se precisar instalar pacotes, usar proxy ou baixar .apk externamente.
-- wwan0 é raw-ip (precisa de `qmicli --wda-set-data-format=raw-ip` antes de configurar IP).
+**4. Logs do Servidor Web**
+```bash
+journalctl -u frankenstein-web.service -n 50 --no-pager
+```
+
+**5. Checar a Topologia de Rede (IPs)**
+```bash
+ip -br a
+```
+*A interface `br0` deve ter IPs locais IPv4 e o IP global IPv6.*
+*A interface `wwan0` deve estar UP, possuir o IP local fe80, e possivelmente o /128 da operadora.*
+
+**6. Checar Vizinhos IPv6 Mapeados no NDP Proxy**
+Para confirmar que um PC foi identificado e exposto publicamente para a internet IPv6:
+```bash
+ip -6 neigh show proxy dev wwan0
+```
