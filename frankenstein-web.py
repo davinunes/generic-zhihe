@@ -51,6 +51,9 @@ def write_config(config_data):
 
 class FrankensteinHandler(http.server.BaseHTTPRequestHandler):
 
+    # Desativar logs (evita timeout de 5s no IPv6 por falha de lookup reverso de DNS)
+    def log_message(self, format, *args):
+        pass
 
     def check_auth(self):
         config = read_config()
